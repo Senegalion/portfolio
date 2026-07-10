@@ -1,0 +1,150 @@
+---
+import { Github, Linkedin, Menu, X } from 'lucide-astro';
+
+const navigation = [
+  { label: 'About', href: '#about' },
+  { label: 'Experience', href: '#experience' },
+  { label: 'Projects', href: '#projects' },
+  { label: 'Blog', href: '#blog' },
+];
+---
+
+<header
+  class="fixed inset-x-0 top-0 z-50 border-b border-white/5 bg-[#070b14]/75 backdrop-blur-xl"
+>
+  <div class="container-page flex h-20 items-center justify-between">
+    <a
+      href="#top"
+      class="group inline-flex items-center gap-3 rounded-lg font-semibold tracking-tight text-white focus-visible:outline-2 focus-visible:outline-brand-400"
+      aria-label="Go to homepage"
+    >
+      <span
+        class="grid size-9 place-items-center rounded-xl border border-brand-400/25 bg-brand-400/10 text-sm text-brand-300 transition group-hover:border-brand-400/50 group-hover:bg-brand-400/15"
+      >
+        ŁP
+      </span>
+
+      <span class="hidden sm:block">Łukasz Pelikan</span>
+    </a>
+
+    <nav class="hidden items-center gap-8 md:flex" aria-label="Main navigation">
+      {
+        navigation.map(({ label, href }) => (
+          <a
+            href={href}
+            class="text-sm font-medium text-slate-400 transition hover:text-white focus-visible:rounded focus-visible:outline-2 focus-visible:outline-brand-400"
+          >
+            {label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="hidden items-center gap-2 md:flex">
+      <a
+        href="https://github.com/Senegalion"
+        target="_blank"
+        rel="noreferrer"
+        class="grid size-10 place-items-center rounded-xl text-slate-400 transition hover:bg-white/5 hover:text-white focus-visible:outline-2 focus-visible:outline-brand-400"
+        aria-label="GitHub profile"
+      >
+        <Github size={19} aria-hidden="true" />
+      </a>
+
+      <a
+        href="https://www.linkedin.com/in/%C5%82ukasz-pelikan/"
+        target="_blank"
+        rel="noreferrer"
+        class="grid size-10 place-items-center rounded-xl text-slate-400 transition hover:bg-white/5 hover:text-white focus-visible:outline-2 focus-visible:outline-brand-400"
+        aria-label="LinkedIn profile"
+      >
+        <Linkedin size={19} aria-hidden="true" />
+      </a>
+
+      <a
+        href="mailto:lupelikan@gmail.com"
+        class="ml-2 inline-flex min-h-10 items-center justify-center rounded-xl border border-white/10 bg-white px-5 text-sm font-semibold text-slate-950 transition hover:bg-slate-200 focus-visible:outline-2 focus-visible:outline-brand-400"
+      >
+        Contact
+      </a>
+    </div>
+
+    <button
+      id="mobile-menu-button"
+      type="button"
+      class="grid size-11 place-items-center rounded-xl border border-white/10 text-slate-200 transition hover:bg-white/5 focus-visible:outline-2 focus-visible:outline-brand-400 md:hidden"
+      aria-controls="mobile-menu"
+      aria-expanded="false"
+      aria-label="Open navigation"
+    >
+      <Menu id="menu-open-icon" size={22} aria-hidden="true" />
+      <X id="menu-close-icon" class="hidden" size={22} aria-hidden="true" />
+    </button>
+  </div>
+
+  <div
+    id="mobile-menu"
+    class="container-page hidden border-t border-white/5 py-5 md:hidden"
+  >
+    <nav class="flex flex-col gap-1" aria-label="Mobile navigation">
+      {
+        navigation.map(({ label, href }) => (
+          <a
+            href={href}
+            class="rounded-xl px-4 py-3 text-base font-medium text-slate-300 transition hover:bg-white/5 hover:text-white"
+          >
+            {label}
+          </a>
+        ))
+      }
+
+      <a
+        href="mailto:lupelikan@gmail.com"
+        class="mt-3 inline-flex min-h-12 items-center justify-center rounded-xl bg-white px-5 font-semibold text-slate-950"
+      >
+        Contact me
+      </a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const button = document.querySelector<HTMLButtonElement>('#mobile-menu-button');
+  const menu = document.querySelector<HTMLElement>('#mobile-menu');
+  const openIcon = document.querySelector<HTMLElement>('#menu-open-icon');
+  const closeIcon = document.querySelector<HTMLElement>('#menu-close-icon');
+  const mobileLinks = menu?.querySelectorAll('a');
+
+  const closeMenu = () => {
+    menu?.classList.add('hidden');
+    openIcon?.classList.remove('hidden');
+    closeIcon?.classList.add('hidden');
+    button?.setAttribute('aria-expanded', 'false');
+    button?.setAttribute('aria-label', 'Open navigation');
+  };
+
+  button?.addEventListener('click', () => {
+    const isOpen = button.getAttribute('aria-expanded') === 'true';
+
+    if (isOpen) {
+      closeMenu();
+      return;
+    }
+
+    menu?.classList.remove('hidden');
+    openIcon?.classList.add('hidden');
+    closeIcon?.classList.remove('hidden');
+    button.setAttribute('aria-expanded', 'true');
+    button.setAttribute('aria-label', 'Close navigation');
+  });
+
+  mobileLinks?.forEach((link) => {
+    link.addEventListener('click', closeMenu);
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 768) {
+      closeMenu();
+    }
+  });
+</script>
