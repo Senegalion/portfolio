@@ -1,0 +1,289 @@
+---
+import {
+  ArrowUpRight,
+  BriefcaseBusiness,
+  Building2,
+  Code2,
+  GraduationCap,
+  Network,
+} from 'lucide-astro';
+
+const experience = [
+  {
+    period: 'Sept 2025 — Present',
+    role: 'Junior Dev / DevOps Engineer',
+    company: 'ING Bank Śląski',
+    location: 'Katowice, Poland · Hybrid',
+    current: true,
+    icon: Building2,
+    description:
+      'Developing and supporting enterprise software in a regulated banking environment, combining Java backend development with DevOps, delivery automation and operational responsibilities.',
+    responsibilities: [
+      'Developing and maintaining Java-based backend components',
+      'Supporting CI/CD pipelines and automated deployment processes',
+      'Working with Azure-based infrastructure and application environments',
+      'Investigating technical issues across development and deployment workflows',
+      'Collaborating with developers, DevOps engineers and other technology teams',
+    ],
+    technologies: [
+      'Java',
+      'Spring Boot',
+      'Azure',
+      'CI/CD',
+      'Docker',
+      'DevOps',
+    ],
+  },
+  {
+    period: 'Oct 2025 — Feb 2026',
+    role: 'Java Backend Developer',
+    company: 'Fair Place Finance SA',
+    location: 'Łódź, Poland · Remote',
+    current: false,
+    icon: Network,
+    description:
+      'Developed backend components for a microservice-based financial platform, focusing on GraphQL gateways, trading integrations and event-driven communication.',
+    responsibilities: [
+      'Developed and maintained microservice-based backend components using Java 21 and Spring Boot',
+      'Implemented GraphQL APIs for back-office and internal gateway services',
+      'Integrated the GraphQL gateway layer with downstream REST-based microservices',
+      'Implemented and refactored FIX protocol integrations for order management and market connectors',
+      'Designed domain models and mapping logic between OMS components and external broker APIs',
+      'Created and maintained unit and integration tests using Spock and JUnit',
+      'Collaborated with DevOps engineers on GitLab CI/CD, Docker, Kubernetes and Argo CD deployments',
+    ],
+    technologies: [
+      'Java 21',
+      'Spring Boot',
+      'GraphQL',
+      'Kafka',
+      'PostgreSQL',
+      'Liquibase',
+      'Docker',
+      'Kubernetes',
+      'Argo CD',
+    ],
+  },
+  {
+    period: 'May 2025 — Jun 2025',
+    role: 'Junior Fullstack Java Developer',
+    company: 'Firmao',
+    location: 'Łódź, Poland · On-site',
+    current: false,
+    icon: Code2,
+    description:
+      'Developed and maintained features in a mature commercial CRM platform, working across Java backend services, database logic and an Ext JS frontend.',
+    responsibilities: [
+      'Implemented backend and frontend features in a production CRM system',
+      'Fixed defects and investigated regressions in existing functionality',
+      'Worked with Java, Hibernate, PostgreSQL and Ext JS',
+      'Modified reports, application configuration and business logic',
+      'Participated in code reviews and Jenkins-based build processes',
+      'Analyzed automated test failures and production-oriented issues',
+    ],
+    technologies: [
+      'Java',
+      'Hibernate',
+      'PostgreSQL',
+      'Ext JS',
+      'Jenkins',
+      'Selenium',
+      'JasperReports',
+    ],
+  },
+  {
+    period: 'Feb 2024 — Apr 2025',
+    role: 'Programming Instructor',
+    company: 'Giganci Programowania',
+    location: 'Łódź, Poland',
+    current: false,
+    icon: GraduationCap,
+    description:
+      'Taught programming fundamentals to children and teenagers, combining technical instruction with mentoring and practical project work.',
+    responsibilities: [
+      'Conducted programming courses and practical workshops',
+      'Taught Python, C++ and C# fundamentals',
+      'Explained algorithms and programming concepts at different experience levels',
+      'Supported students while building their own applications and games',
+      'Adapted lesson plans and exercises to individual learning needs',
+    ],
+    technologies: [
+      'Python',
+      'C++',
+      'C#',
+      'Algorithms',
+      'Teaching',
+      'Mentoring',
+    ],
+  },
+];
+---
+
+<section
+  id="experience"
+  class="relative overflow-hidden border-y border-white/5 bg-white/[0.015] py-28 sm:py-36"
+>
+  <div
+    class="pointer-events-none absolute right-0 top-1/4 -z-10 size-[30rem] rounded-full bg-brand-500/5 blur-[140px]"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div class="container-page">
+    <div class="max-w-3xl">
+      <p
+        class="text-sm font-semibold uppercase tracking-[0.22em] text-brand-300"
+      >
+        Experience
+      </p>
+
+      <h2
+        class="mt-5 text-4xl font-bold tracking-[-0.035em] text-white sm:text-5xl"
+      >
+        Building software in real-world environments.
+      </h2>
+
+      <p class="mt-6 max-w-2xl text-lg leading-8 text-slate-400">
+        My experience spans backend development, DevOps, cloud infrastructure
+        and technical education — from product development to regulated
+        enterprise systems.
+      </p>
+    </div>
+
+    <div class="relative mt-16">
+      <div
+        class="absolute bottom-0 left-[1.45rem] top-0 hidden w-px bg-gradient-to-b from-brand-400/50 via-white/10 to-transparent sm:block"
+        aria-hidden="true"
+      >
+      </div>
+
+      <div class="space-y-6">
+        {
+          experience.map(
+            ({
+              period,
+              role,
+              company,
+              location,
+              current,
+              icon: Icon,
+              description,
+              responsibilities,
+              technologies,
+            }) => (
+              <article class="group relative sm:pl-20">
+                <div
+                  class:list={[
+                    'absolute left-0 top-8 z-10 hidden size-12 place-items-center rounded-2xl border bg-[#090e19] transition sm:grid',
+                    current
+                      ? 'border-brand-400/40 text-brand-300 shadow-lg shadow-brand-500/10'
+                      : 'border-white/10 text-slate-500 group-hover:border-brand-400/25 group-hover:text-brand-300',
+                  ]}
+                >
+                  <Icon size={20} aria-hidden="true" />
+                </div>
+
+                <div class="rounded-[2rem] border border-white/8 bg-[#090e19]/80 p-6 transition duration-300 hover:border-white/15 hover:bg-[#0b111f] sm:p-8 lg:p-10">
+                  <div class="grid gap-8 lg:grid-cols-[0.72fr_1.28fr]">
+                    <div>
+                      <div class="flex flex-wrap items-center gap-3">
+                        <span class="font-mono text-sm text-brand-300">
+                          {period}
+                        </span>
+
+                        {
+                          current && (
+                            <span class="inline-flex items-center gap-2 rounded-full border border-emerald-400/20 bg-emerald-400/5 px-3 py-1 text-xs font-semibold text-emerald-300">
+                              <span class="size-1.5 rounded-full bg-emerald-400" />
+                              Current role
+                            </span>
+                          )
+                        }
+                      </div>
+
+                      <h3 class="mt-5 text-2xl font-bold tracking-tight text-white">
+                        {role}
+                      </h3>
+
+                      <div class="mt-3 flex flex-col gap-1 text-sm text-slate-400">
+                        <span class="font-medium text-slate-300">
+                          {company}
+                        </span>
+                        <span>{location}</span>
+                      </div>
+
+                      <div class="mt-7 flex flex-wrap gap-2">
+                        {
+                          technologies.map((technology) => (
+                            <span class="rounded-full border border-white/8 bg-white/[0.025] px-3 py-1.5 text-xs font-medium text-slate-400">
+                              {technology}
+                            </span>
+                          ))
+                        }
+                      </div>
+                    </div>
+
+                    <div>
+                      <p class="text-base leading-8 text-slate-400">
+                        {description}
+                      </p>
+
+                      <ul class="mt-6 space-y-3">
+                        {
+                          responsibilities.map((responsibility) => (
+                            <li class="flex gap-3 text-sm leading-7 text-slate-400">
+                              <span
+                                class="mt-[0.65rem] size-1.5 shrink-0 rounded-full bg-brand-400"
+                                aria-hidden="true"
+                              />
+                              <span>{responsibility}</span>
+                            </li>
+                          ))
+                        }
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            ),
+          )
+        }
+      </div>
+    </div>
+
+    <div
+      class="mt-12 flex flex-col gap-5 rounded-[1.75rem] border border-brand-400/15 bg-brand-400/[0.04] p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8"
+    >
+      <div class="flex items-start gap-4">
+        <div
+          class="grid size-11 shrink-0 place-items-center rounded-2xl border border-brand-400/20 bg-brand-400/10 text-brand-300"
+        >
+          <BriefcaseBusiness size={20} aria-hidden="true" />
+        </div>
+
+        <div>
+          <p class="font-semibold text-white">
+            Interested in working together?
+          </p>
+
+          <p class="mt-1 text-sm leading-6 text-slate-400">
+            I’m open to discussing ambitious backend, cloud and DevOps
+            opportunities.
+          </p>
+        </div>
+      </div>
+
+      <a
+        href="mailto:lupelikan@gmail.com"
+        class="group inline-flex min-h-12 shrink-0 items-center justify-center gap-2 rounded-xl bg-white px-5 font-semibold text-slate-950 transition hover:-translate-y-0.5 hover:bg-slate-200 focus-visible:outline-2 focus-visible:outline-brand-400"
+      >
+        Get in touch
+        <ArrowUpRight
+          size={17}
+          class="transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+          aria-hidden="true"
+        />
+      </a>
+    </div>
+  </div>
+</section>
