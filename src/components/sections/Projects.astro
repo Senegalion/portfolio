@@ -1,0 +1,231 @@
+---
+import {
+  ArrowUpRight,
+  Boxes,
+  Github,
+  ShieldCheck,
+  Sparkles,
+} from 'lucide-astro';
+
+const projects = [
+  {
+    title: 'Job Offers',
+    eyebrow: 'Full-stack platform',
+    description:
+      'A platform that aggregates junior Java job offers, periodically fetches external data and exposes it through a secured Spring Boot API and React frontend.',
+    highlights: [
+      'JWT-based authentication',
+      'Scheduled offer aggregation',
+      'Redis caching',
+      'Integration testing with Testcontainers and WireMock',
+      'Containerized deployment on AWS',
+    ],
+    technologies: [
+      'Java',
+      'Spring Boot',
+      'MongoDB',
+      'Redis',
+      'React',
+      'Docker',
+      'AWS',
+    ],
+    github: 'https://github.com/Senegalion/JobOffers',
+    featured: true,
+    icon: Sparkles,
+  },
+  {
+    title: 'Karate Management System',
+    eyebrow: 'Backend application',
+    description:
+      'A management platform for martial arts clubs with training registration, role-based access, payment workflows and scheduled fee reminders.',
+    highlights: [
+      'Role-based security with JWT',
+      'Training signup and withdrawal workflows',
+      'PayPal payment integration',
+      'Automated monthly reminders',
+      'PostgreSQL integration tests',
+    ],
+    technologies: [
+      'Java',
+      'Spring Boot',
+      'PostgreSQL',
+      'Flyway',
+      'Docker',
+      'Testcontainers',
+    ],
+    github: 'https://github.com/Senegalion',
+    featured: false,
+    icon: ShieldCheck,
+  },
+  {
+    title: 'Thousand Card Game',
+    eyebrow: 'Work in progress',
+    description:
+      'A modern implementation of the Thousand card game, designed with a clean architecture, incremental delivery and trunk-based development.',
+    highlights: [
+      'Domain-driven backend design',
+      'Incremental feature delivery',
+      'Automated verification pipeline',
+      'Production-oriented project structure',
+      'Trunk-based development workflow',
+    ],
+    technologies: [
+      'Java',
+      'Spring Boot',
+      'PostgreSQL',
+      'Docker',
+      'GitHub Actions',
+    ],
+    github: 'https://github.com/Senegalion/Thousand-Card-Game',
+    featured: false,
+    icon: Boxes,
+  },
+];
+---
+
+<section id="projects" class="relative py-28 sm:py-36">
+  <div
+    class="pointer-events-none absolute left-1/2 top-1/3 -z-10 size-[34rem] -translate-x-1/2 rounded-full bg-brand-500/5 blur-[140px]"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div class="container-page">
+    <div class="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+      <div class="max-w-3xl">
+        <p
+          class="text-sm font-semibold uppercase tracking-[0.22em] text-brand-300"
+        >
+          Selected projects
+        </p>
+
+        <h2
+          class="mt-5 text-4xl font-bold tracking-[-0.035em] text-white sm:text-5xl"
+        >
+          Systems built to solve real problems.
+        </h2>
+
+        <p class="mt-6 max-w-2xl text-lg leading-8 text-slate-400">
+          A selection of projects covering backend development, cloud
+          deployment, testing, architecture and full-stack product delivery.
+        </p>
+      </div>
+
+      <a
+        href="https://github.com/Senegalion?tab=repositories"
+        target="_blank"
+        rel="noreferrer"
+        class="group inline-flex items-center gap-2 font-semibold text-white transition hover:text-brand-200 focus-visible:rounded focus-visible:outline-2 focus-visible:outline-brand-400"
+      >
+        View all repositories
+        <ArrowUpRight
+          size={18}
+          class="transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+          aria-hidden="true"
+        />
+      </a>
+    </div>
+
+    <div class="mt-16 grid gap-6">
+      {
+        projects.map(
+          ({
+            title,
+            eyebrow,
+            description,
+            highlights,
+            technologies,
+            github,
+            featured,
+            icon: Icon,
+          }) => (
+            <article
+              class:list={[
+                'group relative overflow-hidden rounded-[2rem] border p-6 transition duration-300 hover:-translate-y-1 sm:p-8 lg:p-10',
+                featured
+                  ? 'border-brand-400/20 bg-brand-400/[0.04]'
+                  : 'border-white/8 bg-white/[0.025] hover:border-white/15 hover:bg-white/[0.04]',
+              ]}
+            >
+              <div class="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
+                <div>
+                  <div class="flex items-center gap-4">
+                    <div
+                      class:list={[
+                        'grid size-12 place-items-center rounded-2xl border',
+                        featured
+                          ? 'border-brand-400/25 bg-brand-400/10 text-brand-300'
+                          : 'border-white/10 bg-white/[0.03] text-slate-400',
+                      ]}
+                    >
+                      <Icon size={22} aria-hidden="true" />
+                    </div>
+
+                    <div>
+                      <p class="text-sm font-medium text-brand-300">
+                        {eyebrow}
+                      </p>
+
+                      <h3 class="mt-1 text-2xl font-bold tracking-tight text-white sm:text-3xl">
+                        {title}
+                      </h3>
+                    </div>
+                  </div>
+
+                  <p class="mt-7 max-w-xl text-base leading-8 text-slate-400">
+                    {description}
+                  </p>
+
+                  <div class="mt-7 flex flex-wrap gap-2">
+                    {
+                      technologies.map((technology) => (
+                        <span class="rounded-full border border-white/8 bg-white/[0.025] px-3 py-1.5 text-xs font-medium text-slate-400">
+                          {technology}
+                        </span>
+                      ))
+                    }
+                  </div>
+
+                  <a
+                    href={github}
+                    target="_blank"
+                    rel="noreferrer"
+                    class="group/link mt-8 inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/[0.03] px-5 font-semibold text-white transition hover:border-white/20 hover:bg-white/[0.06] focus-visible:outline-2 focus-visible:outline-brand-400"
+                  >
+                    <Github size={18} aria-hidden="true" />
+                    View repository
+                    <ArrowUpRight
+                      size={17}
+                      class="text-slate-500 transition group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5 group-hover/link:text-white"
+                      aria-hidden="true"
+                    />
+                  </a>
+                </div>
+
+                <div class="rounded-[1.5rem] border border-white/8 bg-[#080d18]/80 p-6">
+                  <p class="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">
+                    Engineering highlights
+                  </p>
+
+                  <ul class="mt-6 space-y-4">
+                    {
+                      highlights.map((highlight) => (
+                        <li class="flex gap-3 text-sm leading-7 text-slate-300">
+                          <span
+                            class="mt-[0.65rem] size-1.5 shrink-0 rounded-full bg-brand-400"
+                            aria-hidden="true"
+                          />
+                          <span>{highlight}</span>
+                        </li>
+                      ))
+                    }
+                  </ul>
+                </div>
+              </div>
+            </article>
+          ),
+        )
+      }
+    </div>
+  </div>
+</section>

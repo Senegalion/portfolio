@@ -1,9 +1,11 @@
 ---
 import Header from '../components/layout/Header.astro';
-import Hero from '../components/sections/Hero.astro';
-import BaseLayout from '../layouts/BaseLayout.astro';
+import Footer from '../components/layout/Footer.astro';
 import About from '../components/sections/About.astro';
 import Experience from '../components/sections/Experience.astro';
+import Hero from '../components/sections/Hero.astro';
+import Projects from '../components/sections/Projects.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
 
 const title = 'Łukasz Pelikan — Software Engineer';
 const description =
@@ -15,17 +17,10 @@ const description =
 
   <main>
     <Hero />
-
     <About />
-
     <Experience />
-
-    <section id="projects" class="container-page py-32">
-      <p class="text-slate-500">Projects section coming next.</p>
-    </section>
-
-    <section id="blog" class="container-page py-32">
-      <p class="text-slate-500">Blog section coming next.</p>
-    </section>
+    <Projects />
   </main>
+
+  <Footer />
 </BaseLayout>
