@@ -1,17 +1,54 @@
 ---
-
+import '../styles/global.css';
 ---
 
+<!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    />
+    <meta
+      name="description"
+      content="Portfolio of Łukasz Pelikan, a software engineer focused on Java, cloud and DevOps."
+    />
+
+    <title>Łukasz Pelikan — Software Engineer</title>
+  </head>
+
+  <body class="min-h-screen bg-slate-950 text-white antialiased">
+    <main class="mx-auto flex min-h-screen max-w-7xl items-center px-6 py-20 sm:px-10 lg:px-16">
+      <section>
+        <p class="mb-5 text-sm font-semibold uppercase tracking-[0.25em] text-cyan-400">
+          Software Engineer
+        </p>
+
+        <h1 class="max-w-5xl text-5xl font-bold tracking-tight sm:text-6xl lg:text-8xl">
+          Hi, I’m Łukasz.
+        </h1>
+
+        <p class="mt-7 max-w-2xl text-lg leading-8 text-slate-300 sm:text-xl">
+          I build backend systems and the infrastructure that keeps them running.
+        </p>
+
+        <div class="mt-10 flex flex-col gap-4 sm:flex-row">
+          <a
+            href="#projects"
+            class="inline-flex min-h-12 items-center justify-center rounded-xl bg-white px-6 py-3 font-semibold text-slate-950 transition hover:bg-slate-200"
+          >
+            Explore my work
+          </a>
+
+          <a
+            href="mailto:246946@edu.p.lodz.pl"
+            class="inline-flex min-h-12 items-center justify-center rounded-xl border border-slate-700 px-6 py-3 font-semibold text-white transition hover:border-slate-500 hover:bg-slate-900"
+          >
+            Contact me
+          </a>
+        </div>
+      </section>
+    </main>
+  </body>
 </html>
