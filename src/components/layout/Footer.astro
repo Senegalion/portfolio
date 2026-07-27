@@ -1,5 +1,9 @@
 ---
 import { ArrowUp, Github, Linkedin, Mail, Phone } from 'lucide-astro';
+import { getTranslations } from "../../i18n";
+
+const lang = Astro.currentLocale === "en" ? "en" : "pl";
+const t = getTranslations(lang);
 
 const currentYear = new Date().getFullYear();
 ---
@@ -14,18 +18,17 @@ const currentYear = new Date().getFullYear();
         <p
           class="text-sm font-semibold uppercase tracking-[0.22em] text-brand-300"
         >
-          Contact
+          {t.footer.contact}
         </p>
 
         <h2
           class="mt-5 max-w-3xl text-4xl font-bold tracking-[-0.035em] text-white sm:text-5xl"
         >
-          Let’s build something worth shipping.
+          {t.footer.title}
         </h2>
 
         <p class="mt-6 max-w-2xl text-lg leading-8 text-slate-400">
-          I’m open to conversations about backend engineering, cloud
-          infrastructure, DevOps and international software opportunities.
+          {t.footer.description}
         </p>
 
         <a
@@ -52,7 +55,7 @@ const currentYear = new Date().getFullYear();
           target="_blank"
           rel="noreferrer"
           class="grid size-12 place-items-center rounded-xl border border-white/10 text-slate-400 transition hover:border-white/20 hover:bg-white/[0.04] hover:text-white"
-          aria-label="GitHub profile"
+          aria-label={t.footer.github}
         >
           <Github size={20} aria-hidden="true" />
         </a>
@@ -62,7 +65,7 @@ const currentYear = new Date().getFullYear();
           target="_blank"
           rel="noreferrer"
           class="grid size-12 place-items-center rounded-xl border border-white/10 text-slate-400 transition hover:border-white/20 hover:bg-white/[0.04] hover:text-white"
-          aria-label="LinkedIn profile"
+          aria-label={t.footer.linkedin}
         >
           <Linkedin size={20} aria-hidden="true" />
         </a>
@@ -70,7 +73,7 @@ const currentYear = new Date().getFullYear();
         <a
           href="#top"
           class="grid size-12 place-items-center rounded-xl border border-white/10 text-slate-400 transition hover:border-white/20 hover:bg-white/[0.04] hover:text-white"
-          aria-label="Back to top"
+          aria-label={t.footer.backToTop}
         >
           <ArrowUp size={20} aria-hidden="true" />
         </a>
@@ -80,7 +83,9 @@ const currentYear = new Date().getFullYear();
     <div
       class="mt-14 flex flex-col gap-3 border-t border-white/5 pt-6 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between"
     >
-      <p>© {currentYear} Łukasz Pelikan.</p>
+      <p>
+        © {currentYear} Łukasz Pelikan. {t.footer.copyright}
+      </p>
     </div>
   </div>
 </footer>

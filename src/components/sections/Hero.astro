@@ -11,6 +11,11 @@ import {
   Terminal,
 } from 'lucide-astro';
 
+import { getTranslations } from "../../i18n";
+
+const lang = Astro.currentLocale === "en" ? "en" : "pl";
+const t = getTranslations(lang);
+
 const technologies = [
   'Java',
   'Spring Boot',
@@ -22,7 +27,7 @@ const technologies = [
 
 <section
   id="top"
-  class="relative isolate flex min-h-screen max-w-full items-center overflow-hidden pt-28"
+  class="relative isolate flex min-h-[85vh] max-w-full items-center overflow-hidden pt-5"
 >
   <div
     class="grid-background pointer-events-none absolute inset-0 -z-20 max-w-full"
@@ -41,46 +46,25 @@ const technologies = [
       class="grid min-w-0 max-w-full items-center gap-16 lg:grid-cols-[minmax(0,1.18fr)_minmax(0,0.82fr)] lg:gap-12"
     >
       <div class="min-w-0 max-w-full">
-        <div
-          class="mb-7 flex w-fit max-w-full items-center gap-2 rounded-3xl border border-brand-400/20 bg-brand-400/5 px-4 py-3 text-sm font-medium leading-6 text-brand-200"
-        >
-          <span class="relative flex size-2 shrink-0">
-            <span
-              class="absolute inline-flex size-full animate-ping rounded-full bg-emerald-400 opacity-60"
-            >
-            </span>
-
-            <span
-              class="relative inline-flex size-2 rounded-full bg-emerald-400"
-            >
-            </span>
-          </span>
-
-          <span class="min-w-0">
-            Building reliable software in the banking industry
-          </span>
-        </div>
-
         <p
           class="mb-5 max-w-full text-sm font-semibold uppercase tracking-[0.22em] text-brand-300"
         >
-          Software Engineer · Java & DevOps
+          {t.hero.badge}
         </p>
 
         <h1
           class="max-w-full break-words text-[clamp(3rem,13vw,5rem)] font-bold leading-[1.02] tracking-[-0.045em] text-white sm:text-6xl lg:text-7xl xl:text-[5.4rem]"
         >
-          I build backend systems and{' '}
+          {t.hero.title}
           <span class="text-gradient">
-            the infrastructure behind them.
+            {t.hero.titleHighlight}
           </span>
         </h1>
 
         <p
           class="mt-8 max-w-2xl text-lg leading-8 text-slate-400 sm:text-xl sm:leading-9"
         >
-          I’m Łukasz, a software engineer focused on Java, cloud platforms,
-          delivery automation and dependable distributed systems.
+          {t.hero.description}
         </p>
 
         <div class="mt-10 flex max-w-full flex-col gap-4 sm:flex-row">
@@ -88,7 +72,7 @@ const technologies = [
             href="#projects"
             class="group inline-flex min-h-13 max-w-full items-center justify-center gap-2 rounded-2xl bg-white px-6 py-3.5 font-semibold text-slate-950 transition hover:-translate-y-0.5 hover:bg-slate-200 focus-visible:outline-2 focus-visible:outline-brand-400"
           >
-            Explore my work
+            {t.hero.explore}
 
             <ArrowDown
               size={18}
@@ -105,7 +89,7 @@ const technologies = [
           >
             <Github size={18} class="shrink-0" aria-hidden="true" />
 
-            View GitHub
+            {t.hero.github}
 
             <ArrowUpRight
               size={17}
@@ -125,7 +109,7 @@ const technologies = [
               aria-hidden="true"
             />
 
-            Łódź, Poland
+            {t.hero.location}
           </span>
 
           <span class="inline-flex min-w-0 items-center gap-2">
@@ -135,7 +119,7 @@ const technologies = [
               aria-hidden="true"
             />
 
-            Open to international opportunities
+            {t.hero.availability}
           </span>
         </div>
       </div>
@@ -162,7 +146,7 @@ const technologies = [
             </div>
 
             <span class="min-w-0 truncate font-mono text-xs text-slate-500">
-              engineer.profile
+              {t.hero.profileFile}
             </span>
 
             <Terminal
@@ -175,37 +159,45 @@ const technologies = [
           <div class="min-w-0 space-y-6 p-5 sm:p-8">
             <div class="min-w-0">
               <p class="max-w-full font-mono text-sm text-slate-500">
-                <span class="text-brand-300">const</span>{' '}
-                engineer =
+                <span class="text-violet-300">{t.hero.classKeyword}</span>{' '}
+                <span class="text-brand-300">{t.hero.className}</span>
               </p>
 
               <div
                 class="mt-3 min-w-0 max-w-full overflow-hidden rounded-2xl border border-white/8 bg-white/[0.025] p-4 font-mono text-xs leading-7 sm:p-5 sm:text-sm"
               >
-                <p class="break-words">
-                  <span class="text-violet-300">name:</span>{' '}
-                  <span class="text-emerald-300">'Łukasz Pelikan'</span>,
-                </p>
-
-                <p class="break-words">
-                  <span class="text-violet-300">role:</span>{' '}
-                  <span class="text-emerald-300">'Software Engineer'</span>,
+                <p>
+                  <span class="text-violet-300">{t.hero.stringKeyword}</span>{' '}
+                  <span class="text-sky-300">{t.hero.nameLabel}</span> =
+                  <span class="text-emerald-300"> "{t.hero.name}"</span>;
                 </p>
 
                 <p>
-                  <span class="text-violet-300">focus:</span> [
+                  <span class="text-violet-300">{t.hero.stringKeyword}</span>{' '}
+                  <span class="text-sky-300">{t.hero.roleLabel}</span> =
+                  <span class="text-emerald-300"> "{t.hero.role}"</span>;
                 </p>
 
-                <p class="break-words pl-4 text-emerald-300 sm:pl-5">
-                  'Backend', 'Cloud', 'DevOps'
+                <br />
+
+                <p>
+                  <span class="text-violet-300">{t.hero.listKeyword};</span>{' '}
+                  <span class="text-sky-300">{t.hero.focusLabel}</span> = List.of(
                 </p>
 
-                <p>],</p>
-
-                <p class="break-words">
-                  <span class="text-violet-300">mindset:</span>{' '}
-                  <span class="text-emerald-300">'keep shipping'</span>
+                <p class="pl-6 text-emerald-300">
+                  "{t.hero.backend}",
                 </p>
+
+                <p class="pl-6 text-emerald-300">
+                  "{t.hero.cloud}",
+                </p>
+
+                <p class="pl-6 text-emerald-300">
+                  "{t.hero.devops}"
+                </p>
+
+                <p>);</p>
               </div>
             </div>
 
@@ -220,11 +212,11 @@ const technologies = [
                 />
 
                 <p class="text-sm font-semibold text-white">
-                  Backend
+                  {t.hero.backend}
                 </p>
 
                 <p class="mt-1 text-xs text-slate-500">
-                  Java & Spring
+                  {t.hero.backendDescription}
                 </p>
               </div>
 
@@ -238,11 +230,11 @@ const technologies = [
                 />
 
                 <p class="text-sm font-semibold text-white">
-                  Cloud
+                  {t.hero.cloud}
                 </p>
 
                 <p class="mt-1 text-xs text-slate-500">
-                  Azure & AWS
+                  {t.hero.cloudDescription}
                 </p>
               </div>
 
@@ -256,11 +248,11 @@ const technologies = [
                 />
 
                 <p class="text-sm font-semibold text-white">
-                  Delivery
+                  {t.hero.delivery}
                 </p>
 
                 <p class="mt-1 text-xs text-slate-500">
-                  CI/CD & Docker
+                  {t.hero.deliveryDescription}
                 </p>
               </div>
             </div>

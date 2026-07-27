@@ -9,6 +9,11 @@ import {
   Network,
 } from 'lucide-astro';
 
+import { getTranslations } from "../../i18n";
+
+const lang = Astro.currentLocale === "en" ? "en" : "pl";
+const t = getTranslations(lang);
+
 const experience = [
   {
     company: 'ING Bank Śląski',
@@ -16,32 +21,22 @@ const experience = [
     location: 'Katowice, Poland · Hybrid',
     current: true,
     icon: Building2,
-    description:
-      'Progressed from a Java Automation Intern role into a Junior DevOps Engineer position, working on enterprise software and delivery processes in a regulated banking environment.',
+    description: t.experience.companies.ing.description,
     roles: [
       {
         period: 'Feb 2026 — Present',
-        role: 'Junior DevOps Engineer',
+        role: t.experience.companies.ing.roles.devops.title,
         current: true,
         responsibilities: [
-          'Supporting and improving CI/CD pipelines and automated deployment processes',
-          'Working with Java-based applications and their delivery environments',
-          'Supporting cloud infrastructure and application environments in Azure',
-          'Investigating issues across build, deployment and runtime workflows',
-          'Collaborating with developers, DevOps engineers and platform teams',
+          t.experience.companies.ing.roles.devops.responsibilities,
         ],
       },
       {
         period: 'Sep 2025 — Feb 2026',
-        role: 'Java Automation Intern',
+        role: t.experience.companies.ing.roles.intern.title,
         current: false,
-        responsibilities: [
-          'Developed and maintained Java-based test automation',
-          'Supported automated verification of enterprise banking applications',
-          'Investigated failed tests and defects in application workflows',
-          'Worked with CI/CD processes and automated execution environments',
-          'Collaborated with developers and quality engineering teams',
-        ],
+        responsibilities:
+          t.experience.companies.ing.roles.intern.responsibilities,
       },
     ],
     technologies: [
@@ -61,22 +56,14 @@ const experience = [
     location: 'Łódź, Poland · Remote',
     current: false,
     icon: Network,
-    description:
-      'Developed backend components for a microservice-based financial platform, focusing on GraphQL gateways, trading integrations and event-driven communication.',
+    description: t.experience.companies.fairPlace.description,
     roles: [
       {
         period: 'Oct 2025 — Feb 2026',
-        role: 'Java Backend Developer',
+        role: t.experience.companies.fairPlace.roles.backend.title,
         current: false,
-        responsibilities: [
-          'Developed and maintained microservice-based backend components using Java 21 and Spring Boot',
-          'Implemented GraphQL APIs for back-office and internal gateway services',
-          'Integrated the GraphQL gateway layer with downstream REST-based microservices',
-          'Implemented and refactored FIX protocol integrations for order management and market connectors',
-          'Designed domain models and mapping logic between OMS components and external broker APIs',
-          'Created and maintained unit and integration tests using Spock and JUnit',
-          'Collaborated with DevOps engineers on GitLab CI/CD, Docker, Kubernetes and Argo CD deployments',
-        ],
+        responsibilities:
+          t.experience.companies.fairPlace.roles.backend.responsibilities,
       },
     ],
     technologies: [
@@ -98,20 +85,15 @@ const experience = [
     current: false,
     icon: Code2,
     description:
-      'Developed and maintained features in a mature commercial CRM platform, working across Java backend services, database logic and an Ext JS frontend.',
+      t.experience.companies.firmao.description,
     roles: [
       {
         period: 'May 2025 — Aug 2025',
-        role: 'Junior Fullstack Java Developer',
+        role:
+          t.experience.companies.firmao.roles.fullstack.title,
         current: false,
-        responsibilities: [
-          'Implemented backend and frontend features in a production CRM system',
-          'Fixed defects and investigated regressions in existing functionality',
-          'Worked with Java, Hibernate, PostgreSQL and Ext JS',
-          'Modified reports, application configuration and business logic',
-          'Participated in code reviews and Jenkins-based build processes',
-          'Analyzed automated test failures and production-oriented issues',
-        ],
+        responsibilities:
+          t.experience.companies.firmao.roles.fullstack.responsibilities,
       },
     ],
     technologies: [
@@ -131,19 +113,15 @@ const experience = [
     current: false,
     icon: GraduationCap,
     description:
-      'Taught programming fundamentals to children and teenagers, combining technical instruction with mentoring and practical project work.',
+      t.experience.companies.giganci.description,
     roles: [
       {
         period: 'Feb 2024 — Apr 2025',
-        role: 'Programming Instructor',
+        role:
+          t.experience.companies.giganci.roles.instructor.title,
         current: false,
-        responsibilities: [
-          'Conducted programming courses and practical workshops',
-          'Taught Python, C++ and C# fundamentals',
-          'Explained algorithms and programming concepts at different experience levels',
-          'Supported students while building their own applications and games',
-          'Adapted lesson plans and exercises to individual learning needs',
-        ],
+        responsibilities:
+          t.experience.companies.giganci.roles.instructor.responsibilities,
       },
     ],
     technologies: [
@@ -160,7 +138,7 @@ const experience = [
 
 <section
   id="experience"
-  class="relative overflow-hidden border-y border-white/5 bg-white/[0.015] py-28 sm:py-36"
+  class="relative isolate overflow-hidden py-14 sm:py-16"
 >
   <div
     class="pointer-events-none absolute right-0 top-1/4 -z-10 size-[30rem] rounded-full bg-brand-500/5 blur-[140px]"
@@ -173,19 +151,17 @@ const experience = [
       <p
         class="text-sm font-semibold uppercase tracking-[0.22em] text-brand-300"
       >
-        Experience
+        {t.experience.badge}
       </p>
 
       <h2
         class="mt-5 text-4xl font-bold tracking-[-0.035em] text-white sm:text-5xl"
       >
-        Building software in real-world environments.
+        {t.experience.title}
       </h2>
 
       <p class="mt-6 max-w-2xl text-lg leading-8 text-slate-400">
-        My experience spans backend development, DevOps, cloud infrastructure
-        and technical education — from product development to regulated
-        enterprise systems.
+        {t.experience.description}
       </p>
     </div>
 
@@ -233,7 +209,7 @@ const experience = [
                           current && (
                             <span class="inline-flex items-center gap-2 rounded-full border border-emerald-400/20 bg-emerald-400/5 px-3 py-1 text-xs font-semibold text-emerald-300">
                               <span class="size-1.5 rounded-full bg-emerald-400" />
-                              Current company
+                              {t.experience.currentCompany}
                             </span>
                           )
                         }
@@ -282,7 +258,7 @@ const experience = [
                                   {
                                     role.current && (
                                       <span class="rounded-full border border-brand-400/20 bg-brand-400/5 px-2.5 py-1 text-[0.7rem] font-semibold uppercase tracking-wide text-brand-300">
-                                        Current role
+                                        {t.experience.currentRole}
                                       </span>
                                     )
                                   }
@@ -296,7 +272,7 @@ const experience = [
                               {
                                 roleIndex === 0 && roles.length > 1 && (
                                   <div class="hidden items-center gap-2 text-xs font-medium text-brand-300 sm:flex">
-                                    Career progression
+                                    {t.experience.careerProgression}
                                     <ArrowDown
                                       size={15}
                                       aria-hidden="true"
@@ -344,12 +320,11 @@ const experience = [
 
         <div>
           <p class="font-semibold text-white">
-            Interested in working together?
+            {t.experience.ctaTitle}
           </p>
 
           <p class="mt-1 text-sm leading-6 text-slate-400">
-            I’m open to discussing ambitious backend, cloud and DevOps
-            opportunities.
+            {t.experience.ctaDescription}
           </p>
         </div>
       </div>
@@ -360,7 +335,7 @@ const experience = [
         rel="noreferrer"
         class="group inline-flex min-h-12 shrink-0 items-center justify-center gap-2 rounded-xl bg-white px-5 font-semibold text-slate-950 transition hover:-translate-y-0.5 hover:bg-slate-200 focus-visible:outline-2 focus-visible:outline-brand-400"
       >
-        Get in touch
+        {t.experience.contact}
 
         <ArrowUpRight
           size={17}

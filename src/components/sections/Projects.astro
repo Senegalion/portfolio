@@ -9,20 +9,19 @@ import {
   Sparkles,
 } from 'lucide-astro';
 
+import { getTranslations } from "../../i18n";
+
+const lang = Astro.currentLocale === "en" ? "en" : "pl";
+const t = getTranslations(lang);
+
 const projects = [
   {
     title: 'Karate Management System',
-    eyebrow: 'Microservices platform',
-    description:
-      'A comprehensive platform for managing karate clubs, training sessions, enrollments, payments, feedback and automated notifications.',
-    highlights: [
-      'Spring Cloud microservices architecture',
-      'API Gateway, Eureka and centralized configuration',
-      'Event-driven communication with Apache Kafka',
-      'JWT authentication and role-based access',
-      'PayPal payments and automated email notifications',
-      'Jenkins CI/CD with automated testing and promotion',
-    ],
+    eyebrow: t.projects.projects.karate.eyebrow,
+    description: 
+      t.projects.projects.karate.description,
+    highlights: 
+      t.projects.projects.karate.highlights,
     technologies: [
       'Java',
       'Kotlin',
@@ -41,16 +40,11 @@ const projects = [
   },
   {
     title: 'City Failure Predictor',
-    eyebrow: 'Machine learning platform',
+    eyebrow: t.projects.projects.cityFailurePredictor.eyebrow,
     description:
-      'A collaborative machine learning project focused on predicting failures in urban infrastructure and supporting data-driven maintenance decisions.',
-    highlights: [
-      'Predictive modeling for city infrastructure failures',
-      'Data preprocessing and feature engineering',
-      'Machine learning model training and evaluation',
-      'Collaborative development in a multi-person project',
-      'Backend and data-processing integration',
-    ],
+      t.projects.projects.cityFailurePredictor.description,
+    highlights:
+      t.projects.projects.cityFailurePredictor.highlights,
     technologies: [
       'Python',
       'Machine Learning',
@@ -65,16 +59,11 @@ const projects = [
   },
   {
     title: 'Job Offers',
-    eyebrow: 'Full-stack aggregation platform',
+    eyebrow: t.projects.projects.jobOffers.eyebrow,
     description:
-      'A platform that collects and processes junior Java job offers from external sources and exposes them through a secured backend and React frontend.',
-    highlights: [
-      'Scheduled aggregation from external sources',
-      'JWT-based authentication and authorization',
-      'MongoDB persistence and Redis caching',
-      'Integration testing with Testcontainers and WireMock',
-      'Containerized deployment on AWS',
-    ],
+      t.projects.projects.jobOffers.description,
+    highlights:
+      t.projects.projects.jobOffers.highlights,
     technologies: [
       'Java',
       'Spring Boot',
@@ -91,16 +80,11 @@ const projects = [
   },
   {
     title: 'Akigator App',
-    eyebrow: 'AI-powered full-stack application',
+    eyebrow: t.projects.projects.akigator.eyebrow,
     description:
-      'An interactive guessing game inspired by Akinator, combining a Spring Boot backend, React frontend and a machine learning service.',
-    highlights: [
-      'JWT-secured user authentication',
-      'Interactive game session lifecycle',
-      'Machine learning integration through a Python service',
-      'Category, question and answer management',
-      'React and TypeScript user interface',
-    ],
+      t.projects.projects.akigator.description,
+    highlights:
+      t.projects.projects.akigator.highlights,
     technologies: [
       'Java',
       'Spring Boot',
@@ -117,16 +101,11 @@ const projects = [
   },
   {
     title: 'Lotto Application',
-    eyebrow: 'Hexagonal architecture',
+    eyebrow: t.projects.projects.lotto.eyebrow,
     description:
-      'A scalable lottery application where users can submit tickets, view draw results and explore draw history through a clean REST API.',
-    highlights: [
-      'Modular monolith architecture',
-      'Hexagonal architecture and clear domain boundaries',
-      'Lottery draw and ticket validation workflows',
-      'MongoDB persistence',
-      'Automated tests and Docker-based local environment',
-    ],
+      t.projects.projects.lotto.description,
+    highlights:
+      t.projects.projects.lotto.highlights,
     technologies: [
       'Java',
       'Spring Boot',
@@ -144,7 +123,7 @@ const projects = [
 ];
 ---
 
-<section id="projects" class="relative py-28 sm:py-36">
+<section id="projects" class="relative py-16 sm:py-20">
   <div
     class="pointer-events-none absolute left-1/2 top-1/3 -z-10 size-[34rem] -translate-x-1/2 rounded-full bg-brand-500/5 blur-[140px]"
     aria-hidden="true"
@@ -157,18 +136,17 @@ const projects = [
         <p
           class="text-sm font-semibold uppercase tracking-[0.22em] text-brand-300"
         >
-          Selected projects
+          {t.projects.badge}
         </p>
 
         <h2
           class="mt-5 text-4xl font-bold tracking-[-0.035em] text-white sm:text-5xl"
         >
-          Systems built to solve real problems.
+          {t.projects.title}
         </h2>
 
         <p class="mt-6 max-w-2xl text-lg leading-8 text-slate-400">
-          A selection of projects covering backend development, cloud
-          deployment, testing, architecture and full-stack product delivery.
+          {t.projects.description}
         </p>
       </div>
 
@@ -178,7 +156,7 @@ const projects = [
         rel="noreferrer"
         class="group inline-flex items-center gap-2 font-semibold text-white transition hover:text-brand-200 focus-visible:rounded focus-visible:outline-2 focus-visible:outline-brand-400"
       >
-        View all repositories
+        {t.projects.viewRepositories}
         <ArrowUpRight
           size={18}
           class="transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
@@ -254,7 +232,7 @@ const projects = [
                     class="group/link mt-8 inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/[0.03] px-5 font-semibold text-white transition hover:border-white/20 hover:bg-white/[0.06] focus-visible:outline-2 focus-visible:outline-brand-400"
                   >
                     <Github size={18} aria-hidden="true" />
-                    View repository
+                    {t.projects.viewRepository}
                     <ArrowUpRight
                       size={17}
                       class="text-slate-500 transition group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5 group-hover/link:text-white"
@@ -265,7 +243,7 @@ const projects = [
 
                 <div class="rounded-[1.5rem] border border-white/8 bg-[#080d18]/80 p-6">
                   <p class="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">
-                    Engineering highlights
+                    {t.projects.engineeringHighlights}
                   </p>
 
                   <ul class="mt-6 space-y-4">

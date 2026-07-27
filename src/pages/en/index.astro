@@ -1,0 +1,26 @@
+---
+import Header from '../../components/layout/Header.astro';
+import Footer from '../../components/layout/Footer.astro';
+import About from '../../components/sections/About.astro';
+import Experience from '../../components/sections/Experience.astro';
+import Hero from '../../components/sections/Hero.astro';
+import Projects from '../../components/sections/Projects.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = 'Łukasz Pelikan — Software Engineer';
+const description =
+  'Software engineer focused on Java backend development, cloud platforms, DevOps and distributed systems.';
+---
+
+<BaseLayout title={title} description={description}>
+  <Header />
+
+  <main>
+    <Hero />
+    <About />
+    <Experience />
+    <Projects />
+  </main>
+
+  <Footer />
+</BaseLayout>
