@@ -1,38 +1,140 @@
 ---
-import '../styles/global.css';
+import { Font } from "astro:assets";
+import "../styles/global.css";
+import CommandPalette from "../components/ui/CommandPalette.astro";
+import Splash from "../components/ui/Splash.astro";
+import { hasCv } from "../data/build";
+import { SITE } from "../data/site";
+import { getTranslations, langFrom } from "../i18n";
 
 interface Props {
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
+  /** Pages like 404/offline: no splash, no palette, not indexed. */
+  minimal?: boolean;
 }
 
-const { title, description } = Astro.props;
+const lang = langFrom(Astro.currentLocale);
+const t = getTranslations(lang);
+const { title = t.meta.title, description = t.meta.description, minimal = false } = Astro.props;
+
+const site = Astro.site ?? new URL("https://portfolio-omega-opal-16.vercel.app");
+const canonical = new URL(Astro.url.pathname, site).href;
+const ogImage = new URL("/og-image.png", site).href;
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: SITE.name,
+  url: site.href,
+  image: ogImage,
+  jobTitle: "Junior DevOps Engineer",
+  worksFor: { "@type": "Organization", name: "ING Bank Śląski" },
+  alumniOf: { "@type": "CollegeOrUniversity", name: "Politechnika Łódzka" },
+  address: { "@type": "PostalAddress", addressLocality: "Łódź", addressCountry: "PL" },
+  knowsLanguage: ["pl", "en", "es"],
+  knowsAbout: ["Java", "Spring Boot", "DevOps", "Kubernetes", "Microsoft Azure", "Apache Kafka", "Machine Learning"],
+  sameAs: [SITE.github, SITE.linkedin],
+};
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang} class="no-js">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <script is:inline>
+      document.documentElement.classList.replace("no-js", "js");
+      try {
+        var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        // Splash on every full page load (including refresh); skipped for
+        // reduced-motion users and with ?nosplash (screenshots, tests).
+        if (reduce || /[?&]nosplash/.test(location.search)) {
+          document.documentElement.dataset.splash = "off";
+        }
+      } catch (e) {
+        document.documentElement.dataset.splash = "off";
+      }
+    </script>
 
+    <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="author" content="Łukasz Pelikan" />
+    <meta name="author" content={SITE.name} />
+    <link rel="canonical" href={canonical} />
+    {minimal && <meta name="robots" content="noindex" />}
+    {
+      !minimal && (
+        <>
+          <link rel="alternate" hreflang="pl" href={new URL("/", site).href} />
+          <link rel="alternate" hreflang="en" href={new URL("/en/", site).href} />
+          <link rel="alternate" hreflang="x-default" href={new URL("/", site).href} />
+        </>
+      )
+    }
+
     <meta name="theme-color" content="#070b14" />
+    <meta name="color-scheme" content="dark" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Ł. Pelikan" />
 
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:url" content={canonical} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-
+    <meta property="og:locale" content={t.meta.ogLocale} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={t.meta.ogImageAlt} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
 
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <Font cssVariable="--font-geist" preload />
+    <Font cssVariable="--font-geist-mono" />
 
-    <title>{title}</title>
+    {!minimal && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
   </head>
 
-  <body>
+  <body class="text-slate-200">
+    <a
+      href="#main"
+      class="sr-only fixed top-3 left-3 z-[200] rounded-xl bg-white px-4 py-3 font-semibold text-slate-950 focus:not-sr-only"
+    >
+      {t.navigation.skipToContent}
+    </a>
+
+    {!minimal && <Splash />}
+
     <slot />
+
+    <div
+      id="toaster"
+      aria-live="polite"
+      aria-label={t.client.notificationsRegion}
+      role="region"
+      class="pointer-events-none fixed inset-x-4 bottom-4 z-[90] flex flex-col gap-3 sm:inset-x-auto sm:right-6 sm:bottom-6 sm:w-96"
+    >
+    </div>
+
+    {!minimal && <CommandPalette hasCv={hasCv} />}
+
+    <script type="application/json" id="client-i18n" set:html={JSON.stringify(t.client)} />
+
+    <script>
+      import { initPwa } from "../scripts/pwa";
+      import { initUi } from "../scripts/ui";
+
+      initPwa();
+      initUi();
+    </script>
   </body>
 </html>

@@ -5,267 +5,223 @@ import {
   CheckCircle2,
   Cloud,
   Code2,
+  Download,
+  FileCode2,
+  FileText,
   Github,
   MapPin,
   ServerCog,
   Terminal,
-} from 'lucide-astro';
+} from "lucide-astro";
+import { hasCv } from "../../data/build";
+import { SITE } from "../../data/site";
+import { getTranslations, langFrom } from "../../i18n";
 
-import { getTranslations } from "../../i18n";
+const t = getTranslations(langFrom(Astro.currentLocale));
+const h = t.hero;
 
-const lang = Astro.currentLocale === "en" ? "en" : "pl";
-const t = getTranslations(lang);
+const features = [
+  { icon: Code2, title: h.backend, description: h.backendDescription },
+  { icon: Cloud, title: h.cloud, description: h.cloudDescription },
+  { icon: ServerCog, title: h.delivery, description: h.deliveryDescription },
+];
 
-const technologies = [
-  'Java',
-  'Spring Boot',
-  'Azure',
-  'Docker',
-  'CI/CD',
+const tabs = [
+  { id: "java", label: "Engineer.java", icon: FileCode2 },
+  { id: "yaml", label: "profile.yaml", icon: FileText },
+  { id: "shell", label: "zsh", icon: Terminal },
 ];
 ---
 
-<section
-  id="top"
-  class="relative isolate flex min-h-[85vh] max-w-full items-center overflow-hidden pt-5"
->
+<section id="top" class="relative isolate flex min-h-[92svh] max-w-full items-center overflow-hidden pt-18">
+  <div class="grid-background pointer-events-none absolute inset-0 -z-20" aria-hidden="true"></div>
   <div
-    class="grid-background pointer-events-none absolute inset-0 -z-20 max-w-full"
+    class="pointer-events-none absolute top-20 left-1/2 -z-10 size-[28rem] max-w-[90vw] -translate-x-1/2 sm:size-[34rem] glow"
     aria-hidden="true"
   >
   </div>
 
-  <div
-    class="pointer-events-none absolute left-1/2 top-20 -z-10 h-[28rem] w-[28rem] max-w-[90vw] -translate-x-1/2 rounded-full bg-brand-400/10 blur-[120px] sm:h-[34rem] sm:w-[34rem]"
-    aria-hidden="true"
-  >
-  </div>
+  <div class="container-page py-14 lg:py-24">
+    <div class="grid min-w-0 items-center gap-14 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:gap-12">
+      <div class="min-w-0">
+        <p class="eyebrow">{h.badge}</p>
 
-  <div class="container-page max-w-full py-20 lg:py-28">
-    <div
-      class="grid min-w-0 max-w-full items-center gap-16 lg:grid-cols-[minmax(0,1.18fr)_minmax(0,0.82fr)] lg:gap-12"
-    >
-      <div class="min-w-0 max-w-full">
-        <p
-          class="mb-5 max-w-full text-sm font-semibold uppercase tracking-[0.22em] text-brand-300"
-        >
-          {t.hero.badge}
+        <p class="mt-6 flex min-h-6 max-w-full items-center gap-2 overflow-hidden font-mono text-sm whitespace-nowrap">
+          <span class="relative size-2 shrink-0 rounded-full bg-emerald-400 pulse-dot" aria-hidden="true"></span>
+          <span class="text-slate-500">{h.nowLabel}:</span>
+          <span class="caret truncate text-slate-200" data-rotator={JSON.stringify(h.now)} aria-hidden="true">{h.now[0]}</span>
+          <span class="sr-only">{h.now.join("; ")}</span>
         </p>
 
         <h1
-          class="max-w-full break-words text-[clamp(3rem,13vw,5rem)] font-bold leading-[1.02] tracking-[-0.045em] text-white sm:text-6xl lg:text-7xl xl:text-[5.4rem]"
+          class="mt-6 max-w-full text-[clamp(2.6rem,10vw,5.2rem)] leading-[1.02] font-bold tracking-[-0.045em] text-balance text-white"
         >
-          {t.hero.title}
-          <span class="text-gradient">
-            {t.hero.titleHighlight}
-          </span>
+          {h.title}
+          <span class="text-gradient">{h.titleHighlight}</span>
         </h1>
 
-        <p
-          class="mt-8 max-w-2xl text-lg leading-8 text-slate-400 sm:text-xl sm:leading-9"
-        >
-          {t.hero.description}
+        <p class="mt-7 max-w-2xl text-lg leading-8 text-pretty text-slate-400 sm:text-xl sm:leading-9">
+          {h.description}
         </p>
 
-        <div class="mt-10 flex max-w-full flex-col gap-4 sm:flex-row">
-          <a
-            href="#projects"
-            class="group inline-flex min-h-13 max-w-full items-center justify-center gap-2 rounded-2xl bg-white px-6 py-3.5 font-semibold text-slate-950 transition hover:-translate-y-0.5 hover:bg-slate-200 focus-visible:outline-2 focus-visible:outline-brand-400"
-          >
-            {t.hero.explore}
-
-            <ArrowDown
-              size={18}
-              class="shrink-0 transition group-hover:translate-y-0.5"
-              aria-hidden="true"
-            />
+        <div class="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          <a href="#projects" class="btn btn-primary group min-h-13 px-6">
+            {h.explore}
+            <ArrowDown size={18} class="transition group-hover:translate-y-0.5" aria-hidden="true" />
           </a>
-
-          <a
-            href="https://github.com/Senegalion"
-            target="_blank"
-            rel="noreferrer"
-            class="group inline-flex min-h-13 max-w-full items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/[0.03] px-6 py-3.5 font-semibold text-white transition hover:-translate-y-0.5 hover:border-white/20 hover:bg-white/[0.06] focus-visible:outline-2 focus-visible:outline-brand-400"
-          >
-            <Github size={18} class="shrink-0" aria-hidden="true" />
-
-            {t.hero.github}
-
+          <a href={SITE.github} target="_blank" rel="noreferrer" class="btn btn-secondary group min-h-13 px-6">
+            <Github size={18} aria-hidden="true" />
+            {h.github}
             <ArrowUpRight
               size={17}
-              class="shrink-0 text-slate-500 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-white"
+              class="text-slate-500 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-white"
               aria-hidden="true"
             />
           </a>
+          {
+            hasCv && (
+              <a href={SITE.cvPath} download class="btn btn-secondary min-h-13 px-6">
+                <Download size={18} aria-hidden="true" />
+                {h.cv}
+              </a>
+            )
+          }
         </div>
 
-        <div
-          class="mt-12 flex max-w-full flex-col gap-4 text-sm text-slate-400 sm:flex-row sm:flex-wrap sm:gap-x-7"
-        >
-          <span class="inline-flex min-w-0 items-center gap-2">
-            <MapPin
-              size={17}
-              class="shrink-0 text-brand-300"
-              aria-hidden="true"
-            />
-
-            {t.hero.location}
-          </span>
-
-          <span class="inline-flex min-w-0 items-center gap-2">
-            <CheckCircle2
-              size={17}
-              class="shrink-0 text-brand-300"
-              aria-hidden="true"
-            />
-
-            {t.hero.availability}
-          </span>
-        </div>
+        <ul class="mt-10 flex flex-col gap-3 text-sm text-slate-400 sm:flex-row sm:flex-wrap sm:gap-x-7">
+          <li class="inline-flex items-center gap-2">
+            <MapPin size={17} class="shrink-0 text-brand-300" aria-hidden="true" />
+            {h.location}
+          </li>
+          <li class="inline-flex items-center gap-2">
+            <CheckCircle2 size={17} class="shrink-0 text-brand-300" aria-hidden="true" />
+            {h.availability}
+          </li>
+          <li class="hidden items-center gap-2 sm:inline-flex">
+            <kbd data-mod-key>⌘K</kbd>
+            <button type="button" data-open-palette class="underline-offset-4 hover:text-white hover:underline">
+              {t.navigation.openPalette}
+            </button>
+          </li>
+        </ul>
       </div>
 
-      <div
-        class="relative mx-auto min-w-0 w-full max-w-lg lg:mx-0 lg:ml-auto"
-      >
-        <div
-          class="absolute -inset-6 -z-10 rounded-full bg-brand-500/10 blur-3xl sm:-inset-10"
-          aria-hidden="true"
-        >
-        </div>
+      <div class="relative mx-auto w-full max-w-lg min-w-0 lg:mr-0">
+        <div class="absolute -inset-6 -z-10 sm:-inset-10 glow" aria-hidden="true"></div>
 
-        <div
-          class="max-w-full overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950/75 shadow-2xl shadow-black/40 backdrop-blur"
-        >
-          <div
-            class="flex min-w-0 items-center justify-between gap-4 border-b border-white/10 px-5 py-4"
-          >
-            <div class="flex shrink-0 gap-2" aria-hidden="true">
+        <div class="overflow-hidden rounded-[1.75rem] border border-white/10 bg-slate-950/80 shadow-2xl shadow-black/40">
+          <div class="flex min-w-0 items-center gap-4 border-b border-white/10 px-4 pt-3">
+            <div class="hidden shrink-0 gap-1.5 pb-3 sm:flex" aria-hidden="true">
               <span class="size-2.5 rounded-full bg-red-400/80"></span>
               <span class="size-2.5 rounded-full bg-amber-400/80"></span>
               <span class="size-2.5 rounded-full bg-emerald-400/80"></span>
             </div>
 
-            <span class="min-w-0 truncate font-mono text-xs text-slate-500">
-              {t.hero.profileFile}
-            </span>
-
-            <Terminal
-              size={16}
-              class="shrink-0 text-slate-600"
-              aria-hidden="true"
-            />
-          </div>
-
-          <div class="min-w-0 space-y-6 p-5 sm:p-8">
-            <div class="min-w-0">
-              <p class="max-w-full font-mono text-sm text-slate-500">
-                <span class="text-violet-300">{t.hero.classKeyword}</span>{' '}
-                <span class="text-brand-300">{t.hero.className}</span>
-              </p>
-
-              <div
-                class="mt-3 min-w-0 max-w-full overflow-hidden rounded-2xl border border-white/8 bg-white/[0.025] p-4 font-mono text-xs leading-7 sm:p-5 sm:text-sm"
-              >
-                <p>
-                  <span class="text-violet-300">{t.hero.stringKeyword}</span>{' '}
-                  <span class="text-sky-300">{t.hero.nameLabel}</span> =
-                  <span class="text-emerald-300"> "{t.hero.name}"</span>;
-                </p>
-
-                <p>
-                  <span class="text-violet-300">{t.hero.stringKeyword}</span>{' '}
-                  <span class="text-sky-300">{t.hero.roleLabel}</span> =
-                  <span class="text-emerald-300"> "{t.hero.role}"</span>;
-                </p>
-
-                <br />
-
-                <p>
-                  <span class="text-violet-300">{t.hero.listKeyword};</span>{' '}
-                  <span class="text-sky-300">{t.hero.focusLabel}</span> = List.of(
-                </p>
-
-                <p class="pl-6 text-emerald-300">
-                  "{t.hero.backend}",
-                </p>
-
-                <p class="pl-6 text-emerald-300">
-                  "{t.hero.cloud}",
-                </p>
-
-                <p class="pl-6 text-emerald-300">
-                  "{t.hero.devops}"
-                </p>
-
-                <p>);</p>
-              </div>
-            </div>
-
-            <div class="grid min-w-0 grid-cols-1 gap-3 sm:grid-cols-3">
-              <div
-                class="min-w-0 rounded-2xl border border-white/8 bg-white/[0.025] p-4"
-              >
-                <Code2
-                  size={20}
-                  class="mb-5 text-brand-300"
-                  aria-hidden="true"
-                />
-
-                <p class="text-sm font-semibold text-white">
-                  {t.hero.backend}
-                </p>
-
-                <p class="mt-1 text-xs text-slate-500">
-                  {t.hero.backendDescription}
-                </p>
-              </div>
-
-              <div
-                class="min-w-0 rounded-2xl border border-white/8 bg-white/[0.025] p-4"
-              >
-                <Cloud
-                  size={20}
-                  class="mb-5 text-brand-300"
-                  aria-hidden="true"
-                />
-
-                <p class="text-sm font-semibold text-white">
-                  {t.hero.cloud}
-                </p>
-
-                <p class="mt-1 text-xs text-slate-500">
-                  {t.hero.cloudDescription}
-                </p>
-              </div>
-
-              <div
-                class="min-w-0 rounded-2xl border border-white/8 bg-white/[0.025] p-4"
-              >
-                <ServerCog
-                  size={20}
-                  class="mb-5 text-brand-300"
-                  aria-hidden="true"
-                />
-
-                <p class="text-sm font-semibold text-white">
-                  {t.hero.delivery}
-                </p>
-
-                <p class="mt-1 text-xs text-slate-500">
-                  {t.hero.deliveryDescription}
-                </p>
-              </div>
-            </div>
-
-            <div class="flex min-w-0 max-w-full flex-wrap gap-2">
+            <div role="tablist" aria-label={h.tabsLabel} class="-mb-px flex min-w-0 overflow-x-auto">
               {
-                technologies.map((technology) => (
-                  <span class="max-w-full rounded-full border border-white/8 bg-white/[0.025] px-3 py-1.5 text-xs font-medium text-slate-400">
-                    {technology}
-                  </span>
+                tabs.map(({ id, label, icon: Icon }, index) => (
+                  <button
+                    type="button"
+                    role="tab"
+                    id={`tab-${id}`}
+                    aria-controls={`panel-${id}`}
+                    aria-selected={index === 0 ? "true" : "false"}
+                    tabindex={index === 0 ? 0 : -1}
+                    class="inline-flex shrink-0 items-center gap-1.5 border-b-2 border-transparent px-3 pb-3 font-mono text-xs text-slate-500 transition hover:text-slate-300 aria-selected:border-brand-400 aria-selected:text-white"
+                  >
+                    <Icon size={13} aria-hidden="true" />
+                    {label}
+                  </button>
                 ))
               }
             </div>
+          </div>
+
+          <div class="min-w-0 p-5 sm:p-7">
+            <div
+              id="panel-java"
+              role="tabpanel"
+              aria-labelledby="tab-java"
+              tabindex="0"
+              class="min-h-56 overflow-x-auto rounded-2xl border border-white/8 bg-white/[0.025] p-4 font-mono text-xs leading-7 sm:p-5 sm:text-[0.8rem]"
+            >
+              <p>
+                <span class="text-violet-300">{h.classKeyword}</span> <span class="text-brand-300">{h.className}</span> {"{"}
+              </p>
+              <div class="pl-4">
+                <p>
+                  <span class="text-violet-300">{h.stringKeyword}</span> <span class="text-sky-300">{h.nameLabel}</span> ={" "}
+                  <span class="text-emerald-300">"{h.name}"</span>;
+                </p>
+                <p>
+                  <span class="text-violet-300">{h.stringKeyword}</span> <span class="text-sky-300">{h.roleLabel}</span> ={" "}
+                  <span class="text-emerald-300">"{h.role}"</span>;
+                </p>
+                <p class="mt-3">
+                  <span class="text-violet-300">{h.listKeyword}</span> <span class="text-sky-300">{h.focusLabel}</span> = List.of(
+                </p>
+                <p class="pl-4 text-emerald-300">"{h.backend}", "{h.devops}",</p>
+                <p class="pl-4 text-emerald-300">"{h.cloud}", "{h.ml}"</p>
+                <p>);</p>
+              </div>
+              <p>{"}"}</p>
+            </div>
+
+            <div
+              id="panel-yaml"
+              role="tabpanel"
+              aria-labelledby="tab-yaml"
+              tabindex="0"
+              hidden
+              class="min-h-56 overflow-x-auto rounded-2xl border border-white/8 bg-white/[0.025] p-4 font-mono text-xs leading-7 sm:p-5 sm:text-[0.8rem]"
+            >
+              <p><span class="text-sky-300">apiVersion</span>: <span class="text-emerald-300">people/v1</span></p>
+              <p><span class="text-sky-300">kind</span>: <span class="text-emerald-300">Engineer</span></p>
+              <p><span class="text-sky-300">metadata</span>:</p>
+              <p class="pl-4"><span class="text-sky-300">name</span>: <span class="text-emerald-300">lukasz-pelikan</span></p>
+              <p class="pl-4"><span class="text-sky-300">location</span>: <span class="text-emerald-300">lodz-pl</span></p>
+              <p><span class="text-sky-300">spec</span>:</p>
+              <p class="pl-4"><span class="text-sky-300">role</span>: <span class="text-emerald-300">junior-devops-engineer</span></p>
+              <p class="pl-4">
+                <span class="text-sky-300">backend</span>: [<span class="text-emerald-300">java, spring-boot, kafka, postgresql</span>]
+              </p>
+              <p class="pl-4">
+                <span class="text-sky-300">delivery</span>: [<span class="text-emerald-300">docker, kubernetes, argo-cd, azure</span>]
+              </p>
+              <p class="pl-4">
+                <span class="text-sky-300">learning</span>: [<span class="text-emerald-300">machine-learning, rca, az-204</span>]
+              </p>
+            </div>
+
+            <div
+              id="panel-shell"
+              role="tabpanel"
+              aria-labelledby="tab-shell"
+              tabindex="0"
+              hidden
+              class="min-h-56 overflow-x-auto rounded-2xl border border-white/8 bg-black/40 p-4 font-mono text-xs leading-7 whitespace-pre sm:p-5 sm:text-[0.8rem]"
+            >
+              <p><span class="text-brand-300">~</span> <span class="text-slate-500">$</span> kubectl get skills -n engineer</p>
+              <p class="text-slate-500">NAME       STATUS     STACK</p>
+              <p>backend    <span class="text-emerald-300">Ready</span>      java · spring</p>
+              <p>devops     <span class="text-emerald-300">Ready</span>      ci/cd · k8s</p>
+              <p>cloud      <span class="text-emerald-300">Ready</span>      azure · aws</p>
+              <p>ml         <span class="text-amber-300">Learning</span>   python · msc</p>
+              <p class="mt-1 text-slate-500">{h.terminalComment}</p>
+              <p><span class="text-brand-300">~</span> <span class="text-slate-500">$</span> <span class="caret"></span></p>
+            </div>
+
+            <ul class="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-3">
+              {
+                features.map(({ icon: Icon, title, description }) => (
+                  <li class="min-w-0 rounded-2xl border border-white/8 bg-white/[0.025] p-4">
+                    <Icon size={19} class="mb-4 text-brand-300" aria-hidden="true" />
+                    <p class="text-sm font-semibold text-white">{title}</p>
+                    <p class="mt-1 text-xs text-slate-500">{description}</p>
+                  </li>
+                ))
+              }
+            </ul>
           </div>
         </div>
       </div>

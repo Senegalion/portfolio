@@ -1,170 +1,171 @@
 ---
-import { Github, Linkedin, Menu, X } from 'lucide-astro';
-import { getTranslations } from '../../i18n';
+import { Menu, Search, X } from "lucide-astro";
+import { SITE, localePath } from "../../data/site";
+import { getTranslations, langFrom } from "../../i18n";
 
-const lang = Astro.currentLocale === 'en' ? 'en' : 'pl';
-
+const lang = langFrom(Astro.currentLocale);
 const t = getTranslations(lang);
 
 const navigation = [
-  { label: t.navigation.about, href: '#about' },
-  { label: t.navigation.experience, href: '#experience' },
-  { label: t.navigation.projects, href: '#projects' },
-  { label: t.navigation.contact, href: '#contact' },
+  { label: t.navigation.about, href: "#about" },
+  { label: t.navigation.experience, href: "#experience" },
+  { label: t.navigation.projects, href: "#projects" },
+  { label: t.navigation.skills, href: "#skills" },
+  { label: t.navigation.education, href: "#education" },
+  { label: t.navigation.contact, href: "#contact" },
 ];
+
+const languages = [
+  { code: "pl", label: "PL", name: "Polski" },
+  { code: "en", label: "EN", name: "English" },
+] as const;
 ---
 
 <header
-  class="fixed inset-x-0 top-0 z-50 border-b border-white/5 bg-[#070b14]/75 backdrop-blur-xl"
+  id="site-header"
+  class="group/header fixed inset-x-0 top-0 z-50 border-b border-white/5 bg-ink-900/70 backdrop-blur-xl transition-[background-color,box-shadow] data-scrolled:bg-ink-900/85 data-scrolled:shadow-lg data-scrolled:shadow-black/30"
 >
-  <div class="container-page flex h-20 items-center justify-between">
+  <div class="container-page flex h-18 items-center justify-between gap-4">
     <a
       href="#top"
-      class="group inline-flex items-center gap-3 rounded-lg font-semibold tracking-tight text-white focus-visible:outline-2 focus-visible:outline-brand-400"
-      aria-label={t.navigation.home}
+      class="group inline-flex items-center gap-3 rounded-lg font-semibold tracking-tight text-white"
+      title={t.navigation.home}
     >
-      <span
-        class="grid size-9 place-items-center rounded-xl border border-brand-400/25 bg-brand-400/10 text-sm text-brand-300 transition group-hover:border-brand-400/50 group-hover:bg-brand-400/15"
-      >
-        ŁP
-      </span>
-
+      <img src="/favicon.svg" alt="" width="36" height="36" class="size-9 transition group-hover:scale-105" />
       <span class="hidden sm:block">Łukasz Pelikan</span>
+      <span class="sr-only sm:hidden">Łukasz Pelikan</span>
     </a>
 
-    <nav
-      class="hidden items-center gap-8 md:flex"
-      aria-label={t.navigation.mainNavigation}
-    >
+    <nav class="hidden items-center gap-1 lg:flex" aria-label={t.navigation.mainNavigation}>
       {
         navigation.map(({ label, href }) => (
           <a
             href={href}
-            class="text-sm font-medium text-slate-400 transition hover:text-white focus-visible:rounded focus-visible:outline-2 focus-visible:outline-brand-400"
+            data-nav-link
+            class="group/nav relative rounded-lg px-3 py-2 text-sm font-medium text-slate-400 transition hover:text-white data-active:text-white"
           >
             {label}
+            <span
+              class="absolute inset-x-3 -bottom-px h-px scale-x-0 bg-brand-400 transition-transform duration-300 group-data-active/nav:scale-x-100"
+              aria-hidden="true"
+            />
           </a>
         ))
       }
     </nav>
 
-    <div class="hidden items-center gap-2 md:flex">
-      <a
-        href="https://github.com/Senegalion"
-        target="_blank"
-        rel="noreferrer"
-        class="grid size-10 place-items-center rounded-xl text-slate-400 transition hover:bg-white/5 hover:text-white focus-visible:outline-2 focus-visible:outline-brand-400"
-        aria-label="GitHub profile"
+    <div class="flex items-center gap-2">
+      <button
+        type="button"
+        data-open-palette
+        class="hidden h-10 items-center gap-2 rounded-xl border border-white/10 bg-white/[0.03] pr-2 pl-3 text-sm text-slate-400 transition hover:border-white/20 hover:text-white sm:inline-flex"
+        title={t.navigation.openPalette}
+        aria-keyshortcuts="Control+K Meta+K"
       >
-        <Github size={19} aria-hidden="true" />
-      </a>
+        <Search size={15} aria-hidden="true" />
+        <span class="sr-only xl:not-sr-only">{t.navigation.search}</span>
+        <kbd class="ml-1" data-mod-key aria-hidden="true">⌘K</kbd>
+      </button>
 
-      <a
-        href="https://www.linkedin.com/in/%C5%82ukasz-pelikan/"
-        target="_blank"
-        rel="noreferrer"
-        class="grid size-10 place-items-center rounded-xl text-slate-400 transition hover:bg-white/5 hover:text-white focus-visible:outline-2 focus-visible:outline-brand-400"
-        aria-label="LinkedIn profile"
+      <div
+        class="hidden h-10 items-center rounded-xl border border-white/10 bg-white/[0.03] p-1 text-xs font-semibold sm:flex"
+        role="group"
+        aria-label={t.navigation.language}
       >
-        <Linkedin size={19} aria-hidden="true" />
-      </a>
-
-      <div class="hidden items-center gap-3 md:flex">
-
-        <a
-          href="/"
-          class={lang === "pl"
-            ? "font-semibold text-white"
-            : "text-slate-400 hover:text-white"}
-        >
-          PL
-        </a>
-
-        <span class="text-slate-600">|</span>
-
-        <a
-          href="/en"
-          class={lang === "en"
-            ? "font-semibold text-white"
-            : "text-slate-400 hover:text-white"}
-        >
-          EN
-        </a>
-
+        {
+          languages.map(({ code, label, name }) => (
+            <a
+              href={localePath(code)}
+              hreflang={code}
+              lang={code}
+              data-lang-link
+              title={name}
+              aria-current={lang === code ? "page" : undefined}
+              class:list={[
+                "grid h-8 min-w-9 place-items-center rounded-lg px-2 transition",
+                lang === code ? "bg-white text-slate-950" : "text-slate-400 hover:text-white",
+              ]}
+            >
+              {label}
+            </a>
+          ))
+        }
       </div>
 
       <a
-        href="https://mail.google.com/mail/?view=cm&fs=1&to=lupelikan@gmail.com"
-        target="_blank"
-        rel="noreferrer"
-        class="ml-2 inline-flex min-h-10 items-center justify-center rounded-xl border border-white/10 bg-white px-5 text-sm font-semibold text-slate-950 transition hover:bg-slate-200 focus-visible:outline-2 focus-visible:outline-brand-400"
+        href="#contact"
+        class="hidden h-10 items-center justify-center rounded-xl bg-white px-4 text-sm font-semibold text-slate-950 transition hover:bg-slate-200 md:inline-flex"
       >
         {t.navigation.contactButton}
       </a>
-    </div>
 
-    <button
-      id="mobile-menu-button"
-      type="button"
-      class="grid size-11 place-items-center rounded-xl border border-white/10 text-slate-200 transition hover:bg-white/5 focus-visible:outline-2 focus-visible:outline-brand-400 md:hidden"
-      aria-controls="mobile-menu"
-      aria-expanded="false"
-      aria-label={t.navigation.openMenu}
-      data-open-label={t.navigation.openMenu}
-      data-close-label={t.navigation.closeMenu}
-    >
-      <Menu id="menu-open-icon" size={22} aria-hidden="true" />
-      <X id="menu-close-icon" class="hidden" size={22} aria-hidden="true" />
-    </button>
+      <button
+        type="button"
+        data-open-palette
+        class="icon-btn border border-white/10 sm:hidden"
+        aria-label={t.navigation.openPalette}
+      >
+        <Search size={19} aria-hidden="true" />
+      </button>
+
+      <button
+        id="mobile-menu-button"
+        type="button"
+        class="icon-btn border border-white/10 text-slate-200 lg:hidden"
+        aria-controls="mobile-menu"
+        aria-expanded="false"
+        aria-label={t.navigation.openMenu}
+        data-open-label={t.navigation.openMenu}
+        data-close-label={t.navigation.closeMenu}
+      >
+        <Menu id="menu-open-icon" size={21} aria-hidden="true" />
+        <X id="menu-close-icon" class="hidden" size={21} aria-hidden="true" />
+      </button>
+    </div>
   </div>
 
   <div
-    id="mobile-menu"
-    class="container-page hidden border-t border-white/5 py-5 md:hidden"
+    id="scroll-progress"
+    class="absolute inset-x-0 -bottom-px h-0.5 origin-left scale-x-0 bg-gradient-to-r from-brand-500 via-brand-300 to-cyan-200"
+    aria-hidden="true"
   >
-    <nav
-      class="flex flex-col gap-1"
-      aria-label={t.navigation.mobileNavigation}
-    >
+  </div>
+
+  <div id="mobile-menu" class="container-page hidden max-h-[calc(100dvh-4.5rem)] overflow-y-auto border-t border-white/5 py-5 lg:hidden">
+    <nav class="flex flex-col gap-1" aria-label={t.navigation.mobileNavigation}>
       {
         navigation.map(({ label, href }) => (
           <a
             href={href}
-            class="rounded-xl px-4 py-3 text-base font-medium text-slate-300 transition hover:bg-white/5 hover:text-white"
+            data-nav-link
+            class="rounded-xl px-4 py-3 text-base font-medium text-slate-300 transition hover:bg-white/5 hover:text-white data-active:bg-white/5 data-active:text-white"
           >
             {label}
           </a>
         ))
       }
 
-      <div class="mt-3 flex items-center justify-center gap-3">
-      <a
-        href="/"
-        class={lang === "pl"
-          ? "font-semibold text-white"
-          : "text-slate-400 hover:text-white"}
-      >
-        PL
-      </a>
+      <div class="mt-3 grid grid-cols-2 gap-2" role="group" aria-label={t.navigation.language}>
+        {
+          languages.map(({ code, name }) => (
+            <a
+              href={localePath(code)}
+              hreflang={code}
+              lang={code}
+              data-lang-link
+              aria-current={lang === code ? "page" : undefined}
+              class:list={[
+                "grid min-h-12 place-items-center rounded-xl border text-sm font-semibold",
+                lang === code ? "border-white bg-white text-slate-950" : "border-white/10 text-slate-300",
+              ]}
+            >
+              {name}
+            </a>
+          ))
+        }
+      </div>
 
-      <span class="text-slate-600">|</span>
-
-      <a
-        href="/en"
-        class={lang === "en"
-          ? "font-semibold text-white"
-          : "text-slate-400 hover:text-white"}
-      >
-        EN
-      </a>
-    </div>
-
-      <a
-        href="https://mail.google.com/mail/?view=cm&fs=1&to=lupelikan@gmail.com"
-        target="_blank"
-        rel="noreferrer"
-        class="mt-3 inline-flex min-h-12 items-center justify-center rounded-xl bg-white px-5 font-semibold text-slate-950"
-      >
+      <a href={`mailto:${SITE.email}`} class="btn btn-primary mt-3">
         {t.navigation.mobileContact}
       </a>
     </nav>
@@ -172,48 +173,26 @@ const navigation = [
 </header>
 
 <script>
-  const button = document.querySelector<HTMLButtonElement>('#mobile-menu-button');
-  const menu = document.querySelector<HTMLElement>('#mobile-menu');
-  const openIcon = document.querySelector<HTMLElement>('#menu-open-icon');
-  const closeIcon = document.querySelector<HTMLElement>('#menu-close-icon');
-  const mobileLinks = menu?.querySelectorAll('a');
+  const button = document.querySelector<HTMLButtonElement>("#mobile-menu-button");
+  const menu = document.querySelector<HTMLElement>("#mobile-menu");
+  const openIcon = document.querySelector<HTMLElement>("#menu-open-icon");
+  const closeIcon = document.querySelector<HTMLElement>("#menu-close-icon");
 
-  const closeMenu = () => {
-    menu?.classList.add('hidden');
-    openIcon?.classList.remove('hidden');
-    closeIcon?.classList.add('hidden');
-    button?.setAttribute('aria-expanded', 'false');
-    button?.setAttribute(
-      'aria-label',
-      button.dataset.openLabel ?? 'Open navigation',
-    );
+  const setOpen = (open: boolean) => {
+    menu?.classList.toggle("hidden", !open);
+    openIcon?.classList.toggle("hidden", open);
+    closeIcon?.classList.toggle("hidden", !open);
+    button?.setAttribute("aria-expanded", String(open));
+    button?.setAttribute("aria-label", (open ? button.dataset.closeLabel : button.dataset.openLabel) ?? "Menu");
   };
 
-  button?.addEventListener('click', () => {
-    const isOpen = button.getAttribute('aria-expanded') === 'true';
-
-    if (isOpen) {
-      closeMenu();
-      return;
-    }
-
-    menu?.classList.remove('hidden');
-    openIcon?.classList.add('hidden');
-    closeIcon?.classList.remove('hidden');
-    button.setAttribute('aria-expanded', 'true');
-    button.setAttribute(
-      'aria-label',
-      button.dataset.closeLabel ?? 'Close navigation',
-    );
-  });
-
-  mobileLinks?.forEach((link) => {
-    link.addEventListener('click', closeMenu);
-  });
-
-  window.addEventListener('resize', () => {
-    if (window.innerWidth >= 768) {
-      closeMenu();
+  button?.addEventListener("click", () => setOpen(button.getAttribute("aria-expanded") !== "true"));
+  menu?.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => setOpen(false)));
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && button?.getAttribute("aria-expanded") === "true") {
+      setOpen(false);
+      button.focus();
     }
   });
+  window.addEventListener("resize", () => window.innerWidth >= 1024 && setOpen(false));
 </script>

@@ -1,0 +1,152 @@
+---
+import {
+  Activity,
+  BrainCircuit,
+  CloudCog,
+  Code2,
+  Database,
+  FlaskConical,
+  LayoutTemplate,
+  Network,
+  Server,
+  Wrench,
+} from "lucide-astro";
+import SectionHeading from "../ui/SectionHeading.astro";
+import { SKILL_CATEGORIES, label, type SkillCategory } from "../../data/skills";
+import { logoFor } from "../../data/tech";
+import { getTranslations, langFrom } from "../../i18n";
+
+const lang = langFrom(Astro.currentLocale);
+const t = getTranslations(lang);
+const s = t.skills;
+
+const ICONS: Record<SkillCategory["icon"], typeof Code2> = {
+  code: Code2,
+  server: Server,
+  layout: LayoutTemplate,
+  database: Database,
+  cloud: CloudCog,
+  network: Network,
+  test: FlaskConical,
+  brain: BrainCircuit,
+  activity: Activity,
+  wrench: Wrench,
+};
+---
+
+<section id="skills" class="section" aria-labelledby="skills-title">
+  <div class="container-page">
+    <div class="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+      <SectionHeading eyebrow={s.badge} title={s.title} description={s.description} id="skills-title" />
+
+      <div class="flex shrink-0 flex-col gap-3" data-reveal>
+        <p class="inline-flex items-center gap-2 text-sm text-slate-400">
+          <span class="size-2.5 rounded-full bg-brand-400 shadow-[0_0_12px] shadow-brand-400/60" aria-hidden="true"></span>
+          {s.commercial}
+        </p>
+        <div
+          class="inline-flex rounded-xl border border-white/10 bg-white/[0.03] p-1"
+          role="group"
+          aria-label={s.filterLabel}
+          data-skill-filter
+        >
+          <button
+            type="button"
+            data-value="all"
+            aria-pressed="true"
+            class="min-h-9 rounded-lg px-3 text-sm font-medium text-slate-400 transition aria-pressed:bg-white aria-pressed:text-slate-950"
+          >
+            {s.filterAll}
+          </button>
+          <button
+            type="button"
+            data-value="commercial"
+            aria-pressed="false"
+            class="min-h-9 rounded-lg px-3 text-sm font-medium text-slate-400 transition aria-pressed:bg-white aria-pressed:text-slate-950"
+          >
+            {s.filterCommercial}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <ul id="skill-grid" class="mt-14 columns-1 gap-5 sm:columns-2 xl:columns-3">
+      {
+        SKILL_CATEGORIES.map((category, index) => {
+          const Icon = ICONS[category.icon];
+          return (
+            <li
+              class="card spotlight mb-5 break-inside-avoid p-6"
+              data-reveal
+              data-category
+              style={`--reveal-delay:${(index % 3) * 70}ms`}
+            >
+              <h3 class="flex items-center gap-3 text-base font-semibold text-white">
+                <span class="grid size-9 place-items-center rounded-xl border border-brand-400/15 bg-brand-400/[0.08] text-brand-300">
+                  <Icon size={17} aria-hidden="true" />
+                </span>
+                {category.title[lang]}
+              </h3>
+              <ul class="mt-5 flex flex-wrap gap-2">
+                {category.skills.map((skill) => {
+                  const name = label(skill.name, lang);
+                  const logo = logoFor(name);
+                  return (
+                    <li
+                      data-commercial={skill.commercial ? "" : undefined}
+                      class:list={[
+                        "chip text-[0.8rem] transition-opacity",
+                        skill.commercial && "border-brand-400/30 bg-brand-400/[0.08] text-brand-50",
+                      ]}
+                    >
+                      {logo && (
+                        <img
+                          src={logo.src}
+                          alt=""
+                          width="16"
+                          height="16"
+                          loading="lazy"
+                          decoding="async"
+                          class:list={["size-4 shrink-0 object-contain", logo.mono && "logo-mono"]}
+                        />
+                      )}
+                      <span class="whitespace-normal">{name}</span>
+                      {skill.commercial && (
+                        <>
+                          <span class="size-1.5 shrink-0 rounded-full bg-brand-400" aria-hidden="true" />
+                          <span class="sr-only">({s.commercialShort})</span>
+                        </>
+                      )}
+                    </li>
+                  );
+                })}
+              </ul>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </div>
+</section>
+
+<script>
+  const group = document.querySelector<HTMLElement>("[data-skill-filter]");
+  const grid = document.getElementById("skill-grid");
+
+  group?.addEventListener("click", (event) => {
+    const button = (event.target as Element).closest<HTMLButtonElement>("button[data-value]");
+    if (!button || !grid) return;
+    const onlyCommercial = button.dataset.value === "commercial";
+    group.querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", String(b === button)));
+
+    grid.querySelectorAll<HTMLElement>("[data-category]").forEach((category) => {
+      let visible = 0;
+      category.querySelectorAll<HTMLElement>("li").forEach((chip) => {
+        const show = !onlyCommercial || chip.hasAttribute("data-commercial");
+        chip.hidden = !show;
+        if (show) visible++;
+      });
+      category.hidden = visible === 0;
+    });
+  });
+</script>

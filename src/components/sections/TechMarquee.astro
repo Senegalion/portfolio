@@ -1,0 +1,50 @@
+---
+import { MARQUEE, logoFor } from "../../data/tech";
+import { getTranslations, langFrom } from "../../i18n";
+
+const t = getTranslations(langFrom(Astro.currentLocale));
+---
+
+<section class="relative border-y border-white/5 bg-ink-950/40 py-10" aria-labelledby="marquee-label">
+  <p id="marquee-label" class="container-page mb-7 text-center font-mono text-xs tracking-[0.18em] text-slate-500 uppercase">
+    {t.marquee.label}
+  </p>
+
+  <div class="space-y-4">
+    {
+      MARQUEE.map((row, rowIndex) => (
+        <div class="marquee overflow-hidden">
+          <div
+            class="marquee-track gap-4"
+            data-direction={rowIndex % 2 ? "reverse" : undefined}
+            style={`--marquee-duration:${row.length * 4}s`}
+          >
+            {[0, 1].map((copy) => (
+              <ul class="flex shrink-0 gap-4" aria-hidden={copy === 1 ? "true" : undefined}>
+                {row.map((name) => {
+                  const logo = logoFor(name)!;
+                  return (
+                    <li class="flex items-center gap-3 rounded-2xl border border-white/8 bg-white/[0.025] py-2.5 pr-5 pl-3">
+                      <span class="grid size-9 place-items-center rounded-xl bg-white/[0.04]">
+                        <img
+                          src={logo.src}
+                          alt=""
+                          width="24"
+                          height="24"
+                          loading="lazy"
+                          decoding="async"
+                          class:list={["size-6 object-contain", logo.mono && "logo-mono"]}
+                        />
+                      </span>
+                      <span class="text-sm font-medium whitespace-nowrap text-slate-300">{name}</span>
+                    </li>
+                  );
+                })}
+              </ul>
+            ))}
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</section>

@@ -1,0 +1,120 @@
+---
+import { Award, BadgeCheck, BookOpenCheck, Briefcase, Cloud, Coffee, Globe2, GraduationCap, Sparkles } from "lucide-astro";
+import SectionHeading from "../ui/SectionHeading.astro";
+import { getTranslations, langFrom } from "../../i18n";
+
+const t = getTranslations(langFrom(Astro.currentLocale));
+const ed = t.education;
+
+type Status = keyof typeof ed.statuses;
+
+const studies = [
+  { ...ed.items.msc, school: ed.university, icon: GraduationCap, done: false },
+  { ...ed.items.mbs, school: ed.university, icon: Briefcase, done: false },
+  { ...ed.items.beng, school: ed.university, icon: BookOpenCheck, done: true },
+  { ...ed.items.erasmus, icon: Globe2, done: true },
+];
+
+const certs: { key: keyof typeof ed.certs; status: Status; icon: typeof Cloud }[] = [
+  { key: "az900", status: "passed", icon: Cloud },
+  { key: "elementsOfAi", status: "enrolled", icon: Sparkles },
+  { key: "az204", status: "preparing", icon: Cloud },
+  { key: "oracle", status: "planned", icon: Coffee },
+];
+
+const statusTone: Record<Status, string> = {
+  passed: "border-emerald-400/25 bg-emerald-400/10 text-emerald-200",
+  enrolled: "border-sky-400/25 bg-sky-400/10 text-sky-200",
+  preparing: "border-amber-400/25 bg-amber-400/10 text-amber-200",
+  planned: "border-white/10 bg-white/5 text-slate-300",
+};
+---
+
+<section id="education" class="section" aria-labelledby="education-title">
+  <div class="pointer-events-none absolute top-0 right-1/4 -z-10 size-[26rem] glow-sky" aria-hidden="true"></div>
+
+  <div class="container-page">
+    <SectionHeading eyebrow={ed.badge} title={ed.title} description={ed.description} id="education-title" />
+
+    <ol class="mt-14 grid gap-5 md:grid-cols-2">
+      {
+        studies.map(({ degree, school, detail, note, topics, icon: Icon, done }, index) => (
+          <li
+            class="card spotlight flex flex-col p-6 transition duration-300 hover:border-white/15 sm:p-8"
+            data-reveal
+            style={`--reveal-delay:${(index % 2) * 80}ms`}
+          >
+            <div class="flex items-start justify-between gap-4">
+              <span class="grid size-12 place-items-center rounded-2xl border border-brand-400/15 bg-brand-400/[0.08] text-brand-300">
+                <Icon size={22} aria-hidden="true" />
+              </span>
+              <span
+                class:list={[
+                  "inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-semibold",
+                  done ? "border-white/10 bg-white/5 text-slate-300" : "border-emerald-400/25 bg-emerald-400/10 text-emerald-200",
+                ]}
+              >
+                {!done && <span class="pulse-dot size-1.5 rounded-full bg-emerald-400" aria-hidden="true" />}
+                {done ? ed.completed : ed.inProgress}
+              </span>
+            </div>
+
+            <p class="mt-6 text-sm font-medium text-brand-300">{school}</p>
+            <h3 class="mt-1 text-xl font-bold tracking-tight text-balance text-white">{degree}</h3>
+            <p class="mt-3 text-sm leading-6 text-slate-400">{detail}</p>
+            <p class="mt-3 font-mono text-xs leading-5 text-slate-500">{note}</p>
+
+            {
+              topics.length > 0 && (
+                <ul class="mt-6 flex flex-wrap gap-2 pt-1">
+                  {topics.map((topic) => (
+                    <li class="chip">{topic}</li>
+                  ))}
+                </ul>
+              )
+            }
+          </li>
+        ))
+      }
+    </ol>
+
+    <h3 class="mt-16 flex items-center gap-3 text-lg font-semibold text-white" data-reveal>
+      <Award size={20} class="text-brand-300" aria-hidden="true" />
+      {ed.certsTitle}
+    </h3>
+
+    <ul class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        certs.map(({ key, status, icon: Icon }, index) => {
+          const cert = ed.certs[key];
+          const passed = status === "passed";
+          return (
+            <li
+              class:list={[
+                "relative flex flex-col overflow-hidden rounded-2xl border p-5",
+                passed ? "border-emerald-400/25 bg-emerald-400/[0.04]" : "border-white/8 bg-white/[0.02]",
+              ]}
+              data-reveal
+              style={`--reveal-delay:${index * 60}ms`}
+            >
+              {passed && (
+                <BadgeCheck size={64} class="absolute -top-3 -right-3 text-emerald-400/10" aria-hidden="true" />
+              )}
+              <div class="flex items-center justify-between gap-3">
+                <Icon size={19} class={passed ? "text-emerald-300" : "text-slate-500"} aria-hidden="true" />
+                <span class:list={["rounded-full border px-2.5 py-0.5 text-[0.7rem] font-semibold", statusTone[status]]}>
+                  {ed.statuses[status]}
+                </span>
+              </div>
+              <p class="mt-5 text-sm leading-6 font-semibold text-white">{cert.name}</p>
+              <p class="mt-auto pt-3 text-xs text-slate-500">
+                {cert.issuer}
+                {cert.date && ` · ${cert.date}`}
+              </p>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </div>
+</section>

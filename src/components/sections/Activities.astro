@@ -1,0 +1,67 @@
+---
+import { CalendarDays, FlaskConical, Medal, TrendingUp, Users } from "lucide-astro";
+import SectionHeading from "../ui/SectionHeading.astro";
+import { getTranslations, langFrom } from "../../i18n";
+
+const t = getTranslations(langFrom(Astro.currentLocale));
+const a = t.activities;
+
+const items = [
+  { ...a.items.sensei, icon: Users },
+  { ...a.items.kino, icon: FlaskConical },
+  { ...a.items.events, icon: CalendarDays },
+  { ...a.items.business, icon: TrendingUp },
+];
+---
+
+<section id="activities" class="section" aria-labelledby="activities-title">
+  <div class="container-page">
+    <SectionHeading eyebrow={a.badge} title={a.title} description={a.description} id="activities-title" />
+
+    <div class="mt-14 grid gap-5 lg:grid-cols-[1.1fr_1.9fr]">
+      <article
+        class="relative flex min-h-80 flex-col justify-end overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-br from-ink-800 to-ink-950 p-7 sm:p-9"
+        data-reveal
+      >
+        <!-- Decorative belt: a black belt with a single gold stripe for 1st DAN. -->
+        <svg
+          class="pointer-events-none absolute -top-6 -right-10 w-[22rem] max-w-none opacity-90"
+          viewBox="0 0 320 220"
+          aria-hidden="true"
+        >
+          <defs>
+            <linearGradient id="belt" x1="0" x2="1">
+              <stop offset="0" stop-color="#0f172a"></stop>
+              <stop offset="1" stop-color="#1e293b"></stop>
+            </linearGradient>
+          </defs>
+          <path d="M10 70 C 90 40, 220 40, 310 70 L 310 100 C 220 70, 90 70, 10 100 Z" fill="url(#belt)" stroke="#334155"></path>
+          <path d="M150 62 l -40 120 l 26 4 l 30 -110 Z" fill="url(#belt)" stroke="#334155"></path>
+          <path d="M170 62 l 50 116 l -24 8 l -40 -112 Z" fill="url(#belt)" stroke="#334155"></path>
+          <rect x="140" y="52" width="40" height="40" rx="8" fill="#111827" stroke="#475569"></rect>
+          <path d="M120 150 l 26 4" stroke="#fbbf24" stroke-width="5"></path>
+        </svg>
+
+        <span class="relative grid size-12 place-items-center rounded-2xl border border-amber-300/25 bg-amber-300/10 text-amber-200">
+          <Medal size={22} aria-hidden="true" />
+        </span>
+        <h3 class="relative mt-6 text-2xl font-bold tracking-tight text-white">{a.items.karate.title}</h3>
+        <p class="relative mt-3 leading-7 text-slate-400">{a.items.karate.text}</p>
+      </article>
+
+      <ul class="grid gap-5 sm:grid-cols-2">
+        {
+          items.map(({ title, text, icon: Icon }, index) => (
+            <li class="card spotlight p-6 sm:p-7" data-reveal style={`--reveal-delay:${index * 70}ms`}>
+              <span class="grid size-11 place-items-center rounded-2xl border border-brand-400/15 bg-brand-400/[0.08] text-brand-300">
+                <Icon size={20} aria-hidden="true" />
+              </span>
+              <h3 class="mt-5 text-lg font-semibold text-white">{title}</h3>
+              <p class="mt-2 text-sm leading-6 text-slate-400">{text}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>

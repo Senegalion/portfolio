@@ -1,9 +1,13 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans:
-    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --color-ink-950: #05080f;
+  --color-ink-900: #070b14;
+  --color-ink-850: #090e19;
+  --color-ink-800: #0b111f;
 
   --color-brand-50: #effdfd;
   --color-brand-100: #d2f9f7;
@@ -21,10 +25,11 @@
 :root {
   color-scheme: dark;
   font-family: var(--font-sans);
-  background: #070b14;
+  background: var(--color-ink-900);
   color: #f8fafc;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
 
 html {
@@ -46,7 +51,7 @@ body {
   background:
     radial-gradient(circle at 80% 10%, rgb(22 179 181 / 10%), transparent 28rem),
     radial-gradient(circle at 10% 30%, rgb(59 130 246 / 8%), transparent 24rem),
-    #070b14;
+    var(--color-ink-900);
 }
 
 ::selection {
@@ -59,8 +64,8 @@ button {
   -webkit-tap-highlight-color: transparent;
 }
 
-button,
-a {
+:focus-visible {
+  outline: 2px solid var(--color-brand-400);
   outline-offset: 4px;
 }
 
@@ -71,23 +76,173 @@ footer {
   max-width: 100%;
 }
 
-.container-page {
-  width: min(calc(100% - 2rem), 76rem);
-  max-width: 100%;
-  margin-inline: auto;
-}
+/* ---------- layout & components ---------- */
 
-@media (min-width: 640px) {
+@layer components {
   .container-page {
-    width: min(calc(100% - 3rem), 76rem);
+    width: min(calc(100% - 2rem), 76rem);
+    max-width: 100%;
+    margin-inline: auto;
+  }
+
+  @media (min-width: 640px) {
+    .container-page {
+      width: min(calc(100% - 3rem), 76rem);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container-page {
+      width: min(calc(100% - 5rem), 76rem);
+    }
+  }
+
+  .section {
+    position: relative;
+    padding-block: 3.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .section {
+      padding-block: 4.5rem;
+    }
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-brand-300);
+  }
+
+  .eyebrow::before {
+    content: "";
+    width: 1.5rem;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-brand-400));
+  }
+
+  .heading-2 {
+    margin-top: 1.25rem;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: -0.035em;
+    color: #fff;
+    text-wrap: balance;
+  }
+
+  .lead {
+    margin-top: 1.5rem;
+    max-width: 42rem;
+    font-size: 1.125rem;
+    line-height: 1.75;
+    color: rgb(148 163 184);
+    text-wrap: pretty;
+  }
+
+  .card {
+    border: 1px solid rgb(255 255 255 / 8%);
+    background: rgb(255 255 255 / 2.5%);
+    border-radius: 1.75rem;
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    border: 1px solid rgb(255 255 255 / 8%);
+    background: rgb(255 255 255 / 2.5%);
+    border-radius: 999px;
+    padding: 0.375rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: rgb(148 163 184);
+    white-space: nowrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    min-height: 3rem;
+    max-width: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 0.875rem;
+    padding: 0.75rem 1.25rem;
+    font-weight: 600;
+    transition:
+      transform 0.2s ease,
+      background-color 0.2s ease,
+      border-color 0.2s ease,
+      color 0.2s ease;
+    cursor: pointer;
+  }
+
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+
+  .btn-primary {
+    background: #fff;
+    color: #020617;
+  }
+
+  .btn-primary:hover {
+    background: #e2e8f0;
+  }
+
+  .btn-secondary {
+    border: 1px solid rgb(255 255 255 / 10%);
+    background: rgb(255 255 255 / 3%);
+    color: #fff;
+  }
+
+  .btn-secondary:hover {
+    border-color: rgb(255 255 255 / 20%);
+    background: rgb(255 255 255 / 6%);
+  }
+
+  .icon-btn {
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 0.875rem;
+    color: rgb(148 163 184);
+    transition:
+      background-color 0.2s,
+      color 0.2s,
+      border-color 0.2s;
+  }
+
+  .icon-btn:hover {
+    background: rgb(255 255 255 / 5%);
+    color: #fff;
+  }
+
+  kbd,
+  .kbd {
+    display: inline-grid;
+    place-items: center;
+    min-width: 1.4rem;
+    height: 1.4rem;
+    padding-inline: 0.3rem;
+    border: 1px solid rgb(255 255 255 / 12%);
+    border-bottom-width: 2px;
+    border-radius: 0.375rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: rgb(203 213 225);
+    background: rgb(255 255 255 / 4%);
   }
 }
 
-@media (min-width: 1024px) {
-  .container-page {
-    width: min(calc(100% - 5rem), 76rem);
-  }
-}
+/* ---------- decorative utilities ---------- */
 
 .text-gradient {
   background: linear-gradient(100deg, #ffffff 15%, #99f6e4 55%, #67e8f9 100%);
@@ -103,6 +258,219 @@ footer {
   mask-image: linear-gradient(to bottom, black, transparent 85%);
 }
 
+.logo-mono {
+  filter: brightness(0) invert(0.9);
+}
+
+/* Spotlight that follows the cursor on cards (set by ui.ts via --mx/--my). */
+.spotlight {
+  position: relative;
+  isolation: isolate;
+}
+
+.spotlight::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(
+    28rem circle at var(--mx, 50%) var(--my, -20%),
+    rgb(50 207 206 / 9%),
+    transparent 45%
+  );
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+.spotlight:hover::before {
+  opacity: 1;
+}
+
+/* ---------- reveal on scroll (only when JS is running) ---------- */
+
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.js [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- marquee ---------- */
+
+.marquee {
+  mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee var(--marquee-duration, 50s) linear infinite;
+}
+
+.marquee-track[data-direction="reverse"] {
+  animation-direction: reverse;
+}
+
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ---------- splash screen ---------- */
+
+.splash {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at 50% 40%, rgb(22 179 181 / 14%), transparent 26rem),
+    var(--color-ink-900);
+  animation: splash-out 0.45s ease 1.55s forwards;
+}
+
+html[data-splash="off"] .splash {
+  display: none;
+}
+
+.splash.is-hidden {
+  animation: splash-out 0.3s ease forwards;
+}
+
+.splash-logo path {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  animation: splash-draw 0.8s cubic-bezier(0.6, 0, 0.2, 1) forwards;
+}
+
+.splash-logo path:nth-child(2) {
+  animation-delay: 0.25s;
+}
+
+.splash-logo path:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+.splash-line {
+  opacity: 0;
+  animation: splash-line 0.3s ease forwards;
+}
+
+.splash-bar {
+  transform-origin: left;
+  transform: scaleX(0);
+  animation: splash-bar 1.2s cubic-bezier(0.65, 0, 0.35, 1) 0.2s forwards;
+}
+
+@keyframes splash-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes splash-line {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes splash-bar {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes splash-out {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* ---------- toasts ---------- */
+
+.toast {
+  animation: toast-in 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.2);
+}
+
+.toast.is-leaving {
+  animation: toast-out 0.25s ease forwards;
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.97);
+  }
+}
+
+@keyframes toast-out {
+  to {
+    opacity: 0;
+    transform: translateY(8px) scale(0.97);
+  }
+}
+
+/* ---------- misc ---------- */
+
+.caret::after {
+  content: "";
+  display: inline-block;
+  width: 0.55em;
+  height: 1.1em;
+  margin-left: 2px;
+  vertical-align: -0.2em;
+  background: var(--color-brand-300);
+  animation: caret 1s steps(1) infinite;
+}
+
+@keyframes caret {
+  50% {
+    opacity: 0;
+  }
+}
+
+.pulse-dot {
+  position: relative;
+}
+
+.pulse-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: inherit;
+  animation: pulse 2s ease-out infinite;
+}
+
+@keyframes pulse {
+  to {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+
+dialog::backdrop {
+  background: rgb(2 6 23 / 70%);
+  backdrop-filter: blur(6px);
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -116,4 +484,45 @@ footer {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
   }
+
+  .marquee-track {
+    animation: none;
+    flex-wrap: wrap;
+    width: auto;
+    justify-content: center;
+  }
+
+  .marquee-track > [aria-hidden="true"] {
+    display: none;
+  }
+
+  .js [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media print {
+  .splash,
+  header,
+  #toaster,
+  #back-to-top,
+  .marquee {
+    display: none !important;
+  }
+
+  :root,
+  body {
+    background: #fff;
+    color: #000;
+  }
+}
+
+/* Soft ambient glows — radial gradients instead of filter: blur(), which is very expensive to paint. */
+.glow {
+  background: radial-gradient(closest-side, rgb(22 179 181 / 11%), transparent);
+}
+
+.glow-sky {
+  background: radial-gradient(closest-side, rgb(14 165 233 / 7%), transparent);
 }
