@@ -7,6 +7,7 @@ const pl = {
     ogImageAlt: "Łukasz Pelikan — inżynier oprogramowania i DevOps",
   },
   navigation: {
+    start: "Start",
     about: "O mnie",
     experience: "Doświadczenie",
     projects: "Projekty",
@@ -39,6 +40,14 @@ const pl = {
     badge: "Oprogramowanie · Chmura · DevOps · Dane i AI · ",
     scroll: "Przewiń w dół",
     trustedLabel: "Doświadczenie zdobywałem w",
+    rotatorPrefix: "Specjalizuję się w",
+    rotator: [
+      "backendzie w Javie i Spring Boot",
+      "automatyzacji CI/CD",
+      "chmurze Microsoft Azure",
+      "Kubernetesie i Dockerze",
+      "AI i ML",
+    ],
   },
   intro: {
     index: "01",
@@ -71,7 +80,7 @@ const pl = {
     paragraphs: [
       "Nazywam się Łukasz Pelikan. Jestem absolwentem informatyki na Politechnice Łódzkiej, a dziś pracuję w ING Bank Śląski — w środowisku, w którym niezawodność i bezpieczeństwo są ważniejsze niż efektowne prezentacje.",
       "Najbardziej lubię momenty, w których technologia rozwiązuje konkretny problem: system przestaje się zawieszać, wdrożenie trwa minuty zamiast godzin, a zespół szybciej znajduje przyczynę awarii.",
-      "Równolegle studiuję dwa kierunki magisterskie: informatykę (inżynieria oprogramowania i uczenie maszynowe) oraz Master of Business Studies. Chcę rozumieć nie tylko jak zbudować system, ale też jaką wartość tworzy dla organizacji.",
+      "Równolegle studiuję dwa kierunki magisterskie: informatykę (inżynieria oprogramowania i uczenie maszynowe) oraz Master of Business Studies. Chcę rozumieć nie tylko jak zbudować system, ale też jaką wartość tworzy dla organizacji. W listopadzie 2026 zostałem stypendystą ABB w programie Super Stypendium „Młodzi w Łodzi”.",
       "Wcześniej przez ponad rok uczyłem programowania dzieci i młodzież. Nauczyło mnie to najważniejszej umiejętności w pracy z ludźmi spoza IT: tłumaczenia trudnych rzeczy prostym językiem.",
     ],
     contact: "Porozmawiajmy",
@@ -357,6 +366,12 @@ const pl = {
     inProgress: "W trakcie",
     completed: "Ukończone",
     university: "Politechnika Łódzka",
+    award: {
+      label: "Wyróżnienie",
+      title: "Super Stypendium „Młodzi w Łodzi” — stypendysta ABB",
+      text: "Program miasta Łodzi nagradzający studentów, którzy łączą bardzo dobre wyniki na uczelni z aktywnością zawodową i pozauczelnianą. Fundatorem mojego stypendium jest ABB.",
+      meta: "Edycja 2026/2027 · ponad 2270 zgłoszeń",
+    },
     items: {
       msc: {
         degree: "Informatyka Stosowana — studia magisterskie",
@@ -402,6 +417,68 @@ const pl = {
       events: { title: "Wydarzenia technologiczne", text: "Łódzkie Dni Informatyki oraz inne wydarzenia akademickie i branżowe." },
       business: { title: "Technologia w biznesie", text: "Interesuje mnie transformacja cyfrowa i wpływ AI na sposób pracy w organizacjach." },
     },
+  },
+  pages: {
+    about: {
+      title: "O mnie — Łukasz Pelikan",
+      description: "Kim jestem, czym się zajmuję i co robię poza pracą: studia, karate i nauczanie programowania.",
+      eyebrow: "O mnie",
+      heading: "Inżynier z Łodzi, który łączy technologię z biznesem.",
+      lead: "Junior DevOps Engineer w ING Bank Śląski, student dwóch kierunków magisterskich na Politechnice Łódzkiej i stypendysta ABB.",
+    },
+    experience: {
+      title: "Doświadczenie — Łukasz Pelikan",
+      description: "Doświadczenie zawodowe: ING Bank Śląski, Fair Place Finance, Firmao i Giganci Programowania.",
+      eyebrow: "Doświadczenie",
+      heading: "Cztery firmy, jedna zasada: oprogramowanie ma działać.",
+      lead: "Od uczenia programowania, przez systemy dla firm i fintech, po DevOps w banku.",
+    },
+    projects: {
+      title: "Projekty — Łukasz Pelikan",
+      description: "Projekty, które zbudowałem, oraz badania nad automatycznym wykrywaniem przyczyn awarii.",
+      eyebrow: "Projekty",
+      heading: "Rzeczy, które zbudowałem — i problemy, które badam.",
+      lead: "Aplikacje mikroserwisowe, narzędzia i praca badawcza z uczenia maszynowego.",
+    },
+    education: {
+      title: "Edukacja i umiejętności — Łukasz Pelikan",
+      description: "Studia na Politechnice Łódzkiej, Erasmus w Helsinkach, Super Stypendium ABB, certyfikaty i stack technologiczny.",
+      eyebrow: "Edukacja i umiejętności",
+      heading: "Ciągle się uczę — na uczelni i w praktyce.",
+      lead: "Dwa kierunki magisterskie, semestr w Helsinkach, stypendium ABB i narzędzia, z którymi pracuję na co dzień.",
+    },
+    contact: {
+      title: "Kontakt — Łukasz Pelikan",
+      description: "Skontaktuj się ze mną: e-mail, telefon, LinkedIn i GitHub.",
+      eyebrow: "Kontakt",
+      heading: "Porozmawiajmy.",
+      lead: "Szukasz osoby do zespołu albo masz projekt, przy którym mogę pomóc? Odpowiadam zwykle w ciągu jednego dnia.",
+    },
+  },
+  home: {
+    logosLabel: "Firmy i uczelnie, z którymi jestem związany",
+    award: {
+      label: "Nowość · listopad 2026",
+      title: "Zostałem stypendystą ABB w programie Super Stypendium „Młodzi w Łodzi”.",
+      cta: "Zobacz szczegóły",
+    },
+    explore: {
+      label: "Poznaj mnie bliżej",
+      title: "Od czego chcesz zacząć?",
+      more: "Przejdź",
+      items: {
+        about: { title: "O mnie", text: "Kim jestem, co mnie napędza i dlaczego karate ma coś wspólnego z inżynierią." },
+        experience: { title: "Doświadczenie", text: "ING Bank Śląski, fintech, systemy dla firm i nauczanie programowania." },
+        projects: { title: "Projekty", text: "Mikroserwisy, chmura i badania nad wykrywaniem przyczyn awarii." },
+        education: { title: "Edukacja", text: "Politechnika Łódzka, Erasmus w Helsinkach, stypendium ABB i certyfikaty." },
+      },
+    },
+    contact: {
+      title: "Masz projekt albo miejsce w zespole?",
+      text: "Chętnie porozmawiam o pracy, współpracy lub ciekawym problemie technicznym.",
+      button: "Przejdź do kontaktu",
+    },
+    scroll: "Przewiń w dół",
   },
   footer: {
     contact: "Kontakt",

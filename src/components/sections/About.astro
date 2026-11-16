@@ -1,43 +1,25 @@
 ---
-import { Image } from "astro:assets";
-import type { ImageMetadata } from "astro";
 import { ArrowUpRight } from "lucide-astro";
 import Section from "../ui/Section.astro";
+import { pagePath } from "../../data/site";
 import { getTranslations, langFrom } from "../../i18n";
 
-const t = getTranslations(langFrom(Astro.currentLocale));
+const lang = langFrom(Astro.currentLocale);
+const t = getTranslations(lang);
 const a = t.about;
 
-// Optional portrait: put profile.jpg / .png / .webp in src/assets/ and it is
-// optimised (AVIF/WebP, responsive sizes) and shown here automatically.
-const photos = import.meta.glob<{ default: ImageMetadata }>("../../assets/profile.{jpg,jpeg,png,webp}", { eager: true });
-const photo = Object.values(photos)[0]?.default;
 const [first, ...rest] = a.paragraphs;
 ---
 
 <Section id="about" index={a.index} label={a.badge} title={a.title}>
   <div class="mt-14 grid gap-14 xl:grid-cols-[minmax(0,1fr)_20rem] xl:gap-20">
     <div class="max-w-2xl">
-      {
-        photo && (
-          <figure class="mb-12 overflow-hidden rounded-2xl" data-reveal>
-            <Image
-              src={photo}
-              alt={a.photoAlt}
-              widths={[480, 960, 1440]}
-              sizes="(min-width: 1024px) 42rem, 100vw"
-              class="aspect-[4/3] w-full object-cover grayscale-[35%] transition duration-700 hover:grayscale-0"
-            />
-          </figure>
-        )
-      }
-
       <p class="text-xl leading-9 text-pretty text-fg sm:text-[1.375rem]" data-reveal>{first}</p>
       <div class="mt-6 space-y-5 text-lg leading-8 text-pretty text-muted" data-reveal>
         {rest.map((paragraph) => <p>{paragraph}</p>)}
       </div>
 
-      <a href="#contact" class="group mt-10 inline-flex items-center gap-2 text-lg font-semibold text-fg" data-reveal>
+      <a href={pagePath("contact", lang)} class="group mt-10 inline-flex items-center gap-2 text-lg font-semibold text-fg" data-reveal>
         <span class="link">{a.contact}</span>
         <ArrowUpRight size={20} class="text-accent transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true" />
       </a>
@@ -49,7 +31,7 @@ const [first, ...rest] = a.paragraphs;
           a.facts.map(({ value, label }, index) => (
             <div class="flex flex-col border-t border-line py-5" data-reveal style={`--reveal-delay:${index * 70}ms`}>
               <dt class="order-last mt-2 text-sm leading-6 text-muted">{label}</dt>
-              <dd class="font-display text-5xl leading-none text-fg">{value}</dd>
+              <dd class="font-display text-4xl leading-none text-fg tabular-nums" data-count>{value}</dd>
             </div>
           ))
         }

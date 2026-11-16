@@ -14,6 +14,25 @@ export type Language = "pl" | "en";
 
 export const localePath = (lang: Language, hash = "") => `${lang === "en" ? "/en/" : "/"}${hash}`;
 
+/** Pages of the site. Both languages share the structure; only the slugs differ. */
+export const PAGES = ["home", "about", "experience", "projects", "education", "contact"] as const;
+export type PageKey = (typeof PAGES)[number];
+
+const SLUGS: Record<PageKey, Record<Language, string>> = {
+  home: { pl: "", en: "" },
+  about: { pl: "o-mnie", en: "about" },
+  experience: { pl: "doswiadczenie", en: "experience" },
+  projects: { pl: "projekty", en: "projects" },
+  education: { pl: "edukacja", en: "education" },
+  contact: { pl: "kontakt", en: "contact" },
+};
+
+/** "/o-mnie/", "/en/about/", "/projekty/#research"… */
+export const pagePath = (page: PageKey, lang: Language, hash = "") => {
+  const slug = SLUGS[page][lang];
+  return `${lang === "en" ? "/en/" : "/"}${slug ? `${slug}/` : ""}${hash}`;
+};
+
 /** Formats "2025-09" as "wrz 2025" / "Sep 2025". `null` means "present". */
 export function formatMonth(value: string | null, lang: Language, present: string) {
   if (!value) return present;

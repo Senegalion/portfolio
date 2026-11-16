@@ -1,0 +1,36 @@
+---
+import { Image } from "astro:assets";
+import { ArrowRight, Mail } from "lucide-astro";
+import { SITE, pagePath } from "../../data/site";
+import { getTranslations, langFrom } from "../../i18n";
+import photo from "../../assets/banners/contact.jpg";
+
+const lang = langFrom(Astro.currentLocale);
+const t = getTranslations(lang);
+const c = t.home.contact;
+---
+
+<section class="force-dark relative isolate overflow-hidden bg-bg py-24 sm:py-32" aria-labelledby="cta-title">
+  <Image src={photo} alt="" widths={[768, 1280, 1920]} sizes="100vw" class="absolute inset-0 -z-20 size-full object-cover" />
+  <div class="cta-shade absolute inset-0 -z-10" aria-hidden="true"></div>
+  <div class="container-page" data-reveal>
+    <h2 id="cta-title" class="heading-2 max-w-3xl">{c.title}</h2>
+    <p class="lead">{c.text}</p>
+    <div class="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+      <a href={pagePath("contact", lang)} class="btn btn-primary">
+        {c.button}
+        <ArrowRight size={17} aria-hidden="true" />
+      </a>
+      <a href={`mailto:${SITE.email}`} class="btn btn-secondary backdrop-blur-sm">
+        <Mail size={17} aria-hidden="true" />
+        {SITE.email}
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta-shade {
+    background: linear-gradient(to right, rgb(8 11 16 / 0.92) 0%, rgb(8 11 16 / 0.75) 50%, rgb(8 11 16 / 0.45) 100%);
+  }
+</style>

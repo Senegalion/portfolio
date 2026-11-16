@@ -1,5 +1,7 @@
 ---
+import LogoTile from "../ui/LogoTile.astro";
 import Section from "../ui/Section.astro";
+import type { OrgKey } from "../../data/orgs";
 import { getTranslations, langFrom } from "../../i18n";
 
 const t = getTranslations(langFrom(Astro.currentLocale));
@@ -8,10 +10,10 @@ const ed = t.education;
 type Status = keyof typeof ed.statuses;
 
 const studies = [
-  { ...ed.items.msc, school: ed.university, done: false },
-  { ...ed.items.mbs, school: ed.university, done: false },
-  { ...ed.items.beng, school: ed.university, done: true },
-  { ...ed.items.erasmus, done: true },
+  { ...ed.items.msc, school: ed.university, org: "tul" as OrgKey, done: false },
+  { ...ed.items.mbs, school: ed.university, org: "tul" as OrgKey, done: false },
+  { ...ed.items.beng, school: ed.university, org: "tul" as OrgKey, done: true },
+  { ...ed.items.erasmus, org: "metropolia" as OrgKey, done: true },
 ];
 
 const certs: { key: keyof typeof ed.certs; status: Status }[] = [
@@ -30,9 +32,22 @@ const statusTone: Record<Status, string> = {
 ---
 
 <Section id="education" index={ed.index} label={ed.badge} title={ed.title} description={ed.description}>
-  <ol class="mt-16 grid gap-px overflow-hidden rounded-2xl border border-line bg-line md:grid-cols-2">
+  <article
+    class="mt-16 flex flex-col gap-5 rounded-xl border border-accent/30 bg-surface p-7 sm:flex-row sm:items-start sm:gap-7 sm:p-8"
+    data-reveal
+  >
+    <LogoTile org="abb" class="h-20 w-36 shrink-0 px-5" />
+    <div class="min-w-0">
+      <p class="font-mono text-[0.8125rem] text-accent">{ed.award.label}</p>
+      <h3 class="mt-2 font-display text-[1.6rem] leading-[1.15] text-balance text-fg">{ed.award.title}</h3>
+      <p class="mt-3 max-w-2xl leading-7 text-pretty text-muted">{ed.award.text}</p>
+      <p class="mt-4 text-sm text-subtle">{ed.award.meta}</p>
+    </div>
+  </article>
+
+  <ol class="mt-6 grid gap-px overflow-hidden rounded-xl border border-line bg-line md:grid-cols-2">
     {
-      studies.map(({ degree, school, detail, note, done }, index) => (
+      studies.map(({ degree, school, org, detail, note, done }, index) => (
         <li class="flex flex-col bg-bg p-7 sm:p-8" data-reveal style={`--reveal-delay:${(index % 2) * 80}ms`}>
           <div class="flex items-center justify-between gap-4 text-sm">
             <span class="text-muted">{school}</span>
@@ -41,7 +56,8 @@ const statusTone: Record<Status, string> = {
               {done ? ed.completed : ed.inProgress}
             </span>
           </div>
-          <h3 class="mt-8 font-display text-[2rem] leading-[1.05] text-balance text-fg">{degree}</h3>
+          <LogoTile org={org} class="mt-6 h-20 w-56 px-4 py-2.5" />
+          <h3 class="mt-6 font-display text-[1.6rem] leading-[1.15] text-balance text-fg">{degree}</h3>
           <p class="mt-4 leading-7 text-muted">{detail}</p>
           <p class="mt-auto pt-6 text-sm text-subtle">{note}</p>
         </li>
@@ -63,7 +79,7 @@ const statusTone: Record<Status, string> = {
                 {cert.date && ` · ${cert.date}`}
               </p>
             </div>
-            <span class:list={["w-fit shrink-0 rounded-full border px-3 py-1 text-xs font-semibold", statusTone[status]]}>
+            <span class:list={["w-fit shrink-0 rounded-md border px-2.5 py-1 text-xs font-semibold", statusTone[status]]}>
               {ed.statuses[status]}
             </span>
           </li>

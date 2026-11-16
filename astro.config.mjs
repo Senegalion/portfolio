@@ -17,21 +17,21 @@ export default defineConfig({
   fonts: [
     {
       provider: fontProviders.fontsource(),
-      name: "Instrument Serif",
-      cssVariable: "--font-instrument",
-      weights: ["400"],
-      styles: ["normal", "italic"],
-      subsets: ["latin", "latin-ext"],
-      fallbacks: ["Georgia", "Times New Roman", "serif"],
-    },
-    {
-      provider: fontProviders.fontsource(),
-      name: "Schibsted Grotesk",
-      cssVariable: "--font-schibsted",
-      weights: ["400 900"],
+      name: "IBM Plex Sans",
+      cssVariable: "--font-plex-sans",
+      weights: ["400", "500", "600"],
       styles: ["normal"],
       subsets: ["latin", "latin-ext"],
       fallbacks: ["ui-sans-serif", "system-ui", "sans-serif"],
+    },
+    {
+      provider: fontProviders.fontsource(),
+      name: "IBM Plex Mono",
+      cssVariable: "--font-plex-mono",
+      weights: ["400", "500"],
+      styles: ["normal"],
+      subsets: ["latin", "latin-ext"],
+      fallbacks: ["ui-monospace", "SFMono-Regular", "Menlo", "monospace"],
     },
   ],
 

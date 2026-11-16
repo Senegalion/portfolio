@@ -1,0 +1,23 @@
+---
+import LogoTile from "../ui/LogoTile.astro";
+import type { OrgKey } from "../../data/orgs";
+import { getTranslations, langFrom } from "../../i18n";
+
+const t = getTranslations(langFrom(Astro.currentLocale));
+const orgs: OrgKey[] = ["ing", "abb", "tul", "fairPlace", "firmao", "giganci", "metropolia"];
+---
+
+<section id="logos" class="border-b border-line bg-band py-12 sm:py-14" aria-label={t.home.logosLabel}>
+  <div class="container-page">
+    <p class="label" data-reveal>{t.home.logosLabel}</p>
+    <ul class="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-7">
+      {
+        orgs.map((org, index) => (
+          <li data-reveal style={`--reveal-delay:${index * 50}ms`}>
+            <LogoTile org={org} link class="h-20 w-full" />
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

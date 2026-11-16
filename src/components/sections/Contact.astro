@@ -1,0 +1,74 @@
+---
+import { ArrowUpRight, Copy, Download, Github, Linkedin, Mail, MapPin, Phone } from "lucide-astro";
+import { hasCv } from "../../data/build";
+import { SITE } from "../../data/site";
+import { getTranslations, langFrom } from "../../i18n";
+
+const t = getTranslations(langFrom(Astro.currentLocale));
+const f = t.footer;
+
+const channels = [
+  { icon: Mail, label: "E-mail", value: SITE.email, href: `mailto:${SITE.email}` },
+  { icon: Phone, label: f.call, value: SITE.phone, href: SITE.phoneHref },
+  { icon: Linkedin, label: f.linkedin, value: "łukasz-pelikan", href: SITE.linkedin, external: true },
+  { icon: Github, label: f.github, value: "Senegalion", href: SITE.github, external: true },
+];
+---
+
+<section id="contact" class="section" aria-labelledby="contact-title">
+  <div class="container-page grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-20">
+    <div data-reveal>
+      <p class="label">{f.contact}</p>
+      <h2 id="contact-title" class="heading-2 mt-4 inline-flex items-center gap-4">
+        <span class="status-dot size-3!" aria-hidden="true"></span>
+        {t.hero.availability}
+      </h2>
+      <p class="mt-6 inline-flex items-center gap-2 text-lg text-muted">
+        <MapPin size={18} aria-hidden="true" />
+        {t.hero.location}
+      </p>
+
+      <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+        <a href={`mailto:${SITE.email}`} class="btn btn-primary">
+          <Mail size={17} aria-hidden="true" />
+          {f.writeEmail}
+        </a>
+        <button type="button" class="btn btn-secondary" data-action="copy-email" data-email={SITE.email}>
+          <Copy size={17} aria-hidden="true" />
+          {f.copyEmail}
+        </button>
+        {
+          hasCv && (
+            <a href={SITE.cvPath} download class="btn btn-secondary">
+              <Download size={17} aria-hidden="true" />
+              {t.hero.cv}
+            </a>
+          )
+        }
+      </div>
+    </div>
+
+    <ul class="grid gap-4 sm:grid-cols-2">
+      {
+        channels.map(({ icon: Icon, label, value, href, external }, index) => (
+          <li data-reveal style={`--reveal-delay:${index * 70}ms`}>
+            <a
+              href={href}
+              {...(external ? { target: "_blank", rel: "noreferrer" } : {})}
+              class="group flex h-full flex-col rounded-xl border border-line bg-surface p-6 transition hover:-translate-y-0.5 hover:border-accent/50 hover:shadow-lg hover:shadow-black/5"
+            >
+              <span class="flex items-center justify-between">
+                <span class="grid size-11 place-items-center rounded-lg bg-accent/10 text-accent">
+                  <Icon size={20} aria-hidden="true" />
+                </span>
+                <ArrowUpRight size={18} class="text-subtle transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-accent" aria-hidden="true" />
+              </span>
+              <span class="mt-8 text-sm text-subtle">{label}</span>
+              <span class="mt-1 text-lg font-semibold break-all text-fg sm:break-normal">{value}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

@@ -1,17 +1,21 @@
 ---
 import { Menu, Moon, Sun, X } from "lucide-astro";
-import { SITE, localePath } from "../../data/site";
+import { pagePath, type PageKey } from "../../data/site";
 import { getTranslations, langFrom } from "../../i18n";
 
+interface Props {
+  page: PageKey;
+}
+
+const { page } = Astro.props;
 const lang = langFrom(Astro.currentLocale);
 const t = getTranslations(lang);
 
-const navigation = [
-  { label: t.navigation.about, href: "#about" },
-  { label: t.navigation.experience, href: "#experience" },
-  { label: t.navigation.projects, href: "#projects" },
-  { label: t.navigation.skills, href: "#skills" },
-  { label: t.navigation.education, href: "#education" },
+const navigation: { page: PageKey; label: string }[] = [
+  { page: "about", label: t.navigation.about },
+  { page: "experience", label: t.navigation.experience },
+  { page: "projects", label: t.navigation.projects },
+  { page: "education", label: t.navigation.education },
 ];
 
 const languages = [
@@ -22,20 +26,21 @@ const languages = [
 
 <header
   id="site-header"
-  class="fixed inset-x-0 top-0 z-50 border-b border-transparent data-menu-open:bg-bg transition-[background-color,border-color] duration-300 data-scrolled:border-line data-scrolled:bg-bg/85 data-scrolled:backdrop-blur-xl"
+  data-overlay
+  class="fixed inset-x-0 top-0 z-50 border-b border-transparent text-fg data-menu-open:bg-bg transition-[background-color,border-color] duration-300 data-scrolled:border-line data-scrolled:bg-bg/85 data-scrolled:backdrop-blur-xl"
 >
   <div class="container-page flex h-18 items-center justify-between gap-4">
-    <a href="#top" class="group inline-flex items-baseline gap-2 text-fg" title={t.navigation.home}>
-      <span class="font-display text-[1.65rem] leading-none tracking-tight">Łukasz Pelikan</span>
-      <span class="size-1.5 rounded-full bg-accent transition-transform duration-300 group-hover:scale-150" aria-hidden="true"></span>
+    <a href={pagePath("home", lang)} class="inline-flex items-center text-fg" title={t.navigation.home}>
+      <span class="text-[1.05rem] font-semibold tracking-tight">Łukasz Pelikan</span>
     </a>
 
     <nav class="hidden items-center gap-7 lg:flex" aria-label={t.navigation.mainNavigation}>
       {
-        navigation.map(({ label, href }) => (
+        navigation.map(({ page: target, label }) => (
           <a
-            href={href}
-            data-nav-link
+            href={pagePath(target, lang)}
+            data-active={target === page ? "" : undefined}
+            aria-current={target === page ? "page" : undefined}
             class="link text-sm font-medium text-muted hover:text-fg data-active:text-fg data-active:[background-size:100%_1px]"
           >
             {label}
@@ -51,7 +56,7 @@ const languages = [
             <>
               {index > 0 && <span class="px-1 text-line-strong" aria-hidden="true">/</span>}
               <a
-                href={localePath(code)}
+                href={pagePath(page, code)}
                 hreflang={code}
                 lang={code}
                 data-lang-link
@@ -79,7 +84,11 @@ const languages = [
         <Moon size={18} class="theme-icon-moon hidden" aria-hidden="true" />
       </button>
 
-      <a href="#contact" class="btn btn-primary hidden min-h-10 px-5 py-2 text-sm md:inline-flex">
+      <a
+        href={pagePath("contact", lang)}
+        aria-current={page === "contact" ? "page" : undefined}
+        class="btn btn-primary hidden min-h-9 px-4 py-1.5 text-sm md:inline-flex"
+      >
         {t.navigation.contactButton}
       </a>
 
@@ -112,14 +121,14 @@ const languages = [
   >
     <nav class="container-page flex flex-col py-6" aria-label={t.navigation.mobileNavigation}>
       {
-        [...navigation, { label: t.navigation.contact, href: "#contact" }].map(({ label, href }, index) => (
+        [{ page: "home" as PageKey, label: t.navigation.start }, ...navigation, { page: "contact" as PageKey, label: t.navigation.contact }].map(({ page: target, label }) => (
           <a
-            href={href}
-            data-nav-link
-            class="flex items-baseline gap-4 border-b border-line py-4 font-display text-4xl text-fg transition hover:text-accent data-active:text-accent"
+            href={pagePath(target, lang)}
+            data-active={target === page ? "" : undefined}
+            aria-current={target === page ? "page" : undefined}
+            class="flex items-baseline gap-4 border-b border-line py-4 text-2xl font-semibold tracking-tight text-fg transition hover:text-accent data-active:text-accent"
           >
-            <span class="font-sans text-xs text-subtle tabular-nums">0{index + 1}</span>
-            {label}
+                        {label}
           </a>
         ))
       }
@@ -128,13 +137,13 @@ const languages = [
         {
           languages.map(({ code, name }) => (
             <a
-              href={localePath(code)}
+              href={pagePath(page, code)}
               hreflang={code}
               lang={code}
               data-lang-link
               aria-current={lang === code ? "page" : undefined}
               class:list={[
-                "grid min-h-12 place-items-center rounded-full border text-sm font-semibold",
+                "grid min-h-12 place-items-center rounded-lg border text-sm font-semibold",
                 lang === code ? "border-fg bg-fg text-bg" : "border-line-strong text-muted",
               ]}
             >
@@ -144,7 +153,7 @@ const languages = [
         }
       </div>
 
-      <a href={`mailto:${SITE.email}`} class="btn btn-primary mt-3">
+      <a href={pagePath("contact", lang)} class="btn btn-primary mt-3">
         {t.navigation.mobileContact}
       </a>
     </nav>

@@ -1,0 +1,11 @@
+---
+import PageLayout from "../layout/PageLayout.astro";
+import Experience from "../sections/Experience.astro";
+import PageBanner from "../ui/PageBanner.astro";
+import banner from "../../assets/banners/experience.jpg";
+---
+
+<PageLayout page="experience">
+  <PageBanner page="experience" image={banner} focus="70% 50%" />
+  <Experience />
+</PageLayout>

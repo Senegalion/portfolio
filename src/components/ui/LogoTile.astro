@@ -1,0 +1,21 @@
+---
+import { ORGS, type OrgKey } from "../../data/orgs";
+
+interface Props {
+  org: OrgKey;
+  class?: string;
+  /** Wrap the tile in a link to the organisation's website. */
+  link?: boolean;
+}
+
+const { org, class: className, link = false } = Astro.props;
+const { name, logo, url } = ORGS[org];
+const Tag = link ? "a" : "span";
+---
+
+<Tag
+  class:list={["logo-tile", link && "transition hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/10", className]}
+  {...link ? { href: url, target: "_blank", rel: "noreferrer", title: name } : {}}
+>
+  <img src={logo} alt={name} loading="lazy" decoding="async" />
+</Tag>

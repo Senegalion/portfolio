@@ -21,7 +21,7 @@ import {
   User,
   Wrench,
 } from "lucide-astro";
-import { SITE, localePath } from "../../data/site";
+import { SITE, pagePath } from "../../data/site";
 import { getTranslations, langFrom } from "../../i18n";
 
 interface Props {
@@ -49,15 +49,15 @@ const groups: { title: string; items: Item[] }[] = [
     title: t.palette.groups.navigate,
     items: [
       { label: p.top, icon: ArrowUp, action: "back-to-top", keywords: "home start top" },
-      { label: t.intro.badge, icon: Sparkles, href: "#intro", keywords: "what i do services oferta" },
-      { label: t.navigation.about, icon: User, href: "#about", keywords: "about o mnie" },
-      { label: t.navigation.experience, icon: BriefcaseBusiness, href: "#experience", keywords: "work job ing praca" },
-      { label: t.navigation.projects, icon: FolderGit2, href: "#projects", keywords: "projects github projekty" },
-      { label: t.navigation.skills, icon: Wrench, href: "#skills", keywords: "stack tech java devops" },
-      { label: t.research.badge, icon: Microscope, href: "#research", keywords: "rca research ml badania" },
-      { label: t.navigation.education, icon: GraduationCap, href: "#education", keywords: "studies certificates az-900" },
-      { label: t.activities.badge, icon: Medal, href: "#activities", keywords: "karate hobby" },
-      { label: t.navigation.contact, icon: Mail, href: "#contact", keywords: "contact email kontakt" },
+      { label: t.navigation.start, icon: Sparkles, href: pagePath("home", lang), keywords: "home start strona glowna" },
+      { label: t.navigation.about, icon: User, href: pagePath("about", lang), keywords: "about o mnie" },
+      { label: t.navigation.experience, icon: BriefcaseBusiness, href: pagePath("experience", lang), keywords: "work job ing praca" },
+      { label: t.navigation.projects, icon: FolderGit2, href: pagePath("projects", lang), keywords: "projects github projekty" },
+      { label: t.research.badge, icon: Microscope, href: pagePath("projects", lang, "#research"), keywords: "rca research ml badania" },
+      { label: t.navigation.education, icon: GraduationCap, href: pagePath("education", lang), keywords: "studies certificates az-900 abb stypendium" },
+      { label: t.navigation.skills, icon: Wrench, href: pagePath("education", lang, "#skills"), keywords: "stack tech java devops" },
+      { label: t.activities.badge, icon: Medal, href: pagePath("about", lang, "#activities"), keywords: "karate hobby" },
+      { label: t.navigation.contact, icon: Mail, href: pagePath("contact", lang), keywords: "contact email kontakt" },
     ],
   },
   {
@@ -68,7 +68,7 @@ const groups: { title: string; items: Item[] }[] = [
       {
         label: p.language,
         icon: Languages,
-        href: localePath(lang === "pl" ? "en" : "pl"),
+        href: pagePath("home", lang === "pl" ? "en" : "pl"),
         keywords: "language english polski jezyk",
       },
       { label: p.install, icon: Download, action: "install", keywords: "pwa install app aplikacja" },
@@ -92,7 +92,7 @@ let counter = 0;
 <dialog
   id="command-palette"
   aria-label={t.palette.title}
-  class="m-auto mt-[12vh] w-[min(36rem,calc(100%-2rem))] max-w-none overflow-hidden rounded-2xl border border-line-strong bg-surface p-0 text-fg shadow-2xl shadow-black/30 open:animate-[toast-in_.2s_ease]"
+  class="m-auto mt-[12vh] w-[min(36rem,calc(100%-2rem))] max-w-none overflow-hidden rounded-xl border border-line-strong bg-surface p-0 text-fg shadow-2xl shadow-black/30 open:animate-[toast-in_.2s_ease]"
 >
   <div class="flex items-center gap-3 border-b border-line px-4">
     <Search size={18} class="shrink-0 text-subtle" aria-hidden="true" />

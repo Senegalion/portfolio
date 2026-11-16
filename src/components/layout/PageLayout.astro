@@ -1,0 +1,20 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import type { PageKey } from "../../data/site";
+import Footer from "./Footer.astro";
+import Header from "./Header.astro";
+
+interface Props {
+  page: PageKey;
+}
+
+const { page } = Astro.props;
+---
+
+<BaseLayout page={page}>
+  <Header page={page} />
+  <main id="main" tabindex="-1">
+    <slot />
+  </main>
+  <Footer />
+</BaseLayout>

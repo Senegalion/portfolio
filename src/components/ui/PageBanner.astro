@@ -1,0 +1,82 @@
+---
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+import { ChevronRight } from "lucide-astro";
+import { pagePath, type PageKey } from "../../data/site";
+import { getTranslations, langFrom } from "../../i18n";
+
+interface Props {
+  page: Exclude<PageKey, "home">;
+  image?: ImageMetadata;
+  /** CSS object-position for the photo, e.g. "50% 30%". */
+  focus?: string;
+}
+
+const { page, image, focus = "50% 50%" } = Astro.props;
+const lang = langFrom(Astro.currentLocale);
+const t = getTranslations(lang);
+const p = t.pages[page];
+---
+
+<!-- Page header: photo (or a dark gradient) with the page title, always in the dark palette. -->
+<header class="force-dark relative isolate overflow-hidden bg-bg pt-18">
+  {
+    image ? (
+      <Image
+        src={image}
+        alt=""
+        widths={[768, 1280, 1920]}
+        sizes="100vw"
+        loading="eager"
+        fetchpriority="high"
+        class="banner-photo absolute inset-0 -z-20 size-full object-cover"
+        style={`object-position:${focus}`}
+      />
+    ) : (
+      <div class="banner-glow absolute inset-0 -z-20" aria-hidden="true" />
+    )
+  }
+  {image && <div class="banner-shade absolute inset-0 -z-10" aria-hidden="true" />}
+
+  <div class="container-page grid items-end gap-10 lg:grid-cols-[minmax(0,1fr)_auto]">
+  <div class="flex min-h-[19rem] flex-col justify-end pt-14 pb-12 sm:min-h-[24rem] sm:pb-16 lg:min-h-[26rem]">
+    <nav aria-label="breadcrumb" class="fade-in" style="--d:50ms">
+      <ol class="flex items-center gap-1.5 font-mono text-[0.8125rem] text-muted">
+        <li><a href={pagePath("home", lang)} class="transition hover:text-fg">{t.navigation.start}</a></li>
+        <li aria-hidden="true"><ChevronRight size={14} /></li>
+        <li class="text-fg" aria-current="page">{p.eyebrow}</li>
+      </ol>
+    </nav>
+    <h1 class="display fade-in mt-5 max-w-4xl text-[clamp(2.25rem,5.5vw,4.25rem)] text-balance text-fg" style="--d:120ms">
+      {p.heading}
+    </h1>
+    <p class="fade-in mt-5 max-w-2xl text-lg leading-8 text-pretty text-muted" style="--d:220ms">{p.lead}</p>
+  </div>
+  <slot />
+  </div>
+</header>
+
+<style>
+  .banner-shade {
+    background:
+      linear-gradient(to right, rgb(9 12 17 / 0.92) 0%, rgb(9 12 17 / 0.7) 45%, rgb(9 12 17 / 0.35) 100%),
+      linear-gradient(to top, rgb(9 12 17 / 0.85) 0%, transparent 55%);
+  }
+
+  .banner-glow {
+    background:
+      radial-gradient(55% 110% at 80% 20%, rgb(43 106 224 / 0.45), transparent 70%),
+      radial-gradient(45% 80% at 0% 100%, rgb(31 85 196 / 0.3), transparent 70%),
+      linear-gradient(160deg, #0e1622 0%, #0b0f15 100%);
+  }
+
+  .banner-photo {
+    animation: banner-zoom 18s ease-out both;
+  }
+
+  @keyframes banner-zoom {
+    from {
+      transform: scale(1.08);
+    }
+  }
+</style>

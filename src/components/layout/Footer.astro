@@ -1,12 +1,21 @@
 ---
-import { ArrowUp, ArrowUpRight, Copy, Download, Phone } from "lucide-astro";
-import { BUILD, hasCv } from "../../data/build";
-import { SITE } from "../../data/site";
+import { ArrowUp } from "lucide-astro";
+import { BUILD } from "../../data/build";
+import { SITE, pagePath, type PageKey } from "../../data/site";
 import { getTranslations, langFrom } from "../../i18n";
 
-const t = getTranslations(langFrom(Astro.currentLocale));
+const lang = langFrom(Astro.currentLocale);
+const t = getTranslations(lang);
 const f = t.footer;
 const year = new Date().getFullYear();
+
+const pages: { page: PageKey; label: string }[] = [
+  { page: "about", label: t.navigation.about },
+  { page: "experience", label: t.navigation.experience },
+  { page: "projects", label: t.navigation.projects },
+  { page: "education", label: t.navigation.education },
+  { page: "contact", label: t.navigation.contact },
+];
 
 const links = [
   { label: f.linkedin, href: SITE.linkedin },
@@ -14,67 +23,46 @@ const links = [
 ];
 ---
 
-<footer id="contact" class="relative overflow-hidden border-t border-line pt-24 pb-10 sm:pt-32" aria-labelledby="contact-title">
+<footer class="force-dark border-t border-line bg-bg pt-16 pb-10">
   <div class="container-page">
-    <p class="label" data-reveal><span class="label-index">(08)</span>{f.contact}</p>
-
-    <h2 id="contact-title" class="display mt-8 text-[clamp(3.6rem,14.5vw,13rem)] text-fg" data-reveal>
-      {f.title.replace(/\.$/, "")}<span class="text-accent">.</span>
-    </h2>
-
-    <div class="mt-12 grid gap-12 border-t border-line pt-10 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
-      <div data-reveal>
-        <p class="max-w-xl text-xl leading-8 text-pretty text-muted">{f.description}</p>
-
-        <a
-          href={`mailto:${SITE.email}`}
-          class="group mt-8 inline-flex max-w-full items-center gap-3 font-display text-[clamp(1.9rem,5vw,3.5rem)] leading-tight text-fg"
-        >
-          <span class="link min-w-0 break-all sm:break-normal">{SITE.email}</span>
-          <ArrowUpRight
-            class="size-[0.7em] shrink-0 text-accent transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
-            aria-hidden="true"
-          />
-        </a>
-
-        <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-          <button type="button" class="btn btn-secondary" data-action="copy-email" data-email={SITE.email}>
-            <Copy size={17} aria-hidden="true" />
-            {f.copyEmail}
-          </button>
-          <a href={SITE.phoneHref} class="btn btn-secondary">
-            <Phone size={17} aria-hidden="true" />
-            {SITE.phone}
-          </a>
-          {
-            hasCv && (
-              <a href={SITE.cvPath} download class="btn btn-secondary">
-                <Download size={17} aria-hidden="true" />
-                {t.hero.cv}
-              </a>
-            )
-          }
-        </div>
+    <div class="grid gap-10 md:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)_minmax(0,1fr)]">
+      <div>
+        <a href={pagePath("home", lang)} class="text-lg font-semibold tracking-tight text-fg">{SITE.name}</a>
+        <p class="mt-3 max-w-sm leading-7 text-muted">{t.hero.lead}</p>
+        <a href={`mailto:${SITE.email}`} class="link mt-5 inline-block font-medium text-fg">{SITE.email}</a>
       </div>
 
-      <ul class="flex flex-col gap-1 lg:items-end" data-reveal>
+      <nav aria-label={t.navigation.mainNavigation}>
+        <ul class="grid gap-2.5 text-sm">
+          {
+            pages.map(({ page, label }) => (
+              <li>
+                <a href={pagePath(page, lang)} class="text-muted transition hover:text-fg">
+                  {label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <ul class="grid content-start gap-2.5 text-sm">
         {
           links.map(({ label, href }) => (
             <li>
-              <a href={href} target="_blank" rel="noreferrer" class="group inline-flex items-center gap-2 py-1 font-display text-4xl text-fg">
-                <span class="link">{label}</span>
-                <ArrowUpRight size={22} class="text-accent transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true" />
+              <a href={href} target="_blank" rel="noreferrer" class="text-muted transition hover:text-fg">
+                {label} ↗
               </a>
             </li>
           ))
         }
+        <li><a href={SITE.phoneHref} class="text-muted transition hover:text-fg">{SITE.phone}</a></li>
       </ul>
     </div>
 
-    <div class="mt-20 flex flex-col gap-3 border-t border-line pt-6 text-sm text-subtle sm:flex-row sm:items-center sm:justify-between">
+    <div class="mt-14 flex flex-col gap-3 border-t border-line pt-6 text-sm text-subtle sm:flex-row sm:items-center sm:justify-between">
       <p>© {year} {SITE.name}. {f.copyright}</p>
       <p class="inline-flex flex-wrap items-center gap-x-4 gap-y-1">
-        <span>{f.madeWith}</span>
         <button type="button" data-open-palette class="hidden items-center gap-1.5 transition hover:text-fg sm:inline-flex">
           <kbd data-mod-key>⌘K</kbd>
           {f.shortcut}
@@ -99,7 +87,7 @@ const links = [
   data-action="back-to-top"
   tabindex="-1"
   aria-label={f.backToTop}
-  class="pointer-events-none fixed right-4 bottom-4 z-40 grid size-12 translate-y-4 place-items-center rounded-full border border-line-strong bg-bg/90 text-fg opacity-0 shadow-lg backdrop-blur transition hover:border-fg data-visible:pointer-events-auto data-visible:translate-y-0 data-visible:opacity-100 sm:right-6 sm:bottom-6"
+  class="pointer-events-none fixed right-4 bottom-4 z-40 grid size-11 translate-y-4 place-items-center rounded-lg border border-line-strong bg-bg/90 text-fg opacity-0 shadow-lg backdrop-blur transition hover:border-fg data-visible:pointer-events-auto data-visible:translate-y-0 data-visible:opacity-100 sm:right-6 sm:bottom-6"
 >
   <ArrowUp size={20} aria-hidden="true" />
 </button>

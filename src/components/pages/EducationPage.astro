@@ -1,0 +1,13 @@
+---
+import PageLayout from "../layout/PageLayout.astro";
+import Education from "../sections/Education.astro";
+import Skills from "../sections/Skills.astro";
+import PageBanner from "../ui/PageBanner.astro";
+import banner from "../../assets/banners/education.jpg";
+---
+
+<PageLayout page="education">
+  <PageBanner page="education" image={banner} focus="50% 55%" />
+  <Education />
+  <Skills />
+</PageLayout>

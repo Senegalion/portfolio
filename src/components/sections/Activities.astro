@@ -10,7 +10,7 @@ const items = [a.items.sensei, a.items.kino, a.items.events, a.items.business];
 
 <Section id="activities" index={a.index} label={a.badge} title={a.title} description={a.description}>
   <div class="mt-16 grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-16">
-    <article class="relative flex min-h-[28rem] flex-col justify-between overflow-hidden rounded-2xl bg-fg p-8 text-bg sm:p-10" data-reveal>
+    <article class="relative flex min-h-[28rem] flex-col justify-between overflow-hidden rounded-xl bg-fg p-8 text-bg sm:p-10" data-reveal>
       <!-- A knotted black belt with a single stripe for 1st DAN, drawn in the page's own colours. -->
       <svg class="pointer-events-none absolute top-[34%] -right-24 w-[22rem] max-w-none sm:-right-16" viewBox="0 0 320 220" aria-hidden="true">
         <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" opacity="0.35">
@@ -22,7 +22,7 @@ const items = [a.items.sensei, a.items.kino, a.items.events, a.items.business];
         <path d="M118 150 l 27 4" class="stroke-accent" stroke-width="6"></path>
       </svg>
 
-      <p class="relative font-display text-[clamp(5rem,12vw,8.5rem)] leading-none">1 DAN</p>
+      <p class="relative font-display text-[clamp(3.5rem,8vw,5.5rem)] leading-none">1 DAN</p>
       <div class="relative mt-10">
         <h3 class="text-xl font-semibold">{a.items.karate.title}</h3>
         <p class="mt-2 max-w-md leading-7 opacity-75">{a.items.karate.text}</p>
@@ -33,7 +33,7 @@ const items = [a.items.sensei, a.items.kino, a.items.events, a.items.business];
       {
         items.map(({ title, text }, index) => (
           <li class="grid gap-1 border-t border-line py-6 sm:grid-cols-[2rem_minmax(0,1fr)] sm:gap-4" data-reveal style={`--reveal-delay:${index * 70}ms`}>
-            <span class="text-accent" aria-hidden="true">✦</span>
+            <span class="text-subtle" aria-hidden="true">·</span>
             <div>
               <h3 class="text-lg font-semibold text-fg">{title}</h3>
               <p class="mt-1.5 leading-7 text-muted">{text}</p>

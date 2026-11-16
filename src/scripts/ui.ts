@@ -14,24 +14,33 @@ export async function copyEmail(email: string) {
   }
 }
 
-/** Fades elements marked with data-reveal in as they enter the viewport. */
+/**
+ * Fades elements marked with data-reveal in as they enter the viewport.
+ * Content is visible by default: only elements that are still below the fold when
+ * this runs get hidden (and then revealed on scroll). On a slow connection, where this
+ * script arrives late, nothing that the visitor can already see is ever hidden.
+ */
 function initReveal() {
-  const items = document.querySelectorAll<HTMLElement>("[data-reveal]");
-  if (!("IntersectionObserver" in window) || reducedMotion()) {
-    items.forEach((el) => el.classList.add("is-visible"));
-    return;
-  }
+  if (!("IntersectionObserver" in window) || reducedMotion()) return;
+  const fold = window.innerHeight;
+  const items = [...document.querySelectorAll<HTMLElement>("[data-reveal]")].filter(
+    (el) => el.getBoundingClientRect().top > fold,
+  );
   const observer = new IntersectionObserver(
     (entries) => {
       for (const entry of entries) {
         if (!entry.isIntersecting) continue;
+        entry.target.classList.remove("reveal-pending");
         entry.target.classList.add("is-visible");
         observer.unobserve(entry.target);
       }
     },
     { rootMargin: "0px 0px -8% 0px", threshold: 0.08 },
   );
-  items.forEach((el) => observer.observe(el));
+  items.forEach((el) => {
+    el.classList.add("reveal-pending");
+    observer.observe(el);
+  });
 }
 
 /** Scroll progress bar, header shadow and floating back-to-top button. */
@@ -67,36 +76,7 @@ function initScrollEffects() {
   update();
 }
 
-/** Highlights the navigation link of the section currently in view. */
-function initActiveNav() {
-  const links = [...document.querySelectorAll<HTMLAnchorElement>("[data-nav-link]")];
-  const ids = [...new Set(links.map((link) => link.hash.slice(1)))];
-  const sections = ids.map((id) => document.getElementById(id)).filter(Boolean) as HTMLElement[];
-  if (!sections.length || !("IntersectionObserver" in window)) return;
-
-  const setActive = (id: string) => {
-    for (const link of links) {
-      const active = link.hash === `#${id}`;
-      link.toggleAttribute("data-active", active);
-      if (active) link.setAttribute("aria-current", "true");
-      else link.removeAttribute("aria-current");
-    }
-  };
-
-  const visible = new Map<string, number>();
-  const observer = new IntersectionObserver(
-    (entries) => {
-      for (const entry of entries) visible.set(entry.target.id, entry.isIntersecting ? entry.intersectionRatio : 0);
-      const [best] = [...visible.entries()].sort((a, b) => b[1] - a[1]);
-      if (best && best[1] > 0) setActive(best[0]);
-      else if (window.scrollY < 200) setActive("");
-    },
-    { rootMargin: "-30% 0px -55% 0px", threshold: [0, 0.25, 0.5, 1] },
-  );
-  sections.forEach((section) => observer.observe(section));
-}
-
-const THEME_COLORS = { dark: "#0f0e0c", light: "#f3efe7" } as const;
+const THEME_COLORS = { dark: "#0e1116", light: "#f6f7f9" } as const;
 
 /** Applies the theme to <html>, the theme-color meta tag and the toggle buttons. */
 function applyTheme(theme: "dark" | "light") {
@@ -167,11 +147,96 @@ function initShortcutHints() {
   });
 }
 
+/** Wraps every word of an element's text in a span, keeping inline markup such as <em>. */
+function splitWords(root: HTMLElement) {
+  let index = 0;
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+  const nodes: Text[] = [];
+  while (walker.nextNode()) nodes.push(walker.currentNode as Text);
+  for (const node of nodes) {
+    const parts = node.textContent!.split(/(\s+)/);
+    const fragment = document.createDocumentFragment();
+    for (const part of parts) {
+      if (!part) continue;
+      if (/^\s+$/.test(part)) {
+        fragment.append(part);
+        continue;
+      }
+      const word = document.createElement("span");
+      word.className = "split-word";
+      word.style.setProperty("--w", String(index++));
+      word.textContent = part;
+      fragment.append(word);
+    }
+    node.replaceWith(fragment);
+  }
+}
+
+/** Headings marked data-split rise in word by word when they scroll into view. */
+function initSplitHeadings() {
+  if (!("IntersectionObserver" in window) || reducedMotion()) return;
+  const fold = window.innerHeight;
+  const headings = [...document.querySelectorAll<HTMLElement>("[data-split]")].filter(
+    (el) => el.getBoundingClientRect().top > fold,
+  );
+  const observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        entry.target.classList.remove("split-pending");
+        observer.unobserve(entry.target);
+      }
+    },
+    { rootMargin: "0px 0px -10% 0px" },
+  );
+  headings.forEach((heading) => {
+    splitWords(heading);
+    heading.classList.add("split-pending");
+    observer.observe(heading);
+  });
+}
+
+/** Numbers marked data-count ("4", "4,90", "1 DAN") count up from zero when they appear. */
+function initCountUp() {
+  if (!("IntersectionObserver" in window) || reducedMotion()) return;
+  const fold = window.innerHeight;
+  const observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        observer.unobserve(entry.target);
+        const el = entry.target as HTMLElement;
+        const { target, decimals, separator, suffix } = JSON.parse(el.dataset.countParsed!);
+        const started = performance.now();
+        const duration = 1300;
+        const tick = (now: number) => {
+          const progress = Math.min((now - started) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          el.textContent = (target * eased).toFixed(decimals).replace(".", separator) + suffix;
+          if (progress < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      }
+    },
+    { threshold: 0.6 },
+  );
+  document.querySelectorAll<HTMLElement>("[data-count]").forEach((el) => {
+    const match = el.textContent!.trim().match(/^(\d+)(?:([.,])(\d+))?(.*)$/);
+    if (!match || el.getBoundingClientRect().top <= fold) return;
+    const [, whole, separator = ",", fraction = "", suffix] = match;
+    const target = Number(`${whole}.${fraction || 0}`);
+    el.dataset.countParsed = JSON.stringify({ target, decimals: fraction.length, separator, suffix });
+    el.textContent = (0).toFixed(fraction.length).replace(".", separator) + suffix;
+    observer.observe(el);
+  });
+}
+
 export function initUi() {
   initShortcutHints();
   initReveal();
+  initSplitHeadings();
+  initCountUp();
   initScrollEffects();
-  initActiveNav();
   applyTheme(document.documentElement.dataset.theme === "light" ? "light" : "dark");
   initActions();
 }

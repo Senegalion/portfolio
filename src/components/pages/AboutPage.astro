@@ -1,0 +1,27 @@
+---
+import PageLayout from "../layout/PageLayout.astro";
+import About from "../sections/About.astro";
+import Activities from "../sections/Activities.astro";
+import { Image } from "astro:assets";
+import PageBanner from "../ui/PageBanner.astro";
+import { getTranslations, langFrom } from "../../i18n";
+import profile from "../../assets/profile.jpg";
+
+const t = getTranslations(langFrom(Astro.currentLocale));
+---
+
+<PageLayout page="about">
+  <PageBanner page="about">
+    <Image
+      src={profile}
+      alt={t.about.photoAlt}
+      widths={[320, 480, 640]}
+      sizes="18rem"
+      loading="eager"
+      class="fade-in -mt-4 aspect-[4/5] w-56 self-end sm:w-72 rounded-t-2xl object-cover object-top shadow-2xl shadow-black/40 sm:block lg:mt-10"
+      style="--d:250ms"
+    />
+  </PageBanner>
+  <About />
+  <Activities />
+</PageLayout>

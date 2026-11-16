@@ -9,6 +9,7 @@ const en: Translations = {
     ogImageAlt: "Łukasz Pelikan — Software & DevOps Engineer",
   },
   navigation: {
+    start: "Home",
     about: "About",
     experience: "Experience",
     projects: "Projects",
@@ -40,6 +41,14 @@ const en: Translations = {
     cv: "Download CV",
     badge: "Software · Cloud · DevOps · Data & AI · ",
     scroll: "Scroll down",
+    rotatorPrefix: "I specialise in",
+    rotator: [
+      "Java & Spring Boot backends",
+      "CI/CD automation",
+      "Microsoft Azure cloud",
+      "Kubernetes & Docker",
+      "ML-driven incident analysis",
+    ],
     trustedLabel: "I've gained experience at",
   },
   intro: {
@@ -73,7 +82,7 @@ const en: Translations = {
     paragraphs: [
       "My name is Łukasz Pelikan. I graduated in Computer Science from Lodz University of Technology and today I work at ING Bank Śląski — an environment where reliability and security matter more than flashy demos.",
       "What I enjoy most are the moments when technology solves a concrete problem: a system stops crashing, a release takes minutes instead of hours, and the team finds the cause of an outage faster.",
-      "I am currently pursuing two Master's degrees at the same time: Computer Science (software engineering and machine learning) and a Master of Business Studies. I want to understand not only how to build a system, but also what value it creates for an organisation.",
+      "I am currently pursuing two Master's degrees at the same time: Computer Science (software engineering and machine learning) and a Master of Business Studies. I want to understand not only how to build a system, but also what value it creates for an organisation. In November 2026 I was named an ABB scholar in the City of Łódź “Młodzi w Łodzi” Super Scholarship programme.",
       "Before that, I spent more than a year teaching programming to children and teenagers. It taught me the most important skill for working with people outside IT: explaining difficult things in plain language.",
     ],
     contact: "Let's talk",
@@ -359,6 +368,12 @@ const en: Translations = {
     inProgress: "In progress",
     completed: "Completed",
     university: "Lodz University of Technology",
+    award: {
+      label: "Award",
+      title: "“Młodzi w Łodzi” Super Scholarship — ABB scholar",
+      text: "A City of Łódź programme recognising students who combine excellent academic results with professional and extracurricular achievements. My scholarship is funded by ABB.",
+      meta: "2026/2027 edition · over 2,270 applications",
+    },
     items: {
       msc: {
         degree: "Applied Computer Science — Master's degree",
@@ -404,6 +419,68 @@ const en: Translations = {
       events: { title: "Tech events", text: "Łódź IT Days and other academic and industry events." },
       business: { title: "Technology in business", text: "I'm interested in digital transformation and how AI changes the way organisations work." },
     },
+  },
+  pages: {
+    about: {
+      title: "About — Łukasz Pelikan",
+      description: "Who I am, what I do and what I do outside work: studies, karate and teaching programming.",
+      eyebrow: "About",
+      heading: "An engineer from Łódź who connects technology and business.",
+      lead: "Junior DevOps Engineer at ING Bank Śląski, pursuing two Master's degrees at Lodz University of Technology, and an ABB scholar.",
+    },
+    experience: {
+      title: "Experience — Łukasz Pelikan",
+      description: "Professional experience: ING Bank Śląski, Fair Place Finance, Firmao and Giganci Programowania.",
+      eyebrow: "Experience",
+      heading: "Four companies, one rule: software has to work.",
+      lead: "From teaching programming, through business software and fintech, to DevOps at a bank.",
+    },
+    projects: {
+      title: "Projects — Łukasz Pelikan",
+      description: "Projects I have built and my research on automatically finding the root cause of outages.",
+      eyebrow: "Projects",
+      heading: "Things I've built — and problems I research.",
+      lead: "Microservice applications, tools and machine learning research.",
+    },
+    education: {
+      title: "Education & skills — Łukasz Pelikan",
+      description: "Studies at Lodz University of Technology, Erasmus in Helsinki, the ABB Super Scholarship, certificates and tech stack.",
+      eyebrow: "Education & skills",
+      heading: "Always learning — at university and on the job.",
+      lead: "Two Master's degrees, a semester in Helsinki, the ABB scholarship and the tools I use every day.",
+    },
+    contact: {
+      title: "Contact — Łukasz Pelikan",
+      description: "Get in touch: email, phone, LinkedIn and GitHub.",
+      eyebrow: "Contact",
+      heading: "Let's talk.",
+      lead: "Looking for someone to join your team, or have a project I could help with? I usually reply within a day.",
+    },
+  },
+  home: {
+    logosLabel: "Companies and universities I'm connected with",
+    award: {
+      label: "New · November 2026",
+      title: "I was named an ABB scholar in the “Młodzi w Łodzi” Super Scholarship programme.",
+      cta: "See details",
+    },
+    explore: {
+      label: "Get to know me",
+      title: "Where would you like to start?",
+      more: "Open",
+      items: {
+        about: { title: "About", text: "Who I am, what drives me and why karate has something in common with engineering." },
+        experience: { title: "Experience", text: "ING Bank Śląski, fintech, business software and teaching programming." },
+        projects: { title: "Projects", text: "Microservices, cloud and research on finding the root cause of outages." },
+        education: { title: "Education", text: "Lodz University of Technology, Erasmus in Helsinki, the ABB scholarship and certificates." },
+      },
+    },
+    contact: {
+      title: "Have a project or an opening on your team?",
+      text: "I'm happy to talk about a job, a collaboration or an interesting technical problem.",
+      button: "Go to contact",
+    },
+    scroll: "Scroll down",
   },
   footer: {
     contact: "Contact",

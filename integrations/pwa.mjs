@@ -9,12 +9,28 @@ import { readFile, readdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-const PAGES = ["index.html", "en/index.html", "offline/index.html"];
+const PAGES = [
+  "index.html",
+  "o-mnie/index.html",
+  "doswiadczenie/index.html",
+  "projekty/index.html",
+  "edukacja/index.html",
+  "kontakt/index.html",
+  "en/index.html",
+  "en/about/index.html",
+  "en/experience/index.html",
+  "en/projects/index.html",
+  "en/education/index.html",
+  "en/contact/index.html",
+  "offline/index.html",
+];
 
 const PRECACHE_PATTERNS = [
   ...PAGES.map((page) => new RegExp(`^${page.replace(/[./]/g, "\\$&")}$`)),
   /^_astro\/.+\.(css|js|woff2)$/,
   /^tech\/.+\.svg$/,
+  /^logos\/.+\.(svg|webp)$/,
+  /^media\/hero-poster(-portrait)?\.webp$/,
   /^icons\/.+\.png$/,
   /^favicon\.svg$/,
   /^manifest\.webmanifest$/,

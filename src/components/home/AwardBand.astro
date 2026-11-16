@@ -1,0 +1,65 @@
+---
+import { ArrowRight } from "lucide-astro";
+import LogoTile from "../ui/LogoTile.astro";
+import { pagePath } from "../../data/site";
+import { getTranslations, langFrom } from "../../i18n";
+
+const lang = langFrom(Astro.currentLocale);
+const t = getTranslations(lang);
+const a = t.home.award;
+---
+
+<!-- Highlight band in the accent colour: the ABB scholarship. -->
+<section class="award-band relative isolate overflow-hidden py-14 text-white sm:py-16" aria-labelledby="award-title">
+  <div class="container-page grid items-center gap-8 md:grid-cols-[auto_minmax(0,1fr)_auto] md:gap-10" data-reveal>
+    <LogoTile org="abb" class="h-20 w-36 shadow-xl shadow-black/20" />
+    <div>
+      <p class="font-mono text-[0.8125rem] text-white/75">{a.label}</p>
+      <h2 id="award-title" class="mt-2 max-w-3xl text-[clamp(1.4rem,2.6vw,2rem)] leading-snug font-semibold tracking-tight text-balance">
+        {a.title}
+      </h2>
+    </div>
+    <a
+      href={pagePath("education", lang, "#education")}
+      class="btn w-fit border border-white/40 text-white hover:border-white hover:bg-white hover:text-[#1f55c4]"
+    >
+      {a.cta}
+      <ArrowRight size={17} aria-hidden="true" />
+    </a>
+  </div>
+</section>
+
+<style>
+  /* One soft light sweep across the band when it scrolls into view. */
+  .award-band::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(105deg, transparent 35%, rgb(255 255 255 / 0.16) 50%, transparent 65%);
+    transform: translateX(-100%);
+    pointer-events: none;
+  }
+
+  .award-band:has(.is-visible)::after {
+    animation: award-sweep 1.8s 0.35s cubic-bezier(0.4, 0, 0.2, 1) both;
+  }
+
+  @keyframes award-sweep {
+    to {
+      transform: translateX(100%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .award-band::after {
+      display: none;
+    }
+  }
+
+  .award-band {
+    background:
+      radial-gradient(50% 120% at 100% 0%, rgb(255 255 255 / 0.16), transparent 60%),
+      linear-gradient(120deg, #173f96 0%, #1f55c4 55%, #2b6ae0 100%);
+  }
+</style>

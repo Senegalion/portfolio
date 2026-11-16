@@ -1,0 +1,74 @@
+---
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+import { ArrowUpRight } from "lucide-astro";
+import { pagePath, type PageKey } from "../../data/site";
+import { getTranslations, langFrom } from "../../i18n";
+import profile from "../../assets/profile.jpg";
+import education from "../../assets/banners/education.jpg";
+import experience from "../../assets/banners/experience.jpg";
+import projects from "../../assets/banners/projects.jpg";
+
+const lang = langFrom(Astro.currentLocale);
+const t = getTranslations(lang);
+const e = t.home.explore;
+
+const cards: { page: Exclude<PageKey, "home" | "contact">; image: ImageMetadata; focus: string }[] = [
+  { page: "about", image: profile, focus: "50% 25%" },
+  { page: "experience", image: experience, focus: "50% 50%" },
+  { page: "projects", image: projects, focus: "50% 50%" },
+  { page: "education", image: education, focus: "50% 60%" },
+];
+---
+
+<section class="section" aria-labelledby="explore-title">
+  <div class="container-page">
+    <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+      <div>
+        <p class="label" data-reveal>{e.label}</p>
+        <h2 id="explore-title" class="heading-2 mt-4" data-split>{e.title}</h2>
+      </div>
+    </div>
+
+    <ul class="mt-12 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+      {
+        cards.map(({ page, image, focus }, index) => {
+          const item = e.items[page];
+          return (
+            <li data-reveal style={`--reveal-delay:${index * 80}ms`}>
+              <a
+                href={pagePath(page, lang)}
+                class="force-dark group relative isolate flex aspect-[4/5] flex-col justify-end overflow-hidden rounded-xl bg-bg p-6 shadow-lg shadow-black/10"
+              >
+                <Image
+                  src={image}
+                  alt=""
+                  widths={[400, 640, 800]}
+                  sizes="(min-width: 1280px) 20rem, (min-width: 640px) 50vw, 100vw"
+                  class="absolute inset-0 -z-20 size-full object-cover transition duration-700 ease-out group-hover:scale-105"
+                  style={`object-position:${focus}`}
+                />
+                <span class="card-shade absolute inset-0 -z-10" aria-hidden="true" />
+                <span class="font-mono text-xs text-muted">0{index + 1}</span>
+                <span class="mt-2 flex items-center justify-between gap-3">
+                  <span class="text-2xl font-semibold tracking-tight text-fg">{item.title}</span>
+                  <span class="grid size-10 shrink-0 place-items-center rounded-lg bg-white/10 text-fg backdrop-blur transition group-hover:bg-accent group-hover:text-on-accent">
+                    <ArrowUpRight size={18} aria-hidden="true" />
+                    <span class="sr-only">{e.more}</span>
+                  </span>
+                </span>
+                <span class="mt-2 text-sm leading-6 text-muted">{item.text}</span>
+              </a>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .card-shade {
+    background: linear-gradient(to top, rgb(8 11 16 / 0.92) 0%, rgb(8 11 16 / 0.55) 45%, rgb(8 11 16 / 0.1) 100%);
+  }
+</style>

@@ -36,11 +36,11 @@ export function toast(message: string, options: ToastOptions = {}) {
 
   const el = document.createElement("div");
   el.className =
-    "toast pointer-events-auto flex w-full items-start gap-3 rounded-2xl border border-line-strong bg-surface p-4 shadow-2xl shadow-black/25";
+    "toast pointer-events-auto flex w-full items-start gap-3 rounded-xl border border-line-strong bg-surface p-4 shadow-2xl shadow-black/25";
   if (options.id) el.dataset.toastId = options.id;
 
   const icon = document.createElement("span");
-  icon.className = `grid size-8 shrink-0 place-items-center rounded-full border ${TONE[type]}`;
+  icon.className = `grid size-8 shrink-0 place-items-center rounded-lg border ${TONE[type]}`;
   icon.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[type]}</svg>`;
 
   const body = document.createElement("div");
@@ -62,7 +62,7 @@ export function toast(message: string, options: ToastOptions = {}) {
     const action = document.createElement("button");
     action.type = "button";
     action.className =
-      "mt-3 inline-flex min-h-9 items-center rounded-full bg-fg px-4 text-sm font-semibold text-bg transition hover:bg-accent hover:text-on-accent";
+      "mt-3 inline-flex min-h-9 items-center rounded-md bg-accent px-4 text-sm font-semibold text-on-accent transition hover:opacity-90";
     action.textContent = label;
     action.addEventListener("click", () => {
       onClick();

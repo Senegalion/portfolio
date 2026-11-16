@@ -1,7 +1,9 @@
 ---
 import { ArrowUp, Plus } from "lucide-astro";
 import Section from "../ui/Section.astro";
+import LogoTile from "../ui/LogoTile.astro";
 import TechChip from "../ui/TechChip.astro";
+import type { OrgKey } from "../../data/orgs";
 import { formatMonth, formatPeriod } from "../../data/site";
 import { getTranslations, langFrom } from "../../i18n";
 
@@ -14,6 +16,7 @@ const period = (from: string, to: string | null) => formatPeriod(from, to, lang,
 type WorkMode = keyof typeof e.workModes;
 
 const experience: {
+  org: OrgKey;
   company: string;
   from: string;
   to: string | null;
@@ -25,6 +28,7 @@ const experience: {
   technologies: string[];
 }[] = [
   {
+    org: "ing",
     company: "ING Bank Śląski",
     from: "2025-09",
     to: null,
@@ -37,6 +41,7 @@ const experience: {
     technologies: ["Java", "Spring Boot", "Azure", "Azure DevOps", "Apache Kafka", "Oracle Database", "Checkmarx", "JUnit 5", "Selenide", "REST Assured", "Kibana"],
   },
   {
+    org: "fairPlace",
     company: "Fair Place Finance",
     from: "2025-10",
     to: "2026-02",
@@ -46,6 +51,7 @@ const experience: {
     technologies: ["Java 21", "Spring Boot", "GraphQL", "Kafka", "PostgreSQL", "Liquibase", "Docker", "Kubernetes", "Argo CD", "GitLab CI/CD", "Gradle"],
   },
   {
+    org: "firmao",
     company: "Firmao",
     from: "2025-05",
     to: "2025-08",
@@ -55,6 +61,7 @@ const experience: {
     technologies: ["Java", "Hibernate", "PostgreSQL", "Ext JS", "Jenkins", "Selenium", "JasperReports"],
   },
   {
+    org: "giganci",
     company: "Giganci Programowania",
     from: "2024-02",
     to: "2025-04",
@@ -68,11 +75,12 @@ const experience: {
 <Section id="experience" index={e.index} label={e.badge} title={e.title} description={e.description}>
   <ol class="mt-16 border-b border-line">
     {
-      experience.map(({ company, from, to, location, industry, mode, summary, roles, technologies }) => {
+      experience.map(({ org, company, from, to, location, industry, mode, summary, roles, technologies }) => {
         const current = to === null;
         return (
           <li class="group grid gap-6 border-t border-line py-10 md:grid-cols-[11rem_minmax(0,1fr)] md:gap-10 lg:py-12" data-reveal>
             <div class="flex flex-row flex-wrap items-baseline gap-x-4 gap-y-1 md:flex-col md:gap-2">
+              <LogoTile org={org} link class="mb-3 h-16 w-full max-w-44 basis-full md:basis-auto" />
               <p class="text-sm font-semibold text-fg tabular-nums">
                 {formatMonth(from, lang, e.present)} — {formatMonth(to, lang, e.present)}
               </p>
@@ -90,7 +98,7 @@ const experience: {
 
             <div class="min-w-0">
               <p class="text-sm font-medium text-accent">{industry}</p>
-              <h3 class="mt-2 font-display text-[clamp(2.25rem,5vw,3.25rem)] leading-none text-fg transition-transform duration-500 group-hover:translate-x-1">
+              <h3 class="mt-2 font-display text-[clamp(1.75rem,3.5vw,2.375rem)] leading-tight text-fg transition-transform duration-500 group-hover:translate-x-1">
                 {company}
               </h3>
 
@@ -102,7 +110,7 @@ const experience: {
                       <span class="text-sm font-normal text-subtle tabular-nums">{period(role.from, role.to)}</span>
                     )}
                     {roles.length > 1 && index === 0 && (
-                      <span class="inline-flex items-center gap-1 rounded-full border border-line-strong px-2 py-0.5 text-xs font-medium text-muted">
+                      <span class="inline-flex items-center gap-1 rounded-md border border-line-strong px-2 py-0.5 text-xs font-medium text-muted">
                         <ArrowUp size={12} aria-hidden="true" />
                         {e.promotion}
                       </span>
@@ -120,7 +128,7 @@ const experience: {
                   </span>
                   {e.details}
                 </summary>
-                <div class="disclosure-body mt-6 space-y-8 rounded-2xl border border-line bg-surface p-6 sm:p-7">
+                <div class="disclosure-body mt-6 space-y-8 rounded-xl border border-line bg-surface p-6 sm:p-7">
                   {roles.map((role) => (
                     <div>
                       {roles.length > 1 && <h4 class="mb-3 text-sm font-semibold text-fg">{role.title}</h4>}

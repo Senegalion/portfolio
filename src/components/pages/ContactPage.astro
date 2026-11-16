@@ -1,0 +1,11 @@
+---
+import PageLayout from "../layout/PageLayout.astro";
+import Contact from "../sections/Contact.astro";
+import PageBanner from "../ui/PageBanner.astro";
+import banner from "../../assets/banners/contact.jpg";
+---
+
+<PageLayout page="contact">
+  <PageBanner page="contact" image={banner} focus="40% 50%" />
+  <Contact />
+</PageLayout>

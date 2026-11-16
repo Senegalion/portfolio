@@ -1,0 +1,13 @@
+---
+import PageLayout from "../layout/PageLayout.astro";
+import Projects from "../sections/Projects.astro";
+import Research from "../sections/Research.astro";
+import PageBanner from "../ui/PageBanner.astro";
+import banner from "../../assets/banners/projects.jpg";
+---
+
+<PageLayout page="projects">
+  <PageBanner page="projects" image={banner} focus="60% 45%" />
+  <Projects />
+  <Research />
+</PageLayout>

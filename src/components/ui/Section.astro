@@ -17,14 +17,13 @@ const titleId = `${id}-title`;
 <section id={id} class:list={["section", className]} aria-labelledby={titleId}>
   <div class="container-page section-grid">
     <p class="label self-start lg:sticky lg:top-28" data-reveal>
-      {index && <span class="label-index">({index})</span>}
       {label}
     </p>
 
     <div class="min-w-0">
-      <div class="max-w-4xl" data-reveal>
-        <h2 id={titleId} class="heading-2" set:html={title} />
-        {description && <p class="lead">{description}</p>}
+      <div class="max-w-4xl">
+        <h2 id={titleId} class="heading-2" data-split set:html={title} />
+        {description && <p class="lead" data-reveal style="--reveal-delay:120ms">{description}</p>}
       </div>
       <slot />
     </div>

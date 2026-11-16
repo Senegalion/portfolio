@@ -90,8 +90,8 @@ const more = [
               class="absolute top-0 left-0 h-px w-0 bg-accent transition-[width] duration-700 ease-out group-hover:w-full"
               aria-hidden="true"
             />
-            <div class="grid gap-x-8 gap-y-5 md:grid-cols-[4.5rem_minmax(0,1fr)]">
-              <span class="font-display text-3xl leading-none text-subtle tabular-nums italic transition-colors duration-500 group-hover:text-accent md:text-4xl">
+            <div class="grid gap-x-8 gap-y-5 md:grid-cols-[3rem_minmax(0,1fr)]">
+              <span class="pt-1 font-mono text-sm leading-none text-subtle tabular-nums transition-colors duration-500 group-hover:text-accent">
                 {String(index + 1).padStart(2, "0")}
               </span>
 
@@ -104,8 +104,8 @@ const more = [
 
                 <h3
                   class:list={[
-                    "mt-3 font-display leading-[0.95] text-fg",
-                    featured ? "text-[clamp(2.6rem,6vw,4.5rem)]" : "text-[clamp(2.1rem,4.5vw,3.25rem)]",
+                    "mt-3 font-display leading-[1.05] text-fg",
+                    featured ? "text-[clamp(2rem,4.5vw,3rem)]" : "text-[clamp(1.6rem,3.2vw,2.25rem)]",
                   ]}
                 >
                   {title}
@@ -137,7 +137,7 @@ const more = [
                     </span>
                     {pt.details}
                   </summary>
-                  <div class="disclosure-body mt-6 grid gap-6 rounded-2xl border border-line bg-surface p-6 sm:p-7 xl:grid-cols-2 xl:gap-8">
+                  <div class="disclosure-body mt-6 grid gap-6 rounded-xl border border-line bg-surface p-6 sm:p-7 xl:grid-cols-2 xl:gap-8">
                     <ProjectFlow flow={p.flow} label={pt.architecture} />
                     <div class="min-w-0">
                       <ul class="space-y-2.5">
@@ -168,7 +168,7 @@ const more = [
 
   <div class="mt-16 grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)]" data-reveal>
     <div>
-      <h3 class="font-display text-3xl text-fg">{pt.moreTitle}</h3>
+      <h3 class="font-display text-2xl text-fg">{pt.moreTitle}</h3>
       <p class="mt-2 text-muted">{pt.moreDescription}</p>
       <a
         href={SITE.githubRepositories}
@@ -180,7 +180,7 @@ const more = [
         <ArrowUpRight size={16} class="text-accent transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true" />
       </a>
     </div>
-    <ul class="grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2">
+    <ul class="grid gap-px overflow-hidden rounded-xl border border-line bg-line sm:grid-cols-2">
       {
         more.map(({ name, text }) => (
           <li>
