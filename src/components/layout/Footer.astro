@@ -1,5 +1,5 @@
 ---
-import { ArrowUp, Copy, Download, Github, GitCommitHorizontal, Linkedin, Mail, Phone } from "lucide-astro";
+import { ArrowUp, ArrowUpRight, Copy, Download, Phone } from "lucide-astro";
 import { BUILD, hasCv } from "../../data/build";
 import { SITE } from "../../data/site";
 import { getTranslations, langFrom } from "../../i18n";
@@ -7,27 +7,40 @@ import { getTranslations, langFrom } from "../../i18n";
 const t = getTranslations(langFrom(Astro.currentLocale));
 const f = t.footer;
 const year = new Date().getFullYear();
+
+const links = [
+  { label: f.linkedin, href: SITE.linkedin },
+  { label: f.github, href: SITE.github },
+];
 ---
 
-<footer id="contact" class="relative overflow-hidden border-t border-white/5 bg-ink-950 pt-20 pb-10" aria-labelledby="contact-title">
-  <div class="pointer-events-none absolute -top-40 left-1/2 -z-0 size-[36rem] -translate-x-1/2 glow" aria-hidden="true"></div>
+<footer id="contact" class="relative overflow-hidden border-t border-line pt-24 pb-10 sm:pt-32" aria-labelledby="contact-title">
+  <div class="container-page">
+    <p class="label" data-reveal><span class="label-index">(08)</span>{f.contact}</p>
 
-  <div class="container-page relative">
-    <div class="grid gap-12 lg:grid-cols-[1fr_auto] lg:items-end">
+    <h2 id="contact-title" class="display mt-8 text-[clamp(3.6rem,14.5vw,13rem)] text-fg" data-reveal>
+      {f.title.replace(/\.$/, "")}<span class="text-accent">.</span>
+    </h2>
+
+    <div class="mt-12 grid gap-12 border-t border-line pt-10 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
       <div data-reveal>
-        <p class="eyebrow">{f.contact}</p>
-        <h2 id="contact-title" class="heading-2 max-w-3xl sm:text-5xl">{f.title}</h2>
-        <p class="lead">{f.description}</p>
+        <p class="max-w-xl text-xl leading-8 text-pretty text-muted">{f.description}</p>
 
-        <div class="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-          <a href={`mailto:${SITE.email}`} class="btn btn-primary">
-            <Mail size={18} aria-hidden="true" />
-            {f.writeEmail}
-          </a>
+        <a
+          href={`mailto:${SITE.email}`}
+          class="group mt-8 inline-flex max-w-full items-center gap-3 font-display text-[clamp(1.9rem,5vw,3.5rem)] leading-tight text-fg"
+        >
+          <span class="link min-w-0 break-all sm:break-normal">{SITE.email}</span>
+          <ArrowUpRight
+            class="size-[0.7em] shrink-0 text-accent transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
+            aria-hidden="true"
+          />
+        </a>
+
+        <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
           <button type="button" class="btn btn-secondary" data-action="copy-email" data-email={SITE.email}>
             <Copy size={17} aria-hidden="true" />
-            <span class="font-mono text-sm">{SITE.email}</span>
-            <span class="sr-only">— {f.copyEmail}</span>
+            {f.copyEmail}
           </button>
           <a href={SITE.phoneHref} class="btn btn-secondary">
             <Phone size={17} aria-hidden="true" />
@@ -44,36 +57,37 @@ const year = new Date().getFullYear();
         </div>
       </div>
 
-      <div class="flex gap-3" data-reveal>
-        <a href={SITE.github} target="_blank" rel="noreferrer" class="icon-btn size-12 border border-white/10" aria-label={f.github}>
-          <Github size={20} aria-hidden="true" />
-        </a>
-        <a href={SITE.linkedin} target="_blank" rel="noreferrer" class="icon-btn size-12 border border-white/10" aria-label={f.linkedin}>
-          <Linkedin size={20} aria-hidden="true" />
-        </a>
-        <a href="#top" class="icon-btn size-12 border border-white/10" aria-label={f.backToTop}>
-          <ArrowUp size={20} aria-hidden="true" />
-        </a>
-      </div>
+      <ul class="flex flex-col gap-1 lg:items-end" data-reveal>
+        {
+          links.map(({ label, href }) => (
+            <li>
+              <a href={href} target="_blank" rel="noreferrer" class="group inline-flex items-center gap-2 py-1 font-display text-4xl text-fg">
+                <span class="link">{label}</span>
+                <ArrowUpRight size={22} class="text-accent transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true" />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
     </div>
 
-    <div class="mt-16 flex flex-col gap-3 border-t border-white/5 pt-6 text-sm text-slate-400 sm:flex-row sm:items-center sm:justify-between">
+    <div class="mt-20 flex flex-col gap-3 border-t border-line pt-6 text-sm text-subtle sm:flex-row sm:items-center sm:justify-between">
       <p>© {year} {SITE.name}. {f.copyright}</p>
-      <p class="inline-flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-xs">
+      <p class="inline-flex flex-wrap items-center gap-x-4 gap-y-1">
         <span>{f.madeWith}</span>
-        <span class="inline-flex items-center gap-1.5" title={BUILD.date}>
-          <GitCommitHorizontal size={14} aria-hidden="true" />
-          {f.build}
-          <a
-            href={`https://github.com/Senegalion/portfolio/commit/${BUILD.commit}`}
-            target="_blank"
-            rel="noreferrer"
-            class="text-slate-400 underline-offset-4 hover:text-white hover:underline"
-          >
-            {BUILD.commit}
-          </a>
-          · {BUILD.date}
-        </span>
+        <button type="button" data-open-palette class="hidden items-center gap-1.5 transition hover:text-fg sm:inline-flex">
+          <kbd data-mod-key>⌘K</kbd>
+          {f.shortcut}
+        </button>
+        <a
+          href={`https://github.com/Senegalion/portfolio/commit/${BUILD.commit}`}
+          target="_blank"
+          rel="noreferrer"
+          class="tabular-nums transition hover:text-fg"
+          title={BUILD.date}
+        >
+          {f.build} {BUILD.commit}
+        </a>
       </p>
     </div>
   </div>
@@ -85,7 +99,7 @@ const year = new Date().getFullYear();
   data-action="back-to-top"
   tabindex="-1"
   aria-label={f.backToTop}
-  class="fixed right-4 bottom-4 z-40 grid size-12 translate-y-4 place-items-center rounded-2xl border border-white/10 bg-ink-850/90 text-slate-300 opacity-0 shadow-xl shadow-black/40 backdrop-blur transition pointer-events-none hover:text-white data-visible:pointer-events-auto data-visible:translate-y-0 data-visible:opacity-100 sm:right-6 sm:bottom-6"
+  class="pointer-events-none fixed right-4 bottom-4 z-40 grid size-12 translate-y-4 place-items-center rounded-full border border-line-strong bg-bg/90 text-fg opacity-0 shadow-lg backdrop-blur transition hover:border-fg data-visible:pointer-events-auto data-visible:translate-y-0 data-visible:opacity-100 sm:right-6 sm:bottom-6"
 >
   <ArrowUp size={20} aria-hidden="true" />
 </button>

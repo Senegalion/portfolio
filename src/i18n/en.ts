@@ -2,11 +2,11 @@ import type { Translations } from "./pl";
 
 const en: Translations = {
   meta: {
-    title: "Łukasz Pelikan — Junior DevOps Engineer & Java Backend Developer",
+    title: "Łukasz Pelikan — Software & DevOps Engineer",
     description:
-      "Portfolio of Łukasz Pelikan: Java and Spring Boot, DevOps, Azure cloud, distributed systems and machine learning. Experience at ING Bank Śląski and Fair Place Finance.",
+      "Łukasz Pelikan: I build software and make sure it reaches its users reliably. Experience at ING Bank Śląski, Fair Place Finance and Firmao. Java, Azure cloud, DevOps and machine learning.",
     ogLocale: "en_GB",
-    ogImageAlt: "Łukasz Pelikan — Junior DevOps Engineer, Java Backend",
+    ogImageAlt: "Łukasz Pelikan — Software & DevOps Engineer",
   },
   navigation: {
     about: "About",
@@ -15,130 +15,100 @@ const en: Translations = {
     skills: "Skills",
     education: "Education",
     contact: "Contact",
-    contactButton: "Contact",
-    mobileContact: "Contact me",
+    contactButton: "Get in touch",
+    mobileContact: "Get in touch",
     home: "Go to homepage",
-    openMenu: "Open navigation",
-    closeMenu: "Close navigation",
+    openMenu: "Open menu",
+    closeMenu: "Close menu",
     mainNavigation: "Main navigation",
     mobileNavigation: "Mobile navigation",
     language: "Language",
     skipToContent: "Skip to content",
-    search: "Search",
-    openPalette: "Open command palette",
-  },
-  splash: {
-    lines: ["initialising environment", "loading modules: backend · devops · ml", "ready"],
-    skip: "Skip",
+    openPalette: "Open quick search",
+    themeToLight: "Switch to light theme",
+    themeToDark: "Switch to dark theme",
   },
   hero: {
-    badge: "Software Engineer · Java & DevOps",
-    nowLabel: "now",
-    now: [
-      "Junior DevOps Engineer @ ING Bank Śląski",
-      "MSc: Software Engineering & ML",
-      "Microsoft Certified: Azure Fundamentals",
-      "research: root cause analysis in microservices",
-    ],
-    title: "I build backend systems and ",
-    titleHighlight: "the infrastructure behind them.",
-    description:
-      "I'm Łukasz — a Junior DevOps Engineer at ING Bank Śląski. My foundation is Java and Spring Boot, and I increasingly focus on delivery automation, the cloud and machine learning.",
-    explore: "Explore my work",
-    github: "View GitHub",
-    cv: "Download CV",
-    location: "Łódź, Poland",
     availability: "Open to new opportunities",
-    tabsLabel: "Profile in three formats",
-    profileFile: "Engineer.java",
-    classKeyword: "public class",
-    className: "Engineer",
-    stringKeyword: "private final String",
-    listKeyword: "private final List<String>",
-    nameLabel: "name",
-    roleLabel: "role",
-    focusLabel: "focus",
-    name: "Łukasz Pelikan",
-    role: "Junior DevOps Engineer",
-    backend: "Backend",
-    cloud: "Cloud",
-    devops: "DevOps",
-    ml: "Machine Learning",
-    backendDescription: "Java & Spring",
-    cloudDescription: "Azure & AWS",
-    delivery: "Delivery",
-    deliveryDescription: "CI/CD & Kubernetes",
-    terminalComment: "# tech stack, by area",
+    location: "Łódź, Poland",
+    lead: "I build software and make sure it reaches the people who use it reliably — quickly, securely and without downtime.",
+    currentLabel: "Currently",
+    currentRole: "Junior DevOps Engineer",
+    currentCompany: "ING Bank Śląski",
+    primary: "Get in touch",
+    secondary: "See my work",
+    cv: "Download CV",
+    badge: "Software · Cloud · DevOps · Data & AI · ",
+    scroll: "Scroll down",
+    trustedLabel: "I've gained experience at",
   },
-  marquee: {
-    label: "Technologies I've worked with — commercially, at university and in projects",
+  intro: {
+    index: "01",
+    badge: "What I do",
+    title: "I combine three things that usually take <em>three different people.</em>",
+    lead: "I write software, keep it running in the cloud, and use data to catch problems sooner. That lets me understand the whole journey — from an idea to a working product.",
+    techLabel: "Technically",
+    items: [
+      {
+        title: "I build software",
+        text: "I design and build systems that run the business logic: customer service, payments, orders and integrations with partners.",
+        tech: "Java, Spring Boot, SQL databases, APIs",
+      },
+      {
+        title: "I keep it running",
+        text: "I automate how new versions are released, so changes reach users faster and with less risk. I look after the stability of cloud systems.",
+        tech: "CI/CD, Docker, Kubernetes, Microsoft Azure",
+      },
+      {
+        title: "I put data and AI to work",
+        text: "I train models to recognise problems in systems before they become serious. It is also the topic of my Master's thesis.",
+        tech: "Python, machine learning, log analysis",
+      },
+    ],
   },
   about: {
-    badge: "About me",
-    title: "Engineering beyond writing code.",
-    paragraph1:
-      "I'm a Computer Science graduate from Lodz University of Technology and an engineer working at the intersection of backend development, cloud infrastructure and DevOps.",
-    paragraph2:
-      "My core stack is Java and Spring Boot, but I'm equally interested in how software is tested, delivered, monitored and operated after it leaves a developer's machine — from architecture through CI/CD to observability.",
-    paragraph3:
-      "I currently work in the banking industry, where reliability, security and disciplined engineering matter more than impressive demos.",
-    paragraph4:
-      "In parallel I'm pursuing two Master's degrees: Applied Computer Science (Software Engineering and Machine Learning) and a Master of Business Studies — because I want to understand not only how to build a system, but also what value it creates for an organisation.",
+    index: "02",
+    badge: "About",
+    title: "An engineer who <em>also speaks business.</em>",
+    paragraphs: [
+      "My name is Łukasz Pelikan. I graduated in Computer Science from Lodz University of Technology and today I work at ING Bank Śląski — an environment where reliability and security matter more than flashy demos.",
+      "What I enjoy most are the moments when technology solves a concrete problem: a system stops crashing, a release takes minutes instead of hours, and the team finds the cause of an outage faster.",
+      "I am currently pursuing two Master's degrees at the same time: Computer Science (software engineering and machine learning) and a Master of Business Studies. I want to understand not only how to build a system, but also what value it creates for an organisation.",
+      "Before that, I spent more than a year teaching programming to children and teenagers. It taught me the most important skill for working with people outside IT: explaining difficult things in plain language.",
+    ],
     contact: "Let's talk",
     photoAlt: "Portrait photo of Łukasz Pelikan",
-    areas: {
-      backend: {
-        title: "Backend engineering",
-        description:
-          "Designing maintainable services and APIs with Java, Spring Boot, relational databases and automated tests.",
-      },
-      cloud: {
-        title: "Cloud & delivery",
-        description:
-          "CI/CD pipelines, containerised environments and deployment workflows — Docker, Kubernetes, Argo CD and Azure.",
-      },
-      architecture: {
-        title: "System architecture",
-        description:
-          "Modular monoliths, microservices, asynchronous messaging (Kafka, RabbitMQ) and pragmatic architectural decisions.",
-      },
-      ml: {
-        title: "Machine learning",
-        description:
-          "Classification, neural networks and data analysis in Python — currently mostly applied to logs, failures and observability.",
-      },
-    },
     facts: [
-      { value: "4.52", label: "final GPA, B.Eng. in Computer Science (TUL)" },
-      { value: "4.90", label: "first-semester GPA, Master's programme" },
-      { value: "AZ-900", label: "Microsoft Certified: Azure Fundamentals" },
-      { value: "1st DAN", label: "karate black belt, ~15 years of training" },
+      { value: "4", label: "companies — from education and business software to fintech and banking" },
+      { value: "2", label: "Master's degrees in parallel: computer science and business" },
+      { value: "4.90", label: "grade average in the first semester of my Master's" },
+      { value: "1st DAN", label: "black belt in karate after about 15 years of training" },
     ],
     languagesTitle: "Languages",
     languages: [
-      { name: "Polish", level: "native", value: 100 },
-      { name: "English", level: "C1", value: 85 },
-      { name: "Spanish", level: "A2", value: 35 },
+      { name: "Polish", level: "native" },
+      { name: "English", level: "C1 — fluent" },
+      { name: "Spanish", level: "A2 — basic" },
     ],
   },
   experience: {
+    index: "03",
     badge: "Experience",
-    title: "Building software in real-world environments.",
+    title: "From teaching code <em>to banking.</em>",
     description:
-      "My experience spans backend development, DevOps, test automation and technical education — from a CRM product, through fintech, to banking.",
-    currentCompany: "Current company",
-    currentRole: "Current role",
-    careerProgression: "Career progression",
-    present: "Present",
-    workModes: { hybrid: "Hybrid", remote: "Remote", onsite: "On-site" },
-    ctaTitle: "Interested in working together?",
-    ctaDescription: "I'm open to discussing ambitious backend, cloud and DevOps opportunities.",
-    contact: "Get in touch",
+      "I have worked in four very different places. Each taught me something else — from patience in explaining, through shipping features fast, to the discipline that banking requires.",
+    present: "present",
+    currentCompany: "Current",
+    workModes: { hybrid: "hybrid", remote: "remote", onsite: "on-site" },
+    details: "Responsibilities and technologies",
+    technologies: "Technologies",
+    promotion: "Promotion",
     companies: {
       ing: {
         location: "Katowice",
-        description:
-          "Progressed from a test automation internship into a Junior DevOps Engineer position, working on enterprise software and delivery processes in a regulated banking environment.",
+        industry: "Banking",
+        summary:
+          "I work at one of the largest banks in Poland, making sure new versions of applications reach customers automatically, securely and without downtime. I started as an intern in the test automation team and was promoted to a DevOps role six months later.",
         roles: {
           devops: {
             title: "Junior DevOps Engineer",
@@ -164,8 +134,9 @@ const en: Translations = {
       },
       fairPlace: {
         location: "Łódź",
-        description:
-          "Developed backend components for a microservice-based financial platform, focusing on GraphQL gateways, trading integrations and event-driven communication.",
+        industry: "Fintech · investing",
+        summary:
+          "A company building an investment platform. I worked on the part of the system that connects the platform to exchanges and brokers — so client orders reach the right place and the business team has convenient access to them.",
         roles: {
           backend: {
             title: "Java Backend Developer",
@@ -183,8 +154,9 @@ const en: Translations = {
       },
       firmao: {
         location: "Łódź",
-        description:
-          "Developed and maintained features in a mature commercial CRM platform, working across Java backend services, database logic and an Ext JS frontend.",
+        industry: "Business software",
+        summary:
+          "I developed a CRM system that companies use every day for customer service and sales. I added new features, improved reports and fixed bugs reported by users.",
         roles: {
           fullstack: {
             title: "Junior Fullstack Java Developer",
@@ -201,8 +173,9 @@ const en: Translations = {
       },
       giganci: {
         location: "Łódź",
-        description:
-          "Taught programming fundamentals to children and teenagers, combining technical instruction with mentoring and practical project work.",
+        industry: "Education",
+        summary:
+          "I taught programming to children and teenagers — from their first steps to their own games and apps, adapting the pace and material to each student.",
         roles: {
           instructor: {
             title: "Programming Instructor",
@@ -218,50 +191,39 @@ const en: Translations = {
       },
     },
   },
-  skills: {
-    badge: "Skills",
-    title: "A tech stack backed by practice.",
-    description:
-      "Technologies I've used commercially, at university and in projects. Highlighted items were used in professional roles — the rest come from projects and study.",
-    commercial: "Used commercially",
-    commercialShort: "commercial",
-    filterLabel: "Show",
-    filterAll: "All",
-    filterCommercial: "Commercial only",
-  },
   projects: {
-    badge: "Selected projects",
-    title: "Systems built to solve real problems.",
+    index: "04",
+    badge: "Projects",
+    title: "Things I've <em>built.</em>",
     description:
-      "Projects covering backend development, distributed architecture, machine learning and full-stack delivery. Each one links to its source code.",
-    viewRepositories: "View all repositories",
-    viewRepository: "Repository",
-    frontendRepository: "Frontend",
-    engineeringHighlights: "Engineering highlights",
-    architecture: "Flow / architecture",
-    filterLabel: "Filter projects",
-    filters: { all: "All", backend: "Backend", ml: "ML & AI", devops: "DevOps", fullstack: "Full-stack" },
+      "Selected projects — from my engineering thesis, through tools with a touch of artificial intelligence, to online games. Each one with public source code.",
+    viewRepositories: "All projects on GitHub",
+    viewRepository: "Source code",
+    frontendRepository: "Interface code",
+    details: "Technical details",
+    architecture: "How it works",
+    featured: "Featured project",
     status: {
       thesis: "Engineering thesis",
       team: "Team project",
-      research: "R&D — data acquisition",
+      research: "In progress",
       personal: "Personal project",
       course: "Academic project",
     },
-    showing: "Projects shown:",
-    moreTitle: "More on GitHub",
-    moreDescription: "Smaller projects from AI and ML courses — implementations from scratch.",
+    moreTitle: "Smaller projects",
+    moreDescription: "Exercises from artificial intelligence courses — classic algorithms written from scratch.",
     more: {
-      cnn: "Convolutional neural network with pooling layers",
-      fuzzy: "Fuzzy-logic paddle controller for Pong (scikit-fuzzy)",
-      pacman: "Classical graph search algorithms — UC Berkeley Pacman AI",
-      multiAgent: "Adversarial search: minimax, alpha-beta, expectimax",
+      cnn: "A neural network that recognises images",
+      fuzzy: "Pong controlled by fuzzy logic",
+      pacman: "Pacman finding its way through a maze",
+      multiAgent: "Pacman playing against the ghosts",
     },
     projects: {
       karate: {
-        eyebrow: "Microservices platform",
-        description:
-          "A platform for managing karate clubs: training sessions, enrolments, payments, feedback and automated notifications. The subject of my engineering thesis, defended on 10 February 2026 (supervisor: Dr. Eng. Rafał Kotas).",
+        kind: "System for sports clubs",
+        summary:
+          "A complete system for running a karate club: training sign-ups, online payments, feedback and automatic email notifications. Built so that each part can grow independently of the others.",
+        note: "The subject of my engineering thesis, defended on 10 February 2026 (supervisor: Dr. Eng. Rafał Kotas).",
         highlights: [
           "Evolved from a modular monolith into a microservices architecture (Spring Cloud)",
           "API Gateway, Eureka and centralised configuration (Spring Cloud Config)",
@@ -273,36 +235,24 @@ const en: Translations = {
         ],
         flow: [["React"], ["API Gateway", "Eureka", "Config Server"], ["Users", "Trainings", "Payments", "Notifications"], ["Kafka", "PostgreSQL"]],
       },
-      aiLogs: {
-        eyebrow: "Machine learning for DevOps",
-        description:
-          "Classifies raw application and infrastructure logs into DATABASE, KAFKA, DOCKER, MEMORY, NETWORK and SECURITY categories to speed up incident triage.",
-        highlights: [
-          "TF-IDF vectorisation of log text",
-          "Logistic regression model (scikit-learn)",
-          "Data preparation and analysis with pandas",
-          "Trained model serialised with Joblib",
-          "Combines my interests: DevOps, monitoring and AI",
-        ],
-        flow: [["Raw logs"], ["pandas", "TF-IDF"], ["Logistic regression"], ["DATABASE", "KAFKA", "NETWORK", "…"]],
-      },
       cityFailurePredictor: {
-        eyebrow: "Machine learning platform",
-        description:
-          "An academic team project focused on predicting failures in urban infrastructure and supporting data-driven maintenance decisions.",
+        kind: "Smart city",
+        summary:
+          "A model that predicts failures in city infrastructure and helps plan repairs before something breaks. A team project at university.",
+        note: "",
         highlights: [
           "Predictive models for urban infrastructure failures",
           "Data preprocessing and feature engineering",
           "Machine learning model training and evaluation",
           "Monitoring and logs: Prometheus, Grafana, Loki",
-          "Collaborative development within a team",
         ],
         flow: [["City data"], ["Python", "Feature eng."], ["ML model"], ["Prometheus", "Grafana", "Loki"]],
       },
       jobOffers: {
-        eyebrow: "Job aggregation platform",
-        description:
-          "A platform that collects and processes Junior Java Developer job offers from external sources and exposes them through a secure backend and React frontend.",
+        kind: "Job offer aggregator",
+        summary:
+          "A service that automatically collects job offers for junior developers from many sources and shows them in one place — with user accounts and secure sign-in.",
+        note: "",
         highlights: [
           "Scheduled aggregation from external job sources",
           "JWT-based authentication and authorization",
@@ -313,9 +263,10 @@ const en: Translations = {
         flow: [["External APIs"], ["Scheduler", "Spring Boot"], ["MongoDB", "Redis"], ["React"]],
       },
       traffic: {
-        eyebrow: "Smart city · Geo + ML",
-        description:
-          "A system that estimates the current traffic-light phase in Łódź and the approximate time until it changes — before the driver reaches the intersection. Currently in the data acquisition and feasibility validation stage.",
+        kind: "Smart city",
+        summary:
+          "An app meant to tell a driver in Łódź which light they will hit at the next intersection and how many seconds until it changes. I am currently collecting data and checking whether a reliable forecast is possible.",
+        note: "",
         highlights: [
           "Identifying the upcoming intersection from GPS",
           "Geospatial data in PostgreSQL + PostGIS",
@@ -323,12 +274,13 @@ const en: Translations = {
           "Explicitly signals when a reliable prediction isn't available",
           "Planned components: Spring Boot API, Android app (Kotlin)",
         ],
-        flow: [["GPS"], ["Intersection", "PostGIS"], ["ML model"], ["Phase + ETA"]],
+        flow: [["GPS"], ["Intersection", "PostGIS"], ["ML model"], ["Phase + time"]],
       },
       akigator: {
-        eyebrow: "AI-powered full-stack application",
-        description:
-          "An interactive guessing game combining a Spring Boot backend, a React frontend and a Python machine learning service.",
+        kind: "Game with a touch of AI",
+        summary:
+          "A guessing game: the program asks question after question and tries to work out what the player is thinking of. A machine learning model runs behind the scenes.",
+        note: "",
         highlights: [
           "JWT-secured user authentication",
           "Interactive game session lifecycle management",
@@ -339,9 +291,10 @@ const en: Translations = {
         flow: [["React"], ["Spring Boot"], ["Python ML"], ["PostgreSQL"]],
       },
       thousand: {
-        eyebrow: "Online multiplayer game",
-        description:
-          "An online multiplayer implementation of the Polish card game Tysiąc (Thousand), built with Java 25, Spring Boot 4 and React.",
+        kind: "Online card game",
+        summary:
+          "An online version of Tysiąc (Thousand), a popular Polish card game — play with others in real time, right in the browser.",
+        note: "",
         highlights: [
           "Starts as a modular monolith",
           "Game rules as a pure Java domain model, separated from Spring",
@@ -351,9 +304,10 @@ const en: Translations = {
         flow: [["React"], ["WebSocket"], ["Spring Boot"], ["Game domain"]],
       },
       lotto: {
-        eyebrow: "Hexagonal architecture",
-        description:
-          "A lottery application where users can submit tickets, view draw results and explore draw history through a clean REST API.",
+        kind: "Lottery application",
+        summary:
+          "A lottery system: players submit tickets, and the app runs the draws and checks the results. An exercise in designing code that is easy to extend and test.",
+        note: "",
         highlights: [
           "Modular monolith architecture",
           "Hexagonal architecture with clear domain boundaries",
@@ -368,138 +322,153 @@ const en: Translations = {
   research: {
     badge: "Research",
     status: "Ongoing · Master's thesis",
-    title: "Root cause analysis in microservice systems",
+    title: "How do you quickly find the <em>real cause</em> of an outage?",
     description:
-      "My area of academic research: how to locate the source of a failure in a system made of many services using telemetry — logs, metrics and traces. And how to make a model say when it is not confident in its answer.",
-    topicsTitle: "Topics",
+      "In large systems a single fault can cause symptoms in many places at once — and teams lose time fighting the wrong fire. In my Master's thesis I research how artificial intelligence can automatically point to the source of a problem, and honestly say when it is not sure of the answer.",
+    technical: "For engineers",
+    technicalText: "Root Cause Analysis in microservice systems based on telemetry — logs, metrics and traces. Evaluated on the RCAEval benchmark.",
     topics: [
-      "Observability: logs, metrics, traces",
-      "Graph neural networks (GNNs)",
-      "Large language models (LLMs)",
+      "Observability",
+      "Graph neural networks (GNN)",
+      "Large language models (LLM)",
       "Uncertainty estimation",
       "Model calibration",
       "Selective prediction",
     ],
-    dataset: "Dataset explored: the RCAEval benchmark with failure cases for evaluating RCA methods.",
+    legend: { root: "root cause", symptom: "symptom", ok: "healthy" },
+    figureLabel: "Diagram: a failure in one service causes symptoms in the services that depend on it.",
+  },
+  skills: {
+    index: "05",
+    badge: "Skills",
+    title: "The tools <em>I work with.</em>",
+    description:
+      "This part is more technical — for IT teams and recruiters. Highlighted items are ones I have used professionally; the rest come from projects and study.",
+    commercial: "Used professionally",
+    commercialShort: "used professionally",
+    filterLabel: "Show",
+    filterAll: "All",
+    filterCommercial: "Professional only",
   },
   education: {
+    index: "06",
     badge: "Education",
-    title: "Technology and business — two degrees, one goal.",
+    title: "Technology and business — <em>two degrees, one goal.</em>",
     description:
-      "Studies at Lodz University of Technology, an Erasmus+ exchange in Helsinki and certifications that structure what I've learned in practice.",
+      "Studies at Lodz University of Technology, an exchange semester in Helsinki and certificates that structure what I've learned in practice.",
     inProgress: "In progress",
     completed: "Completed",
     university: "Lodz University of Technology",
     items: {
       msc: {
-        degree: "Master's — Applied Computer Science",
-        detail: "Specialisation: Software Engineering and Machine Learning",
-        note: "First-semester GPA: 4.90",
-        topics: ["Software engineering", "Machine learning", "Artificial intelligence", "Software architecture", "Data analysis"],
+        degree: "Applied Computer Science — Master's degree",
+        detail: "Specialisation: software engineering and machine learning",
+        note: "First-semester grade average: 4.90",
       },
       mbs: {
-        degree: "Master's — Master of Business Studies",
-        detail: "Business and management competencies complementing a technical profile",
-        note: "Digital transformation and business applications of AI",
-        topics: ["Strategic management", "Economics", "Digital transformation", "Business strategy", "AI in business"],
+        degree: "Master of Business Studies",
+        detail: "Strategic management, economics and digital transformation",
+        note: "Business applications of artificial intelligence",
       },
       beng: {
-        degree: "B.Eng. — Computer Science",
-        detail: "Thesis: “Web Application for Karate Training Management Based on Microservices Architecture”",
-        note: "GPA: 4.52 · defended 10 Feb 2026 · supervisor: Dr. Eng. Rafał Kotas",
-        topics: ["Java", "Spring Boot", "Microservices", "PostgreSQL", "Docker"],
+        degree: "Computer Science — Bachelor of Engineering",
+        detail: "Thesis: “A web application for managing karate training based on a microservices architecture”",
+        note: "Grade average: 4.52 · defended 10.02.2026",
       },
       erasmus: {
-        degree: "Erasmus+ — academic exchange",
+        degree: "Erasmus+ — exchange semester",
         school: "Metropolia University of Applied Sciences",
         detail: "Helsinki, Finland",
         note: "Studying in an international environment",
-        topics: [],
       },
     },
-    certsTitle: "Certifications & development",
-    statuses: { passed: "Passed", preparing: "Preparing", planned: "Planned", enrolled: "Enrolled" },
+    certsTitle: "Certificates",
+    statuses: { passed: "Passed", preparing: "Preparing", planned: "Planned", enrolled: "In progress" },
     certs: {
-      az900: { name: "Microsoft Certified: Azure Fundamentals (AZ-900)", issuer: "Microsoft", date: "6 May 2026" },
+      az900: { name: "Microsoft Azure Fundamentals (AZ-900)", issuer: "Microsoft", date: "May 2026" },
       az204: { name: "Azure Developer Associate (AZ-204)", issuer: "Microsoft", date: "" },
       oracle: { name: "Java SE 25 Developer (1Z0-831)", issuer: "Oracle", date: "" },
-      elementsOfAi: { name: "Elements of AI · Building AI", issuer: "ECIU · Linköping University", date: "2 × 2 ECTS" },
+      elementsOfAi: { name: "Elements of AI · Building AI", issuer: "ECIU · Linköping University", date: "" },
     },
   },
   activities: {
-    badge: "Beyond code",
-    title: "Discipline from the dojo, curiosity from the lab.",
+    index: "07",
+    badge: "Outside work",
+    title: "Discipline <em>from the dojo.</em>",
     description:
-      "Karate taught me consistency and continuous improvement — exactly what software engineering demands.",
+      "I have trained karate since childhood. It taught me consistency and continuous improvement — exactly what good engineering requires.",
     items: {
-      karate: { title: "Karate — 1st DAN", text: "Around 15 years of training and a black belt. Karate also became the subject of my engineering thesis." },
-      sensei: { title: "Karate instructor", text: "Teaching classes as a sensei — passing on knowledge, patience and responsibility for a group." },
-      kino: { title: "KINO research club", text: "Member of the KINO student research club." },
-      events: { title: "Tech events", text: "Taking part in Łódzkie Dni Informatyki and other academic and technology events." },
-      business: { title: "Technology in business", text: "Digital transformation, generative AI in organisations and AI's impact on labour productivity." },
+      karate: { title: "Karate — black belt, 1st DAN", text: "About 15 years of training. Karate also became the subject of my engineering thesis." },
+      sensei: { title: "Karate instructor", text: "I lead training sessions as a sensei — passing on knowledge and taking responsibility for the group." },
+      kino: { title: "Lodz Solar Team", text: "Member of a student research club that builds solar-powered vehicles." },
+      events: { title: "Tech events", text: "Łódź IT Days and other academic and industry events." },
+      business: { title: "Technology in business", text: "I'm interested in digital transformation and how AI changes the way organisations work." },
     },
   },
   footer: {
     contact: "Contact",
-    title: "Let's build something worth shipping.",
+    title: "Let's talk.",
     description:
-      "I'm open to conversations about backend engineering, cloud infrastructure, DevOps and international software opportunities.",
-    writeEmail: "Write an email",
+      "Looking for someone to join your team, or have a project I could help with? Write or call — I'd be happy to talk.",
+    writeEmail: "Send an email",
     copyEmail: "Copy email address",
+    call: "Call",
     backToTop: "Back to top",
-    github: "GitHub profile",
-    linkedin: "LinkedIn profile",
+    github: "GitHub",
+    linkedin: "LinkedIn",
     copyright: "All rights reserved.",
-    build: "build",
-    madeWith: "Astro · Tailwind CSS · PWA",
+    build: "version",
+    madeWith: "Designed and built by me",
+    shortcut: "Quick search",
   },
   palette: {
-    title: "Command palette",
-    placeholder: "Type a command or section name…",
+    title: "Quick search",
+    placeholder: "Type a section name or command…",
     empty: "No results",
     groups: { navigate: "Go to", actions: "Actions", links: "Links" },
     actions: {
       top: "Top of the page",
       copyEmail: "Copy email address",
       language: "Przełącz na polski",
+      theme: "Toggle theme (light / dark)",
       install: "Install as an app",
       notifications: "Enable new-version notifications",
       github: "Open GitHub",
       linkedin: "Open LinkedIn",
-      email: "Write an email",
+      email: "Send an email",
       cv: "Download CV",
     },
-    hint: "↑↓ navigate · Enter select · Esc close",
+    hint: "↑↓ select · Enter open · Esc close",
   },
   client: {
-    offline: "You're offline — the site is running from cache.",
+    offline: "You are offline — the site is running from cache.",
     online: "Connection restored.",
     updateAvailable: "A new version of the site is available.",
     updateAction: "Refresh",
     offlineReady: "The site is ready to work offline.",
     installed: "The app has been installed.",
-    installUnavailable: "You can install it from your browser menu (e.g. “Add to Home Screen”).",
+    installUnavailable: "You can install it from the browser menu (e.g. “Add to Home Screen”).",
     copied: "Email address copied.",
     copyFailed: "Couldn't copy — the address is: ",
-    notificationsEnabled: "Notifications enabled. I'll let you know when a new version is published.",
+    notificationsEnabled: "Notifications enabled. I'll let you know when a new version is out.",
     notificationsDenied: "Notifications are blocked in your browser settings.",
     notificationsUnsupported: "This browser doesn't support notifications.",
-    notificationTitle: "Łukasz Pelikan — portfolio",
-    notificationEnabledBody: "Notifications work. This is how a new-version alert will look.",
+    notificationTitle: "Łukasz Pelikan's portfolio",
+    notificationEnabledBody: "Notifications work. This is what a new-version alert will look like.",
     notificationUpdateBody: "A new version of the site has been published — click to open it.",
     dismiss: "Dismiss notification",
     notificationsRegion: "Notifications",
   },
   offline: {
-    title: "You're offline",
+    title: "No connection",
     description: "This page hasn't been saved for offline use yet. Check your connection and try again.",
     retry: "Try again",
-    home: "Home page",
+    home: "Homepage",
   },
   notFound: {
     title: "404 — page not found",
     description: "This page doesn't exist or has been moved.",
-    home: "Back to the home page",
+    home: "Back to the homepage",
   },
 };
 

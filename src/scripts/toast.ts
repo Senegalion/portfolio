@@ -19,10 +19,10 @@ const ICONS: Record<ToastType, string> = {
 };
 
 const TONE: Record<ToastType, string> = {
-  info: "text-sky-300 bg-sky-400/10 border-sky-400/20",
-  success: "text-emerald-300 bg-emerald-400/10 border-emerald-400/20",
-  warning: "text-amber-300 bg-amber-400/10 border-amber-400/20",
-  update: "text-brand-300 bg-brand-400/10 border-brand-400/25",
+  info: "text-fg border-line-strong",
+  success: "text-ok border-ok/40",
+  warning: "text-warn border-warn/40",
+  update: "text-accent border-accent/40",
 };
 
 const MAX_TOASTS = 3;
@@ -36,17 +36,17 @@ export function toast(message: string, options: ToastOptions = {}) {
 
   const el = document.createElement("div");
   el.className =
-    "toast pointer-events-auto flex w-full items-start gap-3 rounded-2xl border border-white/10 bg-ink-850/95 p-4 shadow-2xl shadow-black/50 backdrop-blur-xl";
+    "toast pointer-events-auto flex w-full items-start gap-3 rounded-2xl border border-line-strong bg-surface p-4 shadow-2xl shadow-black/25";
   if (options.id) el.dataset.toastId = options.id;
 
   const icon = document.createElement("span");
-  icon.className = `grid size-8 shrink-0 place-items-center rounded-xl border ${TONE[type]}`;
+  icon.className = `grid size-8 shrink-0 place-items-center rounded-full border ${TONE[type]}`;
   icon.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[type]}</svg>`;
 
   const body = document.createElement("div");
   body.className = "min-w-0 flex-1 pt-1";
   const text = document.createElement("p");
-  text.className = "text-sm leading-6 text-slate-200";
+  text.className = "text-sm leading-6 text-fg";
   text.textContent = message;
   body.append(text);
 
@@ -62,7 +62,7 @@ export function toast(message: string, options: ToastOptions = {}) {
     const action = document.createElement("button");
     action.type = "button";
     action.className =
-      "mt-3 inline-flex min-h-9 items-center rounded-lg bg-white px-3 text-sm font-semibold text-slate-950 transition hover:bg-slate-200";
+      "mt-3 inline-flex min-h-9 items-center rounded-full bg-fg px-4 text-sm font-semibold text-bg transition hover:bg-accent hover:text-on-accent";
     action.textContent = label;
     action.addEventListener("click", () => {
       onClick();
@@ -73,7 +73,7 @@ export function toast(message: string, options: ToastOptions = {}) {
 
   const close = document.createElement("button");
   close.type = "button";
-  close.className = "grid size-8 shrink-0 place-items-center rounded-lg text-slate-500 transition hover:bg-white/5 hover:text-white";
+  close.className = "grid size-8 shrink-0 place-items-center rounded-full text-subtle transition hover:bg-raised hover:text-fg";
   close.setAttribute("aria-label", strings().dismiss ?? "Dismiss");
   close.innerHTML =
     '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>';

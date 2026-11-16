@@ -1,8 +1,8 @@
 ---
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
-import { ArrowUpRight, Boxes, BrainCircuit, CloudCog, Code2, Languages } from "lucide-astro";
-import SectionHeading from "../ui/SectionHeading.astro";
+import { ArrowUpRight } from "lucide-astro";
+import Section from "../ui/Section.astro";
 import { getTranslations, langFrom } from "../../i18n";
 
 const t = getTranslations(langFrom(Astro.currentLocale));
@@ -12,111 +12,62 @@ const a = t.about;
 // optimised (AVIF/WebP, responsive sizes) and shown here automatically.
 const photos = import.meta.glob<{ default: ImageMetadata }>("../../assets/profile.{jpg,jpeg,png,webp}", { eager: true });
 const photo = Object.values(photos)[0]?.default;
-
-const areas = [
-  { icon: Code2, ...a.areas.backend },
-  { icon: CloudCog, ...a.areas.cloud },
-  { icon: Boxes, ...a.areas.architecture },
-  { icon: BrainCircuit, ...a.areas.ml },
-];
+const [first, ...rest] = a.paragraphs;
 ---
 
-<section id="about" class="section overflow-hidden" aria-labelledby="about-title">
-  <div class="pointer-events-none absolute top-1/3 left-0 -z-10 size-96 glow" aria-hidden="true"></div>
+<Section id="about" index={a.index} label={a.badge} title={a.title}>
+  <div class="mt-14 grid gap-14 xl:grid-cols-[minmax(0,1fr)_20rem] xl:gap-20">
+    <div class="max-w-2xl">
+      {
+        photo && (
+          <figure class="mb-12 overflow-hidden rounded-2xl" data-reveal>
+            <Image
+              src={photo}
+              alt={a.photoAlt}
+              widths={[480, 960, 1440]}
+              sizes="(min-width: 1024px) 42rem, 100vw"
+              class="aspect-[4/3] w-full object-cover grayscale-[35%] transition duration-700 hover:grayscale-0"
+            />
+          </figure>
+        )
+      }
 
-  <div class="container-page">
-    <div class="grid gap-14 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
-      <div>
-        {
-          photo && (
-            <div class="relative mb-10 w-fit" data-reveal>
-              <div class="absolute -inset-1 rounded-[2rem] bg-gradient-to-br from-brand-400/40 to-transparent blur-sm" aria-hidden="true" />
-              <Image
-                src={photo}
-                alt={a.photoAlt}
-                widths={[192, 384]}
-                sizes="192px"
-                class="relative size-48 rounded-[1.75rem] border border-white/10 object-cover"
-              />
-            </div>
-          )
-        }
-
-        <SectionHeading eyebrow={a.badge} title={a.title} id="about-title" />
-
-        <div class="mt-8 space-y-5 text-lg leading-8 text-pretty text-slate-400" data-reveal>
-          <p>{a.paragraph1}</p>
-          <p>{a.paragraph2}</p>
-          <p>{a.paragraph3}</p>
-          <p>{a.paragraph4}</p>
-        </div>
-
-        <a
-          href="#contact"
-          class="group mt-10 inline-flex items-center gap-2 font-semibold text-white transition hover:text-brand-200"
-          data-reveal
-        >
-          {a.contact}
-          <ArrowUpRight size={18} class="transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true" />
-        </a>
+      <p class="text-xl leading-9 text-pretty text-fg sm:text-[1.375rem]" data-reveal>{first}</p>
+      <div class="mt-6 space-y-5 text-lg leading-8 text-pretty text-muted" data-reveal>
+        {rest.map((paragraph) => <p>{paragraph}</p>)}
       </div>
 
-      <div class="space-y-5">
-        <ul class="grid gap-4 sm:grid-cols-2">
-          {
-            areas.map(({ icon: Icon, title, description }, index) => (
-              <li
-                class="card spotlight group p-6 transition duration-300 hover:-translate-y-1 hover:border-brand-400/20 sm:p-7"
-                data-reveal
-                style={`--reveal-delay:${index * 80}ms`}
-              >
-                <div class="grid size-11 place-items-center rounded-2xl border border-brand-400/15 bg-brand-400/[0.08] text-brand-300 transition group-hover:border-brand-400/30">
-                  <Icon size={21} aria-hidden="true" />
-                </div>
-                <h3 class="mt-6 text-lg font-semibold text-white">{title}</h3>
-                <p class="mt-3 leading-7 text-slate-400">{description}</p>
-              </li>
-            ))
-          }
-        </ul>
-
-        <ul class="grid grid-cols-2 gap-4 lg:grid-cols-4">
-          {
-            a.facts.map(({ value, label }, index) => (
-              <li
-                class="rounded-2xl border border-white/8 bg-ink-950/50 p-5"
-                data-reveal
-                style={`--reveal-delay:${index * 60}ms`}
-              >
-                <p class="text-2xl font-bold tracking-tight text-white">{value}</p>
-                <p class="mt-1 text-xs leading-5 text-slate-500">{label}</p>
-              </li>
-            ))
-          }
-        </ul>
-
-        <div class="card p-6" data-reveal>
-          <h3 class="flex items-center gap-2 text-sm font-semibold text-white">
-            <Languages size={17} class="text-brand-300" aria-hidden="true" />
-            {a.languagesTitle}
-          </h3>
-          <ul class="mt-5 grid gap-4 sm:grid-cols-3">
-            {
-              a.languages.map(({ name, level, value }) => (
-                <li>
-                  <div class="flex items-baseline justify-between text-sm">
-                    <span class="text-slate-300">{name}</span>
-                    <span class="font-mono text-xs text-brand-300">{level}</span>
-                  </div>
-                  <div class="mt-2 h-1.5 overflow-hidden rounded-full bg-white/5" aria-hidden="true">
-                    <div class="h-full rounded-full bg-gradient-to-r from-brand-500 to-brand-300" style={`width:${value}%`} />
-                  </div>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-      </div>
+      <a href="#contact" class="group mt-10 inline-flex items-center gap-2 text-lg font-semibold text-fg" data-reveal>
+        <span class="link">{a.contact}</span>
+        <ArrowUpRight size={20} class="text-accent transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true" />
+      </a>
     </div>
+
+    <aside class="space-y-10">
+      <dl class="grid grid-cols-2 gap-x-6 xl:grid-cols-1">
+        {
+          a.facts.map(({ value, label }, index) => (
+            <div class="flex flex-col border-t border-line py-5" data-reveal style={`--reveal-delay:${index * 70}ms`}>
+              <dt class="order-last mt-2 text-sm leading-6 text-muted">{label}</dt>
+              <dd class="font-display text-5xl leading-none text-fg">{value}</dd>
+            </div>
+          ))
+        }
+      </dl>
+
+      <div data-reveal>
+        <h3 class="text-sm font-semibold text-fg">{a.languagesTitle}</h3>
+        <ul class="mt-3 divide-y divide-line border-y border-line">
+          {
+            a.languages.map(({ name, level }) => (
+              <li class="flex items-baseline justify-between gap-4 py-3 text-sm">
+                <span class="text-fg">{name}</span>
+                <span class="text-muted">{level}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </aside>
   </div>
-</section>
+</Section>

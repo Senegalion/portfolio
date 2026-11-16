@@ -81,8 +81,6 @@ const LOGOS: Record<string, string> = {
   Algorithms: "algorithms",
   Mentoring: "mentoring",
   "Machine Learning": "machinelearning",
-  "TF-IDF": "tfidf",
-  Joblib: "joblib",
   WebSocket: "websocket",
   Selenide: "selenide",
   "REST Assured": "restassured",

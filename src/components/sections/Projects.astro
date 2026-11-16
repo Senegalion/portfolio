@@ -1,18 +1,7 @@
 ---
-import {
-  Activity,
-  ArrowUpRight,
-  BrainCircuit,
-  Gamepad2,
-  Github,
-  Layers,
-  ScanSearch,
-  ShieldCheck,
-  Sparkles,
-  TrafficCone,
-} from "lucide-astro";
+import { ArrowUpRight, Plus } from "lucide-astro";
 import ProjectFlow from "../ui/ProjectFlow.astro";
-import SectionHeading from "../ui/SectionHeading.astro";
+import Section from "../ui/Section.astro";
 import TechChip from "../ui/TechChip.astro";
 import { SITE } from "../../data/site";
 import { getTranslations, langFrom } from "../../i18n";
@@ -21,43 +10,26 @@ const t = getTranslations(langFrom(Astro.currentLocale));
 const pt = t.projects;
 const repo = (name: string) => `${SITE.github}/${name}`;
 
-type Category = keyof typeof pt.filters;
 type Status = keyof typeof pt.status;
 type ProjectKey = keyof typeof pt.projects;
 
 const projects: {
   key: ProjectKey;
   title: string;
-  icon: typeof ShieldCheck;
-  categories: Exclude<Category, "all">[];
   status?: Status;
-  featured?: boolean;
   technologies: string[];
   links: { label: string; href: string }[];
 }[] = [
   {
     key: "karate",
     title: "Karate Management System",
-    icon: ShieldCheck,
-    categories: ["backend", "devops", "fullstack"],
     status: "thesis",
-    featured: true,
     technologies: ["Java", "Kotlin", "Spring Boot", "Spring Cloud", "Kafka", "RabbitMQ", "PostgreSQL", "Flyway", "Redis", "Docker", "Jenkins", "React", "PayPal API"],
     links: [{ label: pt.viewRepository, href: repo("KarateManagementSystem") }],
   },
   {
-    key: "aiLogs",
-    title: "AI Log Classifier",
-    icon: ScanSearch,
-    categories: ["ml", "devops"],
-    technologies: ["Python", "pandas", "scikit-learn", "TF-IDF", "Joblib"],
-    links: [{ label: pt.viewRepository, href: repo("AI-Log-Classifier") }],
-  },
-  {
     key: "cityFailurePredictor",
     title: "City Failure Predictor",
-    icon: BrainCircuit,
-    categories: ["ml", "devops"],
     status: "team",
     technologies: ["Python", "Machine Learning", "Prometheus", "Grafana", "Loki", "Docker"],
     links: [{ label: pt.viewRepository, href: "https://github.com/Yehor-Kovalenko/CityFailurePredictor" }],
@@ -65,8 +37,6 @@ const projects: {
   {
     key: "jobOffers",
     title: "Job Offers",
-    icon: Sparkles,
-    categories: ["backend", "fullstack"],
     technologies: ["Java", "Spring Boot", "MongoDB", "Redis", "React", "Docker", "AWS", "Testcontainers"],
     links: [
       { label: pt.viewRepository, href: repo("JobOffers") },
@@ -76,39 +46,29 @@ const projects: {
   {
     key: "traffic",
     title: "Traffic Light Predictor",
-    icon: TrafficCone,
-    categories: ["ml", "backend"],
     status: "research",
     technologies: ["Java", "Spring Boot", "PostgreSQL", "PostGIS", "Python", "scikit-learn", "Kotlin"],
     links: [{ label: pt.viewRepository, href: repo("TrafficLightPredictor") }],
   },
   {
-    key: "akigator",
-    title: "Akigator App",
-    icon: Layers,
-    categories: ["fullstack", "ml"],
-    technologies: ["Java", "Spring Boot", "React", "TypeScript", "Python", "PostgreSQL", "Docker"],
-    links: [{ label: pt.viewRepository, href: repo("AkigatorApp") }],
-  },
-  {
     key: "thousand",
     title: "Thousand Online",
-    icon: Gamepad2,
-    categories: ["fullstack", "backend"],
     technologies: ["Java 25", "Spring Boot", "React", "TypeScript", "Tailwind CSS", "WebSocket"],
     links: [{ label: pt.viewRepository, href: repo("Thousand-Card-Game") }],
   },
   {
+    key: "akigator",
+    title: "Akigator",
+    technologies: ["Java", "Spring Boot", "React", "TypeScript", "Python", "PostgreSQL", "Docker"],
+    links: [{ label: pt.viewRepository, href: repo("AkigatorApp") }],
+  },
+  {
     key: "lotto",
     title: "Lotto Application",
-    icon: Activity,
-    categories: ["backend"],
     technologies: ["Java", "Spring Boot", "MongoDB", "Docker", "JUnit", "Mockito", "WireMock", "Testcontainers"],
     links: [{ label: pt.viewRepository, href: repo("LottoApplication") }],
   },
 ];
-
-const filters = Object.entries(pt.filters) as [Category, string][];
 
 const more = [
   { name: "Convolutional_Neural_Network", text: pt.more.cnn },
@@ -116,196 +76,133 @@ const more = [
   { name: "Pacman_Search_AI", text: pt.more.pacman },
   { name: "Multi-Agent_Search", text: pt.more.multiAgent },
 ];
-
-const statusTone: Record<Status, string> = {
-  thesis: "border-brand-400/30 bg-brand-400/10 text-brand-200",
-  team: "border-sky-400/25 bg-sky-400/10 text-sky-200",
-  research: "border-amber-400/25 bg-amber-400/10 text-amber-200",
-  personal: "border-white/10 bg-white/5 text-slate-300",
-  course: "border-violet-400/25 bg-violet-400/10 text-violet-200",
-};
 ---
 
-<section id="projects" class="section" aria-labelledby="projects-title">
-  <div class="pointer-events-none absolute top-1/3 left-1/2 -z-10 size-[34rem] -translate-x-1/2 glow" aria-hidden="true"></div>
+<Section id="projects" index={pt.index} label={pt.badge} title={pt.title} description={pt.description}>
+  <ol class="mt-16 border-b border-line">
+    {
+      projects.map(({ key, title, status, technologies, links }, index) => {
+        const p = pt.projects[key];
+        const featured = index === 0;
+        return (
+          <li class="group relative border-t border-line py-10 lg:py-12" data-reveal>
+            <span
+              class="absolute top-0 left-0 h-px w-0 bg-accent transition-[width] duration-700 ease-out group-hover:w-full"
+              aria-hidden="true"
+            />
+            <div class="grid gap-x-8 gap-y-5 md:grid-cols-[4.5rem_minmax(0,1fr)]">
+              <span class="font-display text-3xl leading-none text-subtle tabular-nums italic transition-colors duration-500 group-hover:text-accent md:text-4xl">
+                {String(index + 1).padStart(2, "0")}
+              </span>
 
-  <div class="container-page">
-    <div class="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
-      <SectionHeading eyebrow={pt.badge} title={pt.title} description={pt.description} id="projects-title" />
+              <div class="min-w-0">
+                <div class="flex flex-wrap items-center gap-x-4 gap-y-2">
+                  <p class="text-sm font-medium text-accent">{p.kind}</p>
+                  {status && <span class="tag py-0.5 text-xs">{pt.status[status]}</span>}
+                  {featured && <span class="tag border-accent/40 py-0.5 text-xs text-fg">{pt.featured}</span>}
+                </div>
+
+                <h3
+                  class:list={[
+                    "mt-3 font-display leading-[0.95] text-fg",
+                    featured ? "text-[clamp(2.6rem,6vw,4.5rem)]" : "text-[clamp(2.1rem,4.5vw,3.25rem)]",
+                  ]}
+                >
+                  {title}
+                </h3>
+
+                <p class:list={["mt-5 max-w-2xl leading-8 text-pretty text-muted", featured ? "text-xl" : "text-lg"]}>
+                  {p.summary}
+                </p>
+                {p.note && <p class="mt-3 max-w-2xl text-sm leading-6 text-subtle">{p.note}</p>}
+
+                <div class="mt-7 flex flex-wrap items-center gap-x-7 gap-y-4">
+                  {links.map(({ label, href }) => (
+                    <a href={href} target="_blank" rel="noreferrer" class="group/link inline-flex items-center gap-1.5 text-sm font-semibold text-fg">
+                      <span class="link">{label}</span>
+                      <span class="sr-only">— {title}</span>
+                      <ArrowUpRight
+                        size={16}
+                        class="text-accent transition-transform duration-300 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5"
+                        aria-hidden="true"
+                      />
+                    </a>
+                  ))}
+                </div>
+
+                <details class="disclosure mt-6">
+                  <summary>
+                    <span class="disclosure-icon">
+                      <Plus size={14} aria-hidden="true" />
+                    </span>
+                    {pt.details}
+                  </summary>
+                  <div class="disclosure-body mt-6 grid gap-6 rounded-2xl border border-line bg-surface p-6 sm:p-7 xl:grid-cols-2 xl:gap-8">
+                    <ProjectFlow flow={p.flow} label={pt.architecture} />
+                    <div class="min-w-0">
+                      <ul class="space-y-2.5">
+                        {p.highlights.map((highlight) => (
+                          <li class="flex gap-3 text-[0.95rem] leading-7 text-muted">
+                            <span class="mt-[0.7rem] h-px w-3 shrink-0 bg-accent" aria-hidden="true" />
+                            <span>{highlight}</span>
+                          </li>
+                        ))}
+                      </ul>
+                      <ul class="mt-6 flex flex-wrap gap-2 border-t border-line pt-6">
+                        {technologies.map((technology) => (
+                          <li>
+                            <TechChip name={technology} />
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </details>
+              </div>
+            </div>
+          </li>
+        );
+      })
+    }
+  </ol>
+
+  <div class="mt-16 grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)]" data-reveal>
+    <div>
+      <h3 class="font-display text-3xl text-fg">{pt.moreTitle}</h3>
+      <p class="mt-2 text-muted">{pt.moreDescription}</p>
       <a
         href={SITE.githubRepositories}
         target="_blank"
         rel="noreferrer"
-        class="group inline-flex shrink-0 items-center gap-2 font-semibold text-white transition hover:text-brand-200"
+        class="group mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-fg"
       >
-        {pt.viewRepositories}
-        <ArrowUpRight size={18} class="transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true" />
+        <span class="link">{pt.viewRepositories}</span>
+        <ArrowUpRight size={16} class="text-accent transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true" />
       </a>
     </div>
-
-    <div
-      class="mt-12 flex flex-wrap items-center gap-2"
-      role="group"
-      aria-label={pt.filterLabel}
-      data-filter-group="project-grid"
-      data-filter-count="project-count"
-    >
+    <ul class="grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2">
       {
-        filters.map(([value, label], index) => (
-          <button
-            type="button"
-            data-filter={value}
-            aria-pressed={index === 0 ? "true" : "false"}
-            class="min-h-10 rounded-full border border-white/10 px-4 text-sm font-medium text-slate-400 transition hover:border-white/20 hover:text-white aria-pressed:border-white aria-pressed:bg-white aria-pressed:text-slate-950"
-          >
-            {label}
-          </button>
+        more.map(({ name, text }) => (
+          <li>
+            <a
+              href={repo(name)}
+              target="_blank"
+              rel="noreferrer"
+              class="group flex h-full items-start justify-between gap-4 bg-bg p-5 transition-colors duration-300 hover:bg-surface"
+            >
+              <span class="min-w-0">
+                <span class="block font-medium text-fg">{text}</span>
+                <span class="mt-1 block truncate text-xs text-subtle">{name.replace(/[-_]+$/, "").replaceAll("_", " ")}</span>
+              </span>
+              <ArrowUpRight
+                size={16}
+                class="mt-1 shrink-0 text-subtle transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-accent"
+                aria-hidden="true"
+              />
+            </a>
+          </li>
         ))
       }
-      <p class="ml-auto font-mono text-xs text-slate-500" aria-live="polite">
-        {pt.showing} <span id="project-count">{projects.length}</span>
-      </p>
-    </div>
-
-    <ul id="project-grid" class="mt-8 grid gap-6 lg:grid-cols-2">
-      {
-        projects.map(({ key, title, icon: Icon, categories, status, featured, technologies, links }) => {
-          const p = pt.projects[key];
-          return (
-            <li data-tags={categories.join(" ")} data-reveal class:list={[featured && "lg:col-span-2"]}>
-              <article
-                class:list={[
-                  "spotlight group flex h-full flex-col overflow-hidden rounded-[2rem] border p-6 transition duration-300 hover:-translate-y-1 sm:p-8",
-                  featured
-                    ? "border-brand-400/20 bg-brand-400/[0.04] lg:p-10"
-                    : "border-white/8 bg-white/[0.025] hover:border-white/15",
-                ]}
-              >
-                <div class:list={["grid gap-8", featured && "lg:grid-cols-[0.95fr_1.05fr] lg:gap-10"]}>
-                  <div class="flex min-w-0 flex-col">
-                    <div class="flex items-start gap-4">
-                      <div
-                        class:list={[
-                          "grid size-12 shrink-0 place-items-center rounded-2xl border",
-                          featured
-                            ? "border-brand-400/25 bg-brand-400/10 text-brand-300"
-                            : "border-white/10 bg-white/[0.03] text-slate-400 group-hover:text-brand-300",
-                        ]}
-                      >
-                        <Icon size={22} aria-hidden="true" />
-                      </div>
-                      <div class="min-w-0">
-                        <p class="text-sm font-medium text-brand-300">{p.eyebrow}</p>
-                        <h3 class="mt-1 text-2xl font-bold tracking-tight text-white sm:text-[1.7rem]">{title}</h3>
-                      </div>
-                    </div>
-
-                    {status && (
-                      <p class:list={["mt-5 w-fit rounded-full border px-3 py-1 text-xs font-semibold", statusTone[status]]}>
-                        {pt.status[status]}
-                      </p>
-                    )}
-
-                    <p class="mt-5 text-base leading-7 text-pretty text-slate-400">{p.description}</p>
-
-                    {!featured && (
-                      <div class="mt-6">
-                        <ProjectFlow flow={p.flow} label={pt.architecture} compact />
-                      </div>
-                    )}
-
-                    <ul class="mt-6 flex flex-wrap gap-2">
-                      {technologies.map((technology) => (
-                        <li>
-                          <TechChip name={technology} />
-                        </li>
-                      ))}
-                    </ul>
-
-                    {!featured && (
-                      <details class="group/details mt-6 rounded-2xl border border-white/8 bg-ink-950/50">
-                        <summary class="flex cursor-pointer list-none items-center justify-between gap-3 px-5 py-4 text-sm font-semibold text-slate-300 marker:hidden hover:text-white [&::-webkit-details-marker]:hidden">
-                          {pt.engineeringHighlights}
-                          <span class="text-brand-300 transition group-open/details:rotate-45" aria-hidden="true">
-                            +
-                          </span>
-                        </summary>
-                        <ul class="space-y-3 px-5 pb-5">
-                          {p.highlights.map((highlight) => (
-                            <li class="flex gap-3 text-sm leading-6 text-slate-400">
-                              <span class="mt-[0.6rem] size-1.5 shrink-0 rounded-full bg-brand-400" aria-hidden="true" />
-                              <span>{highlight}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </details>
-                    )}
-
-                    <div class="mt-auto flex flex-wrap gap-3 pt-7">
-                      {links.map(({ label, href }) => (
-                        <a href={href} target="_blank" rel="noreferrer" class="btn btn-secondary group/link min-h-11 text-sm">
-                          <Github size={17} aria-hidden="true" />
-                          {label}
-                          <span class="sr-only">— {title}</span>
-                          <ArrowUpRight
-                            size={16}
-                            class="text-slate-500 transition group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 group-hover/link:text-white"
-                            aria-hidden="true"
-                          />
-                        </a>
-                      ))}
-                    </div>
-                  </div>
-
-                  {featured && (
-                    <div class="flex min-w-0 flex-col gap-5">
-                      <ProjectFlow flow={p.flow} label={pt.architecture} />
-                      <div class="rounded-[1.5rem] border border-white/8 bg-ink-950/60 p-6">
-                        <p class="text-sm font-semibold tracking-[0.18em] text-slate-500 uppercase">{pt.engineeringHighlights}</p>
-                        <ul class="mt-5 space-y-3.5">
-                          {p.highlights.map((highlight) => (
-                            <li class="flex gap-3 text-sm leading-7 text-slate-300">
-                              <span class="mt-[0.65rem] size-1.5 shrink-0 rounded-full bg-brand-400" aria-hidden="true" />
-                              <span>{highlight}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </article>
-            </li>
-          );
-        })
-      }
     </ul>
-
-    <div class="mt-14 rounded-[1.75rem] border border-white/8 bg-white/[0.02] p-6 sm:p-8" data-reveal>
-      <div class="flex flex-col gap-1">
-        <h3 class="text-lg font-semibold text-white">{pt.moreTitle}</h3>
-        <p class="text-sm text-slate-400">{pt.moreDescription}</p>
-      </div>
-      <ul class="mt-6 grid gap-3 sm:grid-cols-2">
-        {
-          more.map(({ name, text }) => (
-            <li>
-              <a
-                href={repo(name)}
-                target="_blank"
-                rel="noreferrer"
-                class="group flex h-full items-start gap-3 rounded-2xl border border-white/8 p-4 transition hover:border-brand-400/25 hover:bg-white/[0.03]"
-              >
-                <Github size={18} class="mt-0.5 shrink-0 text-slate-500 group-hover:text-brand-300" aria-hidden="true" />
-                <span class="min-w-0">
-                  <span class="block truncate font-mono text-sm text-slate-200">{name.replace(/[-_]+$/, "")}</span>
-                  <span class="mt-1 block text-sm leading-6 text-slate-500">{text}</span>
-                </span>
-              </a>
-            </li>
-          ))
-        }
-      </ul>
-    </div>
   </div>
-</section>
+</Section>

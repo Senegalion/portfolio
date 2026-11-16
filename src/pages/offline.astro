@@ -9,13 +9,13 @@ import pl from "../i18n/pl";
 <BaseLayout title={`${pl.offline.title} · ${en.offline.title}`} minimal>
   <main id="main" class="grid min-h-svh place-items-center px-4 py-16">
     <div class="w-full max-w-lg text-center">
-      <span class="mx-auto grid size-16 place-items-center rounded-2xl border border-amber-400/25 bg-amber-400/10 text-amber-300">
+      <span class="mx-auto grid size-16 place-items-center rounded-full border border-warn/40 text-warn">
         <WifiOff size={28} aria-hidden="true" />
       </span>
-      <h1 class="mt-8 text-3xl font-bold tracking-tight text-white sm:text-4xl">{pl.offline.title}</h1>
-      <p class="mt-4 leading-7 text-slate-400">{pl.offline.description}</p>
-      <p lang="en" class="mt-6 text-sm leading-6 text-slate-500">
-        <strong class="font-semibold text-slate-300">{en.offline.title}.</strong>
+      <h1 class="mt-8 font-display text-5xl text-fg sm:text-6xl">{pl.offline.title}</h1>
+      <p class="mt-4 leading-7 text-muted">{pl.offline.description}</p>
+      <p lang="en" class="mt-6 text-sm leading-6 text-subtle">
+        <strong class="font-semibold text-fg">{en.offline.title}.</strong>
         {en.offline.description}
       </p>
       <div class="mt-10 flex flex-col justify-center gap-3 sm:flex-row">

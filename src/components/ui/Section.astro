@@ -1,0 +1,32 @@
+---
+interface Props {
+  id: string;
+  index?: string;
+  label: string;
+  /** May contain <em> for the accent part of the heading. */
+  title: string;
+  description?: string;
+  class?: string;
+}
+
+const { id, index, label, title, description, class: className } = Astro.props;
+const titleId = `${id}-title`;
+---
+
+<!-- Editorial section frame: sticky label column on the left, content on the right. -->
+<section id={id} class:list={["section", className]} aria-labelledby={titleId}>
+  <div class="container-page section-grid">
+    <p class="label self-start lg:sticky lg:top-28" data-reveal>
+      {index && <span class="label-index">({index})</span>}
+      {label}
+    </p>
+
+    <div class="min-w-0">
+      <div class="max-w-4xl" data-reveal>
+        <h2 id={titleId} class="heading-2" set:html={title} />
+        {description && <p class="lead">{description}</p>}
+      </div>
+      <slot />
+    </div>
+  </div>
+</section>

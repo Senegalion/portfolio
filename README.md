@@ -6,7 +6,8 @@ Live: https://portfolio-omega-opal-16.vercel.app
 ## Features
 
 - **Bilingual** (PL default at `/`, EN at `/en/`) with `hreflang`, canonical URLs, Open Graph image and JSON-LD `Person` schema.
-- **Splash screen** — pure CSS (works without JS), shown on every page load (including refresh), skipped for `prefers-reduced-motion`, click/Esc to skip. Add `?nosplash` to the URL to bypass it (handy for screenshots and tests).
+- **Dark / light theme** — dark by default, toggle in the header (and in the command palette); the choice is stored in `localStorage` and applied before first paint.
+- **Plain-language first** — every section leads with copy a non-technical reader understands; technical details (responsibilities, stacks, architecture) sit in expandable panels.
 - **Command palette** — `⌘K` / `Ctrl+K` / `/`: jump to sections, copy email, switch language, install the app, enable notifications.
 - **Notifications** — in-app toasts (offline/online, copied email, new version, offline-ready) and opt-in system notifications about new versions.
 - **PWA** — web manifest with icons and shortcuts, installable, works offline (`/offline/` fallback page).
@@ -45,8 +46,8 @@ HTML is fetched network-first (a fresh deployment is visible immediately when on
 src/
   components/
     layout/      Header, Footer
-    sections/    Hero, TechMarquee, About, Experience, Projects, Skills, Research, Education, Activities
-    ui/          Splash, CommandPalette, SectionHeading, TechChip, ProjectFlow
+    sections/    Hero, Intro, About, Experience, Projects, Research, Skills, Education, Activities
+    ui/          Section, CommandPalette, TechChip, ProjectFlow
   data/          site constants, skills, technology logos, build info
   i18n/          pl.ts (source of truth, typed) and en.ts
   scripts/       pwa.ts, toast.ts, ui.ts (client-side behaviour)

@@ -48,9 +48,8 @@ function trackInstalling(worker: ServiceWorker | null) {
     if (worker.state !== "installed") return;
     if (navigator.serviceWorker.controller) {
       promptUpdate(worker);
-    } else {
-      toast(strings().offlineReady, { type: "success" });
     }
+    // First install: stay quiet — visitors don't need to know about caching.
   });
 }
 

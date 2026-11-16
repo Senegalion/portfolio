@@ -13,8 +13,10 @@ import {
   Languages,
   Linkedin,
   Mail,
+  Medal,
   Microscope,
   Search,
+  SunMoon,
   Sparkles,
   User,
   Wrench,
@@ -47,13 +49,14 @@ const groups: { title: string; items: Item[] }[] = [
     title: t.palette.groups.navigate,
     items: [
       { label: p.top, icon: ArrowUp, action: "back-to-top", keywords: "home start top" },
+      { label: t.intro.badge, icon: Sparkles, href: "#intro", keywords: "what i do services oferta" },
       { label: t.navigation.about, icon: User, href: "#about", keywords: "about o mnie" },
       { label: t.navigation.experience, icon: BriefcaseBusiness, href: "#experience", keywords: "work job ing praca" },
       { label: t.navigation.projects, icon: FolderGit2, href: "#projects", keywords: "projects github projekty" },
       { label: t.navigation.skills, icon: Wrench, href: "#skills", keywords: "stack tech java devops" },
       { label: t.research.badge, icon: Microscope, href: "#research", keywords: "rca research ml badania" },
       { label: t.navigation.education, icon: GraduationCap, href: "#education", keywords: "studies certificates az-900" },
-      { label: t.activities.badge, icon: Sparkles, href: "#activities", keywords: "karate hobby" },
+      { label: t.activities.badge, icon: Medal, href: "#activities", keywords: "karate hobby" },
       { label: t.navigation.contact, icon: Mail, href: "#contact", keywords: "contact email kontakt" },
     ],
   },
@@ -61,6 +64,7 @@ const groups: { title: string; items: Item[] }[] = [
     title: t.palette.groups.actions,
     items: [
       { label: p.copyEmail, icon: Copy, action: "copy-email", keywords: "email mail copy kopiuj" },
+      { label: p.theme, icon: SunMoon, action: "toggle-theme", keywords: "theme dark light motyw ciemny jasny" },
       {
         label: p.language,
         icon: Languages,
@@ -88,10 +92,10 @@ let counter = 0;
 <dialog
   id="command-palette"
   aria-label={t.palette.title}
-  class="m-auto mt-[12vh] w-[min(36rem,calc(100%-2rem))] max-w-none overflow-hidden rounded-2xl border border-white/10 bg-ink-850/95 p-0 text-slate-200 shadow-2xl shadow-black/60 backdrop-blur-xl open:animate-[toast-in_.2s_ease]"
+  class="m-auto mt-[12vh] w-[min(36rem,calc(100%-2rem))] max-w-none overflow-hidden rounded-2xl border border-line-strong bg-surface p-0 text-fg shadow-2xl shadow-black/30 open:animate-[toast-in_.2s_ease]"
 >
-  <div class="flex items-center gap-3 border-b border-white/8 px-4">
-    <Search size={18} class="shrink-0 text-slate-500" aria-hidden="true" />
+  <div class="flex items-center gap-3 border-b border-line px-4">
+    <Search size={18} class="shrink-0 text-subtle" aria-hidden="true" />
     <input
       id="palette-input"
       type="text"
@@ -103,7 +107,7 @@ let counter = 0;
       spellcheck="false"
       placeholder={t.palette.placeholder}
       aria-label={t.palette.placeholder}
-      class="h-14 min-w-0 flex-1 bg-transparent text-base text-white outline-none placeholder:text-slate-500"
+      class="h-14 min-w-0 flex-1 bg-transparent text-base text-fg outline-none placeholder:text-subtle"
     />
     <kbd>Esc</kbd>
   </div>
@@ -112,7 +116,7 @@ let counter = 0;
     {
       groups.map((group) => (
         <div role="group" aria-label={group.title} data-palette-group class="py-1">
-          <p class="px-3 pt-2 pb-1.5 font-mono text-[0.65rem] tracking-[0.2em] text-slate-500 uppercase" aria-hidden="true">
+          <p class="px-3 pt-2 pb-1.5 text-xs font-medium text-subtle" aria-hidden="true">
             {group.title}
           </p>
           {group.items.map((item) => {
@@ -126,11 +130,11 @@ let counter = 0;
               "data-palette-item": "",
               "data-keywords": `${item.label} ${item.keywords ?? ""}`.toLowerCase(),
               class:
-                "flex w-full cursor-pointer items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm text-slate-300 outline-none aria-selected:bg-white/[0.07] aria-selected:text-white",
+                "flex w-full cursor-pointer items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm text-muted outline-none aria-selected:bg-raised aria-selected:text-fg",
             };
             const content = (
               <>
-                <span class="grid size-8 shrink-0 place-items-center rounded-lg border border-white/8 bg-white/[0.03] text-brand-300">
+                <span class="grid size-8 shrink-0 place-items-center rounded-lg border border-line text-accent">
                   <Icon size={16} aria-hidden="true" />
                 </span>
                 <span class="flex-1">{item.label}</span>
@@ -156,10 +160,10 @@ let counter = 0;
         </div>
       ))
     }
-    <p id="palette-empty" hidden class="px-3 py-8 text-center text-sm text-slate-500">{t.palette.empty}</p>
+    <p id="palette-empty" hidden class="px-3 py-8 text-center text-sm text-subtle">{t.palette.empty}</p>
   </div>
 
-  <p class="border-t border-white/8 px-4 py-2.5 font-mono text-[0.7rem] text-slate-500">{t.palette.hint}</p>
+  <p class="border-t border-line px-4 py-2.5 text-xs text-subtle">{t.palette.hint}</p>
 </dialog>
 
 <script>

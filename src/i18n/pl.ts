@@ -1,10 +1,10 @@
 const pl = {
   meta: {
-    title: "Łukasz Pelikan — Junior DevOps Engineer i Java Backend Developer",
+    title: "Łukasz Pelikan — inżynier oprogramowania i DevOps",
     description:
-      "Portfolio Łukasza Pelikana: Java i Spring Boot, DevOps, chmura Azure, systemy rozproszone oraz uczenie maszynowe. Doświadczenie w ING Bank Śląski i Fair Place Finance.",
+      "Łukasz Pelikan: tworzę oprogramowanie i dbam o to, by niezawodnie trafiało do użytkowników. Doświadczenie w ING Bank Śląski, Fair Place Finance i Firmao. Java, chmura Azure, DevOps i uczenie maszynowe.",
     ogLocale: "pl_PL",
-    ogImageAlt: "Łukasz Pelikan — Junior DevOps Engineer, Java Backend",
+    ogImageAlt: "Łukasz Pelikan — inżynier oprogramowania i DevOps",
   },
   navigation: {
     about: "O mnie",
@@ -13,8 +13,8 @@ const pl = {
     skills: "Umiejętności",
     education: "Edukacja",
     contact: "Kontakt",
-    contactButton: "Kontakt",
-    mobileContact: "Skontaktuj się",
+    contactButton: "Napisz do mnie",
+    mobileContact: "Napisz do mnie",
     home: "Przejdź do strony głównej",
     openMenu: "Otwórz menu",
     closeMenu: "Zamknij menu",
@@ -22,122 +22,91 @@ const pl = {
     mobileNavigation: "Nawigacja mobilna",
     language: "Język",
     skipToContent: "Przejdź do treści",
-    search: "Szukaj",
-    openPalette: "Otwórz paletę poleceń",
-  },
-  splash: {
-    lines: ["inicjalizacja środowiska", "ładowanie modułów: backend · devops · ml", "gotowe"],
-    skip: "Pomiń",
+    openPalette: "Otwórz szybkie wyszukiwanie",
+    themeToLight: "Włącz jasny motyw",
+    themeToDark: "Włącz ciemny motyw",
   },
   hero: {
-    badge: "Software Engineer · Java i DevOps",
-    nowLabel: "obecnie",
-    now: [
-      "Junior DevOps Engineer @ ING Bank Śląski",
-      "MSc: Inżynieria Oprogramowania i ML",
-      "Microsoft Certified: Azure Fundamentals",
-      "badania: Root Cause Analysis w mikroserwisach",
-    ],
-    title: "Tworzę systemy backendowe oraz ",
-    titleHighlight: "infrastrukturę, która za nimi stoi.",
-    description:
-      "Jestem Łukasz — Junior DevOps Engineer w ING Bank Śląski. Moją bazą jest Java i Spring Boot, a coraz więcej uwagi poświęcam automatyzacji dostarczania, chmurze i uczeniu maszynowemu.",
-    explore: "Zobacz moje projekty",
-    github: "Zobacz GitHub",
-    cv: "Pobierz CV",
+    availability: "Otwarty na nowe wyzwania",
     location: "Łódź, Polska",
-    availability: "Otwarty na nowe możliwości",
-    tabsLabel: "Profil w trzech formatach",
-    profileFile: "Engineer.java",
-    classKeyword: "public class",
-    className: "Engineer",
-    stringKeyword: "private final String",
-    listKeyword: "private final List<String>",
-    nameLabel: "name",
-    roleLabel: "role",
-    focusLabel: "focus",
-    name: "Łukasz Pelikan",
-    role: "Junior DevOps Engineer",
-    backend: "Backend",
-    cloud: "Cloud",
-    devops: "DevOps",
-    ml: "Machine Learning",
-    backendDescription: "Java i Spring",
-    cloudDescription: "Azure i AWS",
-    delivery: "Delivery",
-    deliveryDescription: "CI/CD i Kubernetes",
-    terminalComment: "# stos technologiczny, wg obszaru",
+    lead: "Tworzę oprogramowanie i dbam o to, żeby niezawodnie trafiało do ludzi, którzy z niego korzystają — szybko, bezpiecznie i bez przestojów.",
+    currentLabel: "Obecnie",
+    currentRole: "Junior DevOps Engineer",
+    currentCompany: "ING Bank Śląski",
+    primary: "Napisz do mnie",
+    secondary: "Zobacz, co zrobiłem",
+    cv: "Pobierz CV",
+    badge: "Oprogramowanie · Chmura · DevOps · Dane i AI · ",
+    scroll: "Przewiń w dół",
+    trustedLabel: "Doświadczenie zdobywałem w",
   },
-  marquee: {
-    label: "Technologie, z którymi pracowałem — komercyjnie, na studiach i w projektach",
+  intro: {
+    index: "01",
+    badge: "Czym się zajmuję",
+    title: "Łączę trzy rzeczy, które zwykle robią <em>trzy różne osoby.</em>",
+    lead: "Piszę oprogramowanie, dbam o to, żeby działało w chmurze, i wykorzystuję dane, żeby szybciej wykrywać problemy. Dzięki temu rozumiem cały proces — od pomysłu do działającego produktu.",
+    techLabel: "Technicznie",
+    items: [
+      {
+        title: "Buduję oprogramowanie",
+        text: "Projektuję i tworzę systemy, które realizują logikę biznesową: obsługę klientów, płatności, zamówienia i integracje z partnerami.",
+        tech: "Java, Spring Boot, bazy danych SQL, API",
+      },
+      {
+        title: "Dbam, żeby działało",
+        text: "Automatyzuję wydawanie nowych wersji, żeby zmiany trafiały do użytkowników szybciej i bez ryzyka. Pilnuję stabilności systemów w chmurze.",
+        tech: "CI/CD, Docker, Kubernetes, Microsoft Azure",
+      },
+      {
+        title: "Wykorzystuję dane i AI",
+        text: "Uczę modele rozpoznawać problemy w systemach, zanim staną się poważne. To także temat mojej pracy magisterskiej.",
+        tech: "Python, uczenie maszynowe, analiza logów",
+      },
+    ],
   },
   about: {
+    index: "02",
     badge: "O mnie",
-    title: "Inżynieria to coś więcej niż pisanie kodu.",
-    paragraph1:
-      "Jestem absolwentem informatyki na Politechnice Łódzkiej i inżynierem pracującym na styku backendu, infrastruktury chmurowej i DevOps.",
-    paragraph2:
-      "Moim głównym stackiem jest Java oraz Spring Boot, ale równie mocno interesuje mnie, jak oprogramowanie jest testowane, wdrażane, monitorowane i utrzymywane po uruchomieniu — od architektury, przez CI/CD, po obserwowalność.",
-    paragraph3:
-      "Obecnie pracuję w sektorze bankowym, gdzie niezawodność, bezpieczeństwo i zdyscyplinowane podejście do inżynierii są ważniejsze niż efektowne demonstracje.",
-    paragraph4:
-      "Równolegle studiuję dwa kierunki magisterskie: Informatykę Stosowaną (Inżynieria Oprogramowania i Uczenie Maszynowe) oraz Master of Business Studies — bo chcę rozumieć nie tylko jak zbudować system, ale też jaką wartość tworzy dla organizacji.",
+    title: "Inżynier, który <em>rozumie też biznes.</em>",
+    paragraphs: [
+      "Nazywam się Łukasz Pelikan. Jestem absolwentem informatyki na Politechnice Łódzkiej, a dziś pracuję w ING Bank Śląski — w środowisku, w którym niezawodność i bezpieczeństwo są ważniejsze niż efektowne prezentacje.",
+      "Najbardziej lubię momenty, w których technologia rozwiązuje konkretny problem: system przestaje się zawieszać, wdrożenie trwa minuty zamiast godzin, a zespół szybciej znajduje przyczynę awarii.",
+      "Równolegle studiuję dwa kierunki magisterskie: informatykę (inżynieria oprogramowania i uczenie maszynowe) oraz Master of Business Studies. Chcę rozumieć nie tylko jak zbudować system, ale też jaką wartość tworzy dla organizacji.",
+      "Wcześniej przez ponad rok uczyłem programowania dzieci i młodzież. Nauczyło mnie to najważniejszej umiejętności w pracy z ludźmi spoza IT: tłumaczenia trudnych rzeczy prostym językiem.",
+    ],
     contact: "Porozmawiajmy",
     photoAlt: "Zdjęcie portretowe Łukasza Pelikana",
-    areas: {
-      backend: {
-        title: "Backend",
-        description:
-          "Projektowanie usług i API z wykorzystaniem Javy, Spring Boot, relacyjnych baz danych oraz testów automatycznych.",
-      },
-      cloud: {
-        title: "Chmura i wdrożenia",
-        description:
-          "Potoki CI/CD, środowiska kontenerowe i procesy wdrożeniowe — Docker, Kubernetes, Argo CD i Azure.",
-      },
-      architecture: {
-        title: "Architektura systemów",
-        description:
-          "Monolity modułowe, mikroserwisy, komunikacja asynchroniczna (Kafka, RabbitMQ) i pragmatyczne decyzje architektoniczne.",
-      },
-      ml: {
-        title: "Uczenie maszynowe",
-        description:
-          "Klasyfikacja, sieci neuronowe i analiza danych w Pythonie — dziś głównie w kontekście logów, awarii i obserwowalności.",
-      },
-    },
     facts: [
-      { value: "4,52", label: "średnia na studiach inżynierskich (Computer Science, PŁ)" },
-      { value: "4,90", label: "średnia z I semestru studiów magisterskich" },
-      { value: "AZ-900", label: "Microsoft Certified: Azure Fundamentals" },
-      { value: "1 DAN", label: "czarny pas karate, ok. 15 lat treningów" },
+      { value: "4", label: "firmy — od edukacji, przez oprogramowanie dla firm i fintech, po bankowość" },
+      { value: "2", label: "kierunki magisterskie jednocześnie: informatyka i biznes" },
+      { value: "4,90", label: "średnia z pierwszego semestru studiów magisterskich" },
+      { value: "1 DAN", label: "czarny pas w karate po około 15 latach treningów" },
     ],
     languagesTitle: "Języki",
     languages: [
-      { name: "Polski", level: "ojczysty", value: 100 },
-      { name: "Angielski", level: "C1", value: 85 },
-      { name: "Hiszpański", level: "A2", value: 35 },
+      { name: "Polski", level: "ojczysty" },
+      { name: "Angielski", level: "C1 — biegły" },
+      { name: "Hiszpański", level: "A2 — podstawowy" },
     ],
   },
   experience: {
+    index: "03",
     badge: "Doświadczenie",
-    title: "Tworzę oprogramowanie w rzeczywistych środowiskach biznesowych.",
+    title: "Od nauki programowania <em>po bankowość.</em>",
     description:
-      "Moje doświadczenie obejmuje rozwój backendu, DevOps, automatyzację testów oraz edukację programistyczną — od produktu CRM, przez fintech, po bankowość.",
-    currentCompany: "Obecna firma",
-    currentRole: "Obecne stanowisko",
-    careerProgression: "Rozwój kariery",
+      "Pracowałem w czterech bardzo różnych miejscach. Każde nauczyło mnie czegoś innego — od cierpliwości w tłumaczeniu, przez szybkie dostarczanie funkcji, po dyscyplinę wymaganą w banku.",
     present: "obecnie",
+    currentCompany: "Obecnie",
     workModes: { hybrid: "hybrydowo", remote: "zdalnie", onsite: "stacjonarnie" },
-    ctaTitle: "Zainteresowany współpracą?",
-    ctaDescription:
-      "Jestem otwarty na rozmowy dotyczące ambitnych projektów backendowych, chmurowych oraz DevOps.",
-    contact: "Skontaktuj się",
+    details: "Zakres obowiązków i technologie",
+    technologies: "Technologie",
+    promotion: "Awans",
     companies: {
       ing: {
         location: "Katowice",
-        description:
-          "Rozwój od stażu w automatyzacji testów do stanowiska Junior DevOps Engineer — praca nad oprogramowaniem klasy enterprise oraz procesami dostarczania w regulowanym środowisku bankowym.",
+        industry: "Bankowość",
+        summary:
+          "Pracuję w jednym z największych banków w Polsce. Dbam o to, żeby nowe wersje aplikacji trafiały do klientów automatycznie, bezpiecznie i bez przestojów. Zacząłem od stażu w zespole testów automatycznych, a po pół roku dostałem awans na stanowisko DevOps.",
         roles: {
           devops: {
             title: "Junior DevOps Engineer",
@@ -163,8 +132,9 @@ const pl = {
       },
       fairPlace: {
         location: "Łódź",
-        description:
-          "Rozwój komponentów backendowych platformy finansowej opartej na mikroserwisach, ze szczególnym uwzględnieniem GraphQL Gateway, integracji giełdowych oraz komunikacji zdarzeniowej.",
+        industry: "Fintech · inwestycje",
+        summary:
+          "Firma budująca platformę inwestycyjną. Tworzyłem część systemu, która łączy platformę z giełdami i brokerami — tak, żeby zlecenia klientów trafiały we właściwe miejsce, a zespół biznesowy miał do nich wygodny dostęp.",
         roles: {
           backend: {
             title: "Java Backend Developer",
@@ -182,8 +152,9 @@ const pl = {
       },
       firmao: {
         location: "Łódź",
-        description:
-          "Rozwój oraz utrzymanie funkcjonalności komercyjnego systemu CRM, obejmujących backend w Javie, logikę bazodanową oraz frontend oparty o Ext JS.",
+        industry: "Oprogramowanie dla firm",
+        summary:
+          "Rozwijałem system CRM, z którego firmy korzystają na co dzień do obsługi klientów i sprzedaży. Dodawałem nowe funkcje, poprawiałem raporty i naprawiałem błędy zgłaszane przez użytkowników.",
         roles: {
           fullstack: {
             title: "Junior Fullstack Java Developer",
@@ -200,11 +171,12 @@ const pl = {
       },
       giganci: {
         location: "Łódź",
-        description:
-          "Prowadzenie zajęć z programowania dla dzieci i młodzieży, łączące naukę technologii z mentoringiem oraz realizacją praktycznych projektów.",
+        industry: "Edukacja",
+        summary:
+          "Uczyłem dzieci i młodzież programowania — od pierwszych kroków po własne gry i aplikacje. Dopasowywałem tempo i materiał do każdego ucznia.",
         roles: {
           instructor: {
-            title: "Instruktor Programowania",
+            title: "Instruktor programowania",
             responsibilities: [
               "Prowadzenie kursów programowania oraz warsztatów praktycznych",
               "Nauczanie podstaw języków Python, C++ oraz C#",
@@ -217,50 +189,39 @@ const pl = {
       },
     },
   },
-  skills: {
-    badge: "Umiejętności",
-    title: "Stos technologiczny poparty praktyką.",
-    description:
-      "Technologie, z którymi pracowałem komercyjnie, na studiach i w projektach. Oznaczone elementy były używane w pracy zawodowej — reszta pochodzi z projektów i nauki.",
-    commercial: "Użyte komercyjnie",
-    commercialShort: "komercyjnie",
-    filterLabel: "Pokaż",
-    filterAll: "Wszystkie",
-    filterCommercial: "Tylko komercyjne",
-  },
   projects: {
-    badge: "Wybrane projekty",
-    title: "Systemy stworzone do rozwiązywania rzeczywistych problemów.",
+    index: "04",
+    badge: "Projekty",
+    title: "Rzeczy, które <em>zbudowałem.</em>",
     description:
-      "Projekty obejmujące backend, architekturę rozproszoną, uczenie maszynowe i dostarczanie kompletnych aplikacji. Każdy z linkiem do kodu.",
-    viewRepositories: "Zobacz wszystkie repozytoria",
-    viewRepository: "Repozytorium",
-    frontendRepository: "Frontend",
-    engineeringHighlights: "Najważniejsze aspekty techniczne",
-    architecture: "Przepływ / architektura",
-    filterLabel: "Filtruj projekty",
-    filters: { all: "Wszystkie", backend: "Backend", ml: "ML i AI", devops: "DevOps", fullstack: "Full-stack" },
+      "Wybrane projekty — od pracy inżynierskiej, przez narzędzia z elementami sztucznej inteligencji, po gry online. Każdy z publicznym kodem źródłowym.",
+    viewRepositories: "Wszystkie projekty na GitHubie",
+    viewRepository: "Kod źródłowy",
+    frontendRepository: "Kod interfejsu",
+    details: "Szczegóły techniczne",
+    architecture: "Jak to działa",
+    featured: "Projekt wyróżniony",
     status: {
       thesis: "Praca inżynierska",
       team: "Projekt zespołowy",
-      research: "R&D — pozyskiwanie danych",
+      research: "W trakcie",
       personal: "Projekt własny",
       course: "Projekt akademicki",
     },
-    showing: "Wyświetlono projektów:",
-    moreTitle: "Więcej na GitHubie",
-    moreDescription: "Mniejsze projekty z kursów AI i ML — implementacje od podstaw.",
+    moreTitle: "Mniejsze projekty",
+    moreDescription: "Ćwiczenia z kursów sztucznej inteligencji — klasyczne algorytmy napisane od podstaw.",
     more: {
-      cnn: "Konwolucyjna sieć neuronowa z warstwami poolingu",
-      fuzzy: "Sterownik paletki w Pongu oparty na logice rozmytej (scikit-fuzzy)",
-      pacman: "Klasyczne algorytmy przeszukiwania grafów — UC Berkeley Pacman AI",
-      multiAgent: "Przeszukiwanie z przeciwnikiem: minimax, alfa-beta, expectimax",
+      cnn: "Sieć neuronowa rozpoznająca obrazy",
+      fuzzy: "Gra Pong sterowana logiką rozmytą",
+      pacman: "Pacman szukający drogi w labiryncie",
+      multiAgent: "Pacman grający przeciwko duchom",
     },
     projects: {
       karate: {
-        eyebrow: "Platforma mikroserwisowa",
-        description:
-          "Platforma do zarządzania klubami karate: treningami, zapisami, płatnościami, opiniami oraz automatycznymi powiadomieniami. Temat mojej pracy inżynierskiej, obronionej 10 lutego 2026 r. (promotor: dr inż. Rafał Kotas).",
+        kind: "System dla klubów sportowych",
+        summary:
+          "Kompletny system do prowadzenia klubu karate: zapisy na treningi, płatności online, opinie i automatyczne powiadomienia e-mail. Zbudowany tak, żeby każda jego część mogła rozwijać się niezależnie od pozostałych.",
+        note: "Temat mojej pracy inżynierskiej, obronionej 10 lutego 2026 r. (promotor: dr inż. Rafał Kotas).",
         highlights: [
           "Ewolucja od monolitu modułowego do architektury mikroserwisowej (Spring Cloud)",
           "API Gateway, Eureka oraz scentralizowana konfiguracja (Spring Cloud Config)",
@@ -272,36 +233,24 @@ const pl = {
         ],
         flow: [["React"], ["API Gateway", "Eureka", "Config Server"], ["Users", "Trainings", "Payments", "Notifications"], ["Kafka", "PostgreSQL"]],
       },
-      aiLogs: {
-        eyebrow: "Uczenie maszynowe dla DevOps",
-        description:
-          "Klasyfikator surowych logów aplikacyjnych i infrastrukturalnych do kategorii DATABASE, KAFKA, DOCKER, MEMORY, NETWORK i SECURITY — aby przyspieszyć triage incydentów.",
-        highlights: [
-          "Wektoryzacja tekstu logów metodą TF-IDF",
-          "Model regresji logistycznej (scikit-learn)",
-          "Przygotowanie i analiza danych w pandas",
-          "Serializacja wytrenowanego modelu (Joblib)",
-          "Połączenie zainteresowań: DevOps, monitoring i AI",
-        ],
-        flow: [["Surowe logi"], ["pandas", "TF-IDF"], ["Regresja logistyczna"], ["DATABASE", "KAFKA", "NETWORK", "…"]],
-      },
       cityFailurePredictor: {
-        eyebrow: "Platforma uczenia maszynowego",
-        description:
-          "Zespołowy projekt akademicki skupiony na przewidywaniu awarii infrastruktury miejskiej oraz wspieraniu decyzji dotyczących utrzymania.",
+        kind: "Inteligentne miasto",
+        summary:
+          "Model przewidujący awarie infrastruktury miejskiej, który pomaga zaplanować naprawy, zanim coś się zepsuje. Projekt zespołowy realizowany na studiach.",
+        note: "",
         highlights: [
           "Modele predykcyjne dla awarii infrastruktury miejskiej",
           "Przygotowanie danych i inżynieria cech",
           "Trenowanie oraz ewaluacja modeli uczenia maszynowego",
           "Monitoring i logi: Prometheus, Grafana, Loki",
-          "Praca zespołowa nad wspólnym projektem",
         ],
         flow: [["Dane miejskie"], ["Python", "Feature eng."], ["Model ML"], ["Prometheus", "Grafana", "Loki"]],
       },
       jobOffers: {
-        eyebrow: "Platforma agregująca oferty pracy",
-        description:
-          "Platforma zbierająca i przetwarzająca oferty pracy dla Junior Java Developerów z zewnętrznych źródeł, udostępniana poprzez zabezpieczony backend oraz frontend React.",
+        kind: "Agregator ofert pracy",
+        summary:
+          "Serwis, który automatycznie zbiera oferty pracy dla początkujących programistów z wielu źródeł i pokazuje je w jednym miejscu — z kontami użytkowników i bezpiecznym logowaniem.",
+        note: "",
         highlights: [
           "Automatyczne pobieranie ofert z zewnętrznych źródeł",
           "Uwierzytelnianie i autoryzacja oparte o JWT",
@@ -312,9 +261,10 @@ const pl = {
         flow: [["Zewnętrzne API"], ["Scheduler", "Spring Boot"], ["MongoDB", "Redis"], ["React"]],
       },
       traffic: {
-        eyebrow: "Smart city · Geo + ML",
-        description:
-          "System przewidujący bieżącą fazę sygnalizacji świetlnej w Łodzi i przybliżony czas do jej zmiany — zanim kierowca dojedzie do skrzyżowania. Projekt jest na etapie pozyskiwania danych i weryfikacji wykonalności.",
+        kind: "Inteligentne miasto",
+        summary:
+          "Aplikacja, która ma podpowiadać kierowcy w Łodzi, jakie światło zastanie na najbliższym skrzyżowaniu i za ile sekund się zmieni. Obecnie zbieram dane i sprawdzam, czy wiarygodna prognoza jest możliwa.",
+        note: "",
         highlights: [
           "Identyfikacja nadchodzącego skrzyżowania na podstawie GPS",
           "Dane geoprzestrzenne w PostgreSQL + PostGIS",
@@ -322,12 +272,13 @@ const pl = {
           "Jawna informacja, gdy wiarygodna predykcja nie jest możliwa",
           "Planowane komponenty: API w Spring Boot, aplikacja Android (Kotlin)",
         ],
-        flow: [["GPS"], ["Skrzyżowanie", "PostGIS"], ["Model ML"], ["Faza + ETA"]],
+        flow: [["GPS"], ["Skrzyżowanie", "PostGIS"], ["Model ML"], ["Faza + czas"]],
       },
       akigator: {
-        eyebrow: "Aplikacja full-stack wspierana przez AI",
-        description:
-          "Interaktywna gra zgadująca, łącząca backend Spring Boot, frontend React oraz usługę uczenia maszynowego w Pythonie.",
+        kind: "Gra z elementami AI",
+        summary:
+          "Gra w zgadywanie: program zadaje kolejne pytania i próbuje odgadnąć, o czym myśli gracz. W tle działa model uczenia maszynowego.",
+        note: "",
         highlights: [
           "Bezpieczne uwierzytelnianie użytkowników z wykorzystaniem JWT",
           "Obsługa pełnego cyklu życia rozgrywki",
@@ -338,9 +289,10 @@ const pl = {
         flow: [["React"], ["Spring Boot"], ["Python ML"], ["PostgreSQL"]],
       },
       thousand: {
-        eyebrow: "Gra wieloosobowa online",
-        description:
-          "Internetowa implementacja polskiej gry karcianej Tysiąc dla wielu graczy, oparta o Java 25, Spring Boot 4 i React.",
+        kind: "Gra karciana online",
+        summary:
+          "Internetowa wersja popularnej polskiej gry karcianej Tysiąc — rozgrywka z innymi graczami w czasie rzeczywistym, prosto w przeglądarce.",
+        note: "",
         highlights: [
           "Monolit modułowy jako punkt startowy architektury",
           "Zasady gry jako czysty model domenowy w Javie, odseparowany od Springa",
@@ -350,9 +302,10 @@ const pl = {
         flow: [["React"], ["WebSocket"], ["Spring Boot"], ["Domena gry"]],
       },
       lotto: {
-        eyebrow: "Architektura heksagonalna",
-        description:
-          "Aplikacja loteryjna umożliwiająca wysyłanie kuponów, przeglądanie wyników losowań oraz historii poprzez przejrzyste REST API.",
+        kind: "Aplikacja loteryjna",
+        summary:
+          "System loterii: gracze wysyłają kupony, a aplikacja przeprowadza losowania i sprawdza wyniki. Ćwiczenie z projektowania kodu, który łatwo rozwijać i testować.",
+        note: "",
         highlights: [
           "Monolit modułowy",
           "Architektura heksagonalna i wyraźny podział domen",
@@ -367,100 +320,115 @@ const pl = {
   research: {
     badge: "Badania",
     status: "W toku · praca magisterska",
-    title: "Root Cause Analysis w systemach mikroserwisowych",
+    title: "Jak szybko znaleźć <em>prawdziwą przyczynę</em> awarii?",
     description:
-      "Obszar moich badań akademickich: jak na podstawie telemetrii — logów, metryk i śladów — wskazać źródło awarii w systemie złożonym z wielu usług. I jak sprawić, by model mówił też, kiedy nie jest pewny swojej odpowiedzi.",
-    topicsTitle: "Zagadnienia",
+      "W dużych systemach jedna usterka potrafi wywołać objawy w wielu miejscach naraz — i zespół traci czas, gasząc niewłaściwy pożar. W pracy magisterskiej badam, jak sztuczna inteligencja może automatycznie wskazać źródło problemu i uczciwie powiedzieć, kiedy nie jest pewna odpowiedzi.",
+    technical: "Dla technicznych",
+    technicalText: "Root Cause Analysis w systemach mikroserwisowych na podstawie telemetrii — logów, metryk i śladów. Ewaluacja na benchmarku RCAEval.",
     topics: [
-      "Obserwowalność: logi, metryki, ślady",
+      "Obserwowalność",
       "Grafowe sieci neuronowe (GNN)",
       "Duże modele językowe (LLM)",
       "Szacowanie niepewności",
       "Kalibracja modeli",
       "Selective prediction",
     ],
-    dataset: "Analizowany zbiór danych: benchmark RCAEval z przypadkami awarii do ewaluacji metod RCA.",
+    legend: { root: "źródło problemu", symptom: "objaw", ok: "działa poprawnie" },
+    figureLabel: "Schemat: awaria w jednej usłudze wywołuje objawy w usługach, które od niej zależą.",
+  },
+  skills: {
+    index: "05",
+    badge: "Umiejętności",
+    title: "Narzędzia, z którymi <em>pracuję.</em>",
+    description:
+      "Ta część jest bardziej techniczna — dla zespołów IT i rekruterów. Wyróżnione pozycje wykorzystywałem w pracy zawodowej, pozostałe w projektach i na studiach.",
+    commercial: "Używane w pracy zawodowej",
+    commercialShort: "używane zawodowo",
+    filterLabel: "Pokaż",
+    filterAll: "Wszystkie",
+    filterCommercial: "Tylko z pracy",
   },
   education: {
+    index: "06",
     badge: "Edukacja",
-    title: "Technologia i biznes — dwa kierunki, jeden cel.",
+    title: "Technologia i biznes — <em>dwa kierunki, jeden cel.</em>",
     description:
-      "Studia na Politechnice Łódzkiej, wymiana Erasmus+ w Helsinkach i certyfikaty, które porządkują wiedzę zdobytą w praktyce.",
+      "Studia na Politechnice Łódzkiej, semestr wymiany w Helsinkach i certyfikaty, które porządkują wiedzę zdobytą w praktyce.",
     inProgress: "W trakcie",
     completed: "Ukończone",
     university: "Politechnika Łódzka",
     items: {
       msc: {
-        degree: "Studia magisterskie — Informatyka Stosowana",
-        detail: "Specjalizacja: Inżynieria Oprogramowania i Uczenie Maszynowe",
+        degree: "Informatyka Stosowana — studia magisterskie",
+        detail: "Specjalizacja: inżynieria oprogramowania i uczenie maszynowe",
         note: "Średnia z I semestru: 4,90",
-        topics: ["Inżynieria oprogramowania", "Uczenie maszynowe", "Sztuczna inteligencja", "Architektura oprogramowania", "Analiza danych"],
       },
       mbs: {
-        degree: "Studia magisterskie — Master of Business Studies",
-        detail: "Kompetencje biznesowe i zarządcze uzupełniające profil techniczny",
-        note: "Transformacja cyfrowa i biznesowe zastosowania AI",
-        topics: ["Zarządzanie strategiczne", "Ekonomia", "Transformacja cyfrowa", "Strategia biznesowa", "AI w biznesie"],
+        degree: "Master of Business Studies — studia magisterskie",
+        detail: "Zarządzanie strategiczne, ekonomia i transformacja cyfrowa",
+        note: "Biznesowe zastosowania sztucznej inteligencji",
       },
       beng: {
-        degree: "Studia inżynierskie — Computer Science",
+        degree: "Computer Science — studia inżynierskie",
         detail: "Praca: „Aplikacja webowa do zarządzania treningami karate oparta na architekturze mikroserwisowej”",
-        note: "Średnia: 4,52 · obrona 10.02.2026 · promotor: dr inż. Rafał Kotas",
-        topics: ["Java", "Spring Boot", "Mikroserwisy", "PostgreSQL", "Docker"],
+        note: "Średnia: 4,52 · obrona 10.02.2026",
       },
       erasmus: {
-        degree: "Erasmus+ — wymiana akademicka",
+        degree: "Erasmus+ — semestr wymiany",
         school: "Metropolia University of Applied Sciences",
         detail: "Helsinki, Finlandia",
         note: "Studia w międzynarodowym środowisku",
-        topics: [],
       },
     },
-    certsTitle: "Certyfikaty i rozwój",
-    statuses: { passed: "Zdany", preparing: "W przygotowaniu", planned: "Planowany", enrolled: "Zakwalifikowany" },
+    certsTitle: "Certyfikaty",
+    statuses: { passed: "Zdany", preparing: "W przygotowaniu", planned: "Planowany", enrolled: "W trakcie" },
     certs: {
-      az900: { name: "Microsoft Certified: Azure Fundamentals (AZ-900)", issuer: "Microsoft", date: "6 maja 2026" },
+      az900: { name: "Microsoft Azure Fundamentals (AZ-900)", issuer: "Microsoft", date: "maj 2026" },
       az204: { name: "Azure Developer Associate (AZ-204)", issuer: "Microsoft", date: "" },
       oracle: { name: "Java SE 25 Developer (1Z0-831)", issuer: "Oracle", date: "" },
-      elementsOfAi: { name: "Elements of AI · Building AI", issuer: "ECIU · Linköping University", date: "2 × 2 ECTS" },
+      elementsOfAi: { name: "Elements of AI · Building AI", issuer: "ECIU · Linköping University", date: "" },
     },
   },
   activities: {
-    badge: "Poza kodem",
-    title: "Dyscyplina z dojo, ciekawość z laboratorium.",
+    index: "07",
+    badge: "Poza pracą",
+    title: "Dyscyplina <em>z dojo.</em>",
     description:
-      "Karate nauczyło mnie systematyczności i ciągłego doskonalenia — dokładnie tego, czego wymaga inżynieria oprogramowania.",
+      "Karate trenuję od dziecka. Nauczyło mnie systematyczności i ciągłego doskonalenia się — dokładnie tego, czego wymaga dobra inżynieria.",
     items: {
-      karate: { title: "Karate — 1 DAN", text: "Około 15 lat treningów i czarny pas. Karate stało się też tematem mojej pracy inżynierskiej." },
-      sensei: { title: "Instruktor karate", text: "Prowadzenie treningów jako sensei — przekazywanie wiedzy, cierpliwość i odpowiedzialność za grupę." },
-      kino: { title: "Koło naukowe Lodz Solar Team", text: "Członek studenckiego koła naukowego SOLAR." },
-      events: { title: "Wydarzenia technologiczne", text: "Udział w Łódzkich Dniach Informatyki oraz innych wydarzeniach akademickich i technologicznych." },
-      business: { title: "Technologia w biznesie", text: "Transformacja cyfrowa, generatywna AI w organizacjach i wpływ AI na produktywność pracy." },
+      karate: { title: "Karate — czarny pas, 1 DAN", text: "Około 15 lat treningów. Karate stało się też tematem mojej pracy inżynierskiej." },
+      sensei: { title: "Instruktor karate", text: "Prowadzę treningi jako sensei — przekazuję wiedzę i odpowiadam za grupę." },
+      kino: { title: "Lodz Solar Team", text: "Członek studenckiego koła naukowego budującego pojazdy solarne." },
+      events: { title: "Wydarzenia technologiczne", text: "Łódzkie Dni Informatyki oraz inne wydarzenia akademickie i branżowe." },
+      business: { title: "Technologia w biznesie", text: "Interesuje mnie transformacja cyfrowa i wpływ AI na sposób pracy w organizacjach." },
     },
   },
   footer: {
     contact: "Kontakt",
-    title: "Stwórzmy coś, co warto wdrożyć.",
+    title: "Porozmawiajmy.",
     description:
-      "Jestem otwarty na rozmowy dotyczące backendu, infrastruktury chmurowej, DevOps oraz międzynarodowych projektów programistycznych.",
+      "Szukasz osoby do zespołu albo masz projekt, przy którym mogę pomóc? Napisz lub zadzwoń — chętnie porozmawiam.",
     writeEmail: "Napisz e-mail",
     copyEmail: "Kopiuj adres e-mail",
+    call: "Zadzwoń",
     backToTop: "Powrót na górę",
-    github: "Profil GitHub",
-    linkedin: "Profil LinkedIn",
+    github: "GitHub",
+    linkedin: "LinkedIn",
     copyright: "Wszelkie prawa zastrzeżone.",
-    build: "build",
-    madeWith: "Astro · Tailwind CSS · PWA",
+    build: "wersja",
+    madeWith: "Zaprojektowane i zbudowane samodzielnie",
+    shortcut: "Szybkie wyszukiwanie",
   },
   palette: {
-    title: "Paleta poleceń",
-    placeholder: "Wpisz polecenie lub nazwę sekcji…",
+    title: "Szybkie wyszukiwanie",
+    placeholder: "Wpisz nazwę sekcji lub polecenie…",
     empty: "Brak wyników",
     groups: { navigate: "Przejdź do", actions: "Akcje", links: "Linki" },
     actions: {
       top: "Początek strony",
       copyEmail: "Kopiuj adres e-mail",
       language: "Switch to English",
+      theme: "Zmień motyw (jasny / ciemny)",
       install: "Zainstaluj jako aplikację",
       notifications: "Włącz powiadomienia o nowych wersjach",
       github: "Otwórz GitHub",
@@ -468,7 +436,7 @@ const pl = {
       email: "Napisz e-mail",
       cv: "Pobierz CV",
     },
-    hint: "↑↓ nawigacja · Enter wybór · Esc zamknij",
+    hint: "↑↓ wybór · Enter otwórz · Esc zamknij",
   },
   client: {
     offline: "Jesteś offline — strona działa z pamięci podręcznej.",

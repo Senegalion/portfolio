@@ -2,7 +2,6 @@
 import { Font } from "astro:assets";
 import "../styles/global.css";
 import CommandPalette from "../components/ui/CommandPalette.astro";
-import Splash from "../components/ui/Splash.astro";
 import { hasCv } from "../data/build";
 import { SITE } from "../data/site";
 import { getTranslations, langFrom } from "../i18n";
@@ -10,7 +9,7 @@ import { getTranslations, langFrom } from "../i18n";
 interface Props {
   title?: string;
   description?: string;
-  /** Pages like 404/offline: no splash, no palette, not indexed. */
+  /** Pages like 404/offline: no palette, not indexed. */
   minimal?: boolean;
 }
 
@@ -39,22 +38,17 @@ const jsonLd = {
 ---
 
 <!doctype html>
-<html lang={lang} class="no-js">
+<html lang={lang} class="no-js" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <script is:inline>
       document.documentElement.classList.replace("no-js", "js");
+      // Theme: dark by default, the visitor's explicit choice is remembered.
       try {
-        var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-        // Splash on every full page load (including refresh); skipped for
-        // reduced-motion users and with ?nosplash (screenshots, tests).
-        if (reduce || /[?&]nosplash/.test(location.search)) {
-          document.documentElement.dataset.splash = "off";
-        }
-      } catch (e) {
-        document.documentElement.dataset.splash = "off";
-      }
+        var stored = localStorage.getItem("theme");
+        if (stored === "light" || stored === "dark") document.documentElement.dataset.theme = stored;
+      } catch (e) {}
     </script>
 
     <title>{title}</title>
@@ -72,8 +66,8 @@ const jsonLd = {
       )
     }
 
-    <meta name="theme-color" content="#070b14" />
-    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#0f0e0c" />
+    <meta name="color-scheme" content="dark light" />
     <link rel="manifest" href="/manifest.webmanifest" />
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -98,21 +92,19 @@ const jsonLd = {
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
 
-    <Font cssVariable="--font-geist" preload />
-    <Font cssVariable="--font-geist-mono" />
+    <Font cssVariable="--font-schibsted" preload />
+    <Font cssVariable="--font-instrument" preload />
 
     {!minimal && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
   </head>
 
-  <body class="text-slate-200">
+  <body>
     <a
       href="#main"
-      class="sr-only fixed top-3 left-3 z-[200] rounded-xl bg-white px-4 py-3 font-semibold text-slate-950 focus:not-sr-only"
+      class="sr-only fixed top-3 left-3 z-[200] rounded-full bg-fg px-5 py-3 font-semibold text-bg focus:not-sr-only"
     >
       {t.navigation.skipToContent}
     </a>
-
-    {!minimal && <Splash />}
 
     <slot />
 

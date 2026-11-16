@@ -96,111 +96,34 @@ function initActiveNav() {
   sections.forEach((section) => observer.observe(section));
 }
 
-/** Cursor-following glow on cards with the .spotlight class. */
-function initSpotlight() {
-  if (!window.matchMedia("(hover: hover)").matches) return;
-  document.addEventListener(
-    "pointermove",
-    (event) => {
-      const card = (event.target as Element | null)?.closest<HTMLElement>(".spotlight");
-      if (!card) return;
-      const rect = card.getBoundingClientRect();
-      card.style.setProperty("--mx", `${event.clientX - rect.left}px`);
-      card.style.setProperty("--my", `${event.clientY - rect.top}px`);
-    },
-    { passive: true },
-  );
-}
+const THEME_COLORS = { dark: "#0f0e0c", light: "#f3efe7" } as const;
 
-/** Typewriter effect for the "now:" line in the hero. */
-function initRotator() {
-  const el = document.querySelector<HTMLElement>("[data-rotator]");
-  if (!el) return;
-  const items: string[] = JSON.parse(el.dataset.rotator ?? "[]");
-  if (items.length < 2) return;
-
-  let index = 0;
-  const wait = (ms: number) => new Promise((resolve) => window.setTimeout(resolve, ms));
-
-  const run = async () => {
-    for (;;) {
-      await wait(2800);
-      if (document.hidden) continue;
-      const next = items[(index + 1) % items.length];
-      if (reducedMotion()) {
-        el.textContent = next;
-      } else {
-        for (let i = el.textContent!.length; i >= 0; i--) {
-          el.textContent = el.textContent!.slice(0, i);
-          await wait(18);
-        }
-        for (let i = 1; i <= next.length; i++) {
-          el.textContent = next.slice(0, i);
-          await wait(38);
-        }
-      }
-      index = (index + 1) % items.length;
-    }
-  };
-  run();
-}
-
-/** Accessible tabs (role=tablist) with arrow-key navigation. */
-function initTabs() {
-  document.querySelectorAll<HTMLElement>("[role=tablist]").forEach((list) => {
-    const tabs = [...list.querySelectorAll<HTMLButtonElement>("[role=tab]")];
-    const select = (tab: HTMLButtonElement, focus = false) => {
-      for (const t of tabs) {
-        const selected = t === tab;
-        t.setAttribute("aria-selected", String(selected));
-        t.tabIndex = selected ? 0 : -1;
-        document.getElementById(t.getAttribute("aria-controls")!)?.toggleAttribute("hidden", !selected);
-      }
-      if (focus) tab.focus();
-    };
-    list.addEventListener("click", (event) => {
-      const tab = (event.target as Element).closest<HTMLButtonElement>("[role=tab]");
-      if (tab) select(tab);
-    });
-    list.addEventListener("keydown", (event) => {
-      const current = tabs.indexOf(document.activeElement as HTMLButtonElement);
-      if (current < 0) return;
-      const delta = event.key === "ArrowRight" ? 1 : event.key === "ArrowLeft" ? -1 : 0;
-      if (event.key === "Home") select(tabs[0], true);
-      else if (event.key === "End") select(tabs[tabs.length - 1], true);
-      else if (delta) select(tabs[(current + delta + tabs.length) % tabs.length], true);
-      else return;
-      event.preventDefault();
-    });
+/** Applies the theme to <html>, the theme-color meta tag and the toggle buttons. */
+function applyTheme(theme: "dark" | "light") {
+  const root = document.documentElement;
+  root.dataset.theme = theme;
+  document.querySelector('meta[name="theme-color"]')?.setAttribute("content", THEME_COLORS[theme]);
+  document.querySelectorAll<HTMLElement>('[data-action="toggle-theme"]').forEach((button) => {
+    const label = theme === "dark" ? button.dataset.labelLight : button.dataset.labelDark;
+    if (!label) return;
+    button.setAttribute("aria-label", label);
+    button.title = label;
   });
 }
 
-/** Toggle-button filters: [data-filter-group] > button[data-filter], items carry data-tags. */
-function initFilters() {
-  document.querySelectorAll<HTMLElement>("[data-filter-group]").forEach((group) => {
-    const target = document.getElementById(group.dataset.filterGroup!);
-    const counter = group.dataset.filterCount ? document.getElementById(group.dataset.filterCount) : null;
-    if (!target) return;
-    const buttons = [...group.querySelectorAll<HTMLButtonElement>("button[data-filter]")];
-
-    group.addEventListener("click", (event) => {
-      const button = (event.target as Element).closest<HTMLButtonElement>("button[data-filter]");
-      if (!button) return;
-      const filter = button.dataset.filter!;
-      buttons.forEach((b) => b.setAttribute("aria-pressed", String(b === button)));
-
-      let shown = 0;
-      target.querySelectorAll<HTMLElement>("[data-tags]").forEach((item) => {
-        const match = filter === "all" || item.dataset.tags!.split(" ").includes(filter);
-        item.hidden = !match;
-        if (match) {
-          shown++;
-          item.classList.add("is-visible");
-        }
-      });
-      if (counter) counter.textContent = String(shown);
-    });
-  });
+export function toggleTheme() {
+  const root = document.documentElement;
+  const next = root.dataset.theme === "light" ? "dark" : "light";
+  if (!reducedMotion()) {
+    root.classList.add("theme-transition");
+    window.setTimeout(() => root.classList.remove("theme-transition"), 400);
+  }
+  applyTheme(next);
+  try {
+    localStorage.setItem("theme", next);
+  } catch {
+    /* private mode — the choice simply isn't remembered */
+  }
 }
 
 /** Delegated handlers for [data-action] buttons used across the page. */
@@ -217,6 +140,9 @@ function initActions() {
         break;
       case "notifications":
         enableNotifications();
+        break;
+      case "toggle-theme":
+        toggleTheme();
         break;
       case "back-to-top":
         window.scrollTo({ top: 0, behavior: reducedMotion() ? "auto" : "smooth" });
@@ -246,9 +172,6 @@ export function initUi() {
   initReveal();
   initScrollEffects();
   initActiveNav();
-  initSpotlight();
-  initRotator();
-  initTabs();
-  initFilters();
+  applyTheme(document.documentElement.dataset.theme === "light" ? "light" : "dark");
   initActions();
 }

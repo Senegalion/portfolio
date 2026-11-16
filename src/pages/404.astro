@@ -7,12 +7,10 @@ import pl from "../i18n/pl";
 
 <BaseLayout title={pl.notFound.title} minimal>
   <main id="main" class="relative grid min-h-svh place-items-center overflow-hidden px-4 py-16">
-    <div class="grid-background pointer-events-none absolute inset-0 -z-10" aria-hidden="true"></div>
     <div class="w-full max-w-xl text-center">
-      <p class="font-mono text-sm text-brand-300">HTTP 404 · kubectl get page: NotFound</p>
-      <h1 class="text-gradient mt-6 text-7xl font-bold tracking-tighter sm:text-8xl">404</h1>
-      <p class="mt-6 text-lg leading-8 text-slate-300">{pl.notFound.description}</p>
-      <p lang="en" class="mt-2 text-sm text-slate-500">{en.notFound.description}</p>
+      <h1 class="display text-[clamp(7rem,30vw,14rem)] text-fg">4<em class="text-accent">0</em>4</h1>
+      <p class="mt-6 text-xl leading-8 text-fg">{pl.notFound.description}</p>
+      <p lang="en" class="mt-2 text-sm text-muted">{en.notFound.description}</p>
       <div class="mt-10 flex flex-col justify-center gap-3 sm:flex-row">
         <a href="/" class="btn btn-primary"><ArrowLeft size={18} aria-hidden="true" />{pl.notFound.home}</a>
         <a href="/en/" class="btn btn-secondary" lang="en">{en.notFound.home}</a>
