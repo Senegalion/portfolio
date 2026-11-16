@@ -43,6 +43,17 @@ self.addEventListener("activate", (event) => {
   );
 });
 
+// Only complete (200) responses can be stored: the Cache API rejects partial (206)
+// responses, and a failed write must never break the response the page receives.
+function remember(request, response) {
+  if (response.status !== 200) return;
+  const copy = response.clone();
+  caches
+    .open(RUNTIME)
+    .then((cache) => cache.put(request, copy))
+    .catch(() => undefined);
+}
+
 async function fromCache(request) {
   return (
     (await caches.match(request, { ignoreSearch: true })) ??
@@ -55,10 +66,7 @@ async function handleNavigation(event) {
   try {
     const preloaded = await event.preloadResponse;
     const response = preloaded ?? (await fetch(event.request));
-    if (response.ok) {
-      const copy = response.clone();
-      caches.open(RUNTIME).then((cache) => cache.put(event.request, copy));
-    }
+    remember(event.request, response);
     return response;
   } catch {
     return (await fromCache(event.request)) ?? (await caches.match(OFFLINE_URL)) ?? Response.error();
@@ -70,10 +78,7 @@ async function handleImmutable(request) {
   const cached = await caches.match(request);
   if (cached) return cached;
   const response = await fetch(request);
-  if (response.ok) {
-    const cache = await caches.open(RUNTIME);
-    cache.put(request, response.clone());
-  }
+  remember(request, response);
   return response;
 }
 
@@ -81,11 +86,8 @@ async function handleImmutable(request) {
 async function handleStatic(event) {
   const cached = await caches.match(event.request, { ignoreSearch: true });
   const network = fetch(event.request)
-    .then(async (response) => {
-      if (response.ok) {
-        const cache = await caches.open(RUNTIME);
-        await cache.put(event.request, response.clone());
-      }
+    .then((response) => {
+      remember(event.request, response);
       return response;
     })
     .catch(() => cached ?? Response.error());
@@ -104,6 +106,9 @@ self.addEventListener("fetch", (event) => {
   const url = new URL(request.url);
   if (url.origin !== self.location.origin) return;
   if (url.pathname === "/sw.js" || url.pathname === "/version.json") return;
+  // Video/audio stream in byte ranges (206 responses) that the Cache API can't hold:
+  // let the browser fetch them directly (the HTTP cache still applies).
+  if (request.headers.has("range") || url.pathname.startsWith("/media/") || request.destination === "video") return;
 
   if (request.mode === "navigate") {
     event.respondWith(handleNavigation(event));
