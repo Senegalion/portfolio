@@ -579,6 +579,7 @@ const en: Translations = {
     linkedin: "LinkedIn",
     copyright: "All rights reserved.",
     build: "version",
+    updated: "updated",
     madeWith: "Designed and built by me",
     shortcut: "Quick search",
   },

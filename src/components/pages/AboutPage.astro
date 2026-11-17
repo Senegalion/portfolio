@@ -6,12 +6,13 @@ import { Image } from "astro:assets";
 import PageBanner from "../ui/PageBanner.astro";
 import { getTranslations, langFrom } from "../../i18n";
 import profile from "../../assets/profile.jpg";
+import banner from "../../assets/banners/about.jpg";
 
 const t = getTranslations(langFrom(Astro.currentLocale));
 ---
 
 <PageLayout page="about">
-  <PageBanner page="about">
+  <PageBanner page="about" image={banner} focus="50% 60%">
     <Image
       src={profile}
       alt={t.about.photoAlt}

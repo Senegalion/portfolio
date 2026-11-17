@@ -8,6 +8,9 @@ const lang = langFrom(Astro.currentLocale);
 const t = getTranslations(lang);
 const f = t.footer;
 const year = new Date().getFullYear();
+const updated = new Intl.DateTimeFormat(lang === "pl" ? "pl-PL" : "en-GB", { dateStyle: "long" }).format(
+  new Date(`${BUILD.updated}T12:00:00`),
+);
 
 const pages: { page: PageKey; label: string }[] = [
   { page: "about", label: t.navigation.about },
@@ -74,9 +77,9 @@ const links = [
           target="_blank"
           rel="noreferrer"
           class="tabular-nums transition hover:text-fg"
-          title={BUILD.date}
+          title={`commit ${BUILD.commit}`}
         >
-          {f.build} {BUILD.commit}
+          {f.build} {BUILD.version} · {f.updated} <time datetime={BUILD.updated}>{updated}</time>
         </a>
       </p>
     </div>

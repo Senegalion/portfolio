@@ -577,6 +577,7 @@ const pl = {
     linkedin: "LinkedIn",
     copyright: "Wszelkie prawa zastrzeżone.",
     build: "wersja",
+    updated: "aktualizacja",
     madeWith: "Zaprojektowane i zbudowane samodzielnie",
     shortcut: "Szybkie wyszukiwanie",
   },

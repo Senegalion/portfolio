@@ -2,9 +2,10 @@
 import PageLayout from "../layout/PageLayout.astro";
 import Skills from "../sections/Skills.astro";
 import PageBanner from "../ui/PageBanner.astro";
+import banner from "../../assets/banners/skills.jpg";
 ---
 
 <PageLayout page="skills">
-  <PageBanner page="skills" />
+  <PageBanner page="skills" image={banner} focus="60% 50%" />
   <Skills />
 </PageLayout>

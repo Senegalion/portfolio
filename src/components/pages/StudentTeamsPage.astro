@@ -2,9 +2,10 @@
 import PageLayout from "../layout/PageLayout.astro";
 import StudentTeams from "../sections/StudentTeams.astro";
 import PageBanner from "../ui/PageBanner.astro";
+import banner from "../../assets/banners/teams.jpg";
 ---
 
 <PageLayout page="teams">
-  <PageBanner page="teams" />
+  <PageBanner page="teams" image={banner} focus="60% 40%" />
   <StudentTeams />
 </PageLayout>
