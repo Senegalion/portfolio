@@ -180,6 +180,22 @@ button {
     object-position: center;
   }
 
+  /* Light logos sit on their brand's dark gradient instead of the white tile. */
+  .logo-tile--dark {
+    background: linear-gradient(135deg, #7a16c9 0%, #2a0f86 45%, #140a5c 100%);
+    border-color: transparent;
+  }
+
+  /* Text wordmark for organisations without a published logo. */
+  .logo-wordmark {
+    font-family: var(--font-display, inherit);
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    line-height: 1;
+    color: #111827;
+  }
+
   /* Editorial two-column section frame: label column + content column. */
   .section-grid {
     display: grid;

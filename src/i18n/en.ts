@@ -15,6 +15,7 @@ const en: Translations = {
     projects: "Projects",
     skills: "Skills",
     education: "Education",
+    teams: "Student teams",
     contact: "Contact",
     contactButton: "Get in touch",
     mobileContact: "Get in touch",
@@ -47,7 +48,7 @@ const en: Translations = {
       "CI/CD automation",
       "Microsoft Azure cloud",
       "Kubernetes & Docker",
-      "ML-driven incident analysis",
+      "AI, ML & MLOps",
     ],
     trustedLabel: "I've gained experience at",
   },
@@ -55,23 +56,23 @@ const en: Translations = {
     index: "01",
     badge: "What I do",
     title: "I combine three things that usually take <em>three different people.</em>",
-    lead: "I write software, keep it running in the cloud, and use data to catch problems sooner. That lets me understand the whole journey — from an idea to a working product.",
+    lead: "Software development, running systems in production, and artificial intelligence. Writing code is only the beginning today — AI can do a lot of it. The craft is what comes after: keeping a system stable and secure, compliant with standards, constantly improved, and quickly back on its feet after an outage.",
     techLabel: "Technically",
     items: [
       {
         title: "I build software",
-        text: "I design and build systems that run the business logic: customer service, payments, orders and integrations with partners.",
-        tech: "Java, Spring Boot, SQL databases, APIs",
+        text: "I design and build applications and backend services — tested, readable and ready to grow.",
+        tech: "Java, Spring Boot, Python, databases, APIs",
       },
       {
-        title: "I keep it running",
-        text: "I automate how new versions are released, so changes reach users faster and with less risk. I look after the stability of cloud systems.",
-        tech: "CI/CD, Docker, Kubernetes, Microsoft Azure",
+        title: "I run it in production",
+        text: "I automate builds and deployments, look after security and compliance, respond to incidents and keep improving what already works.",
+        tech: "CI/CD, Docker, Kubernetes, Azure, monitoring",
       },
       {
-        title: "I put data and AI to work",
-        text: "I train models to recognise problems in systems before they become serious. It is also the topic of my Master's thesis.",
-        tech: "Python, machine learning, log analysis",
+        title: "I bring AI into it",
+        text: "I use machine learning and language models in practice — and make sure AI solutions run just as reliably in production.",
+        tech: "Python, machine learning, LLMs, MLOps",
       },
     ],
   },
@@ -82,7 +83,7 @@ const en: Translations = {
     paragraphs: [
       "My name is Łukasz Pelikan. I graduated in Computer Science from Lodz University of Technology and today I work at ING Bank Śląski — an environment where reliability and security matter more than flashy demos.",
       "What I enjoy most are the moments when technology solves a concrete problem: a system stops crashing, a release takes minutes instead of hours, and the team finds the cause of an outage faster.",
-      "I am currently pursuing two Master's degrees at the same time: Computer Science (software engineering and machine learning) and a Master of Business Studies. I want to understand not only how to build a system, but also what value it creates for an organisation. In November 2026 I was named an ABB scholar in the City of Łódź “Młodzi w Łodzi” Super Scholarship programme.",
+      "I am currently pursuing two Master's degrees at the same time: Computer Science (software engineering and machine learning) and a Master of Business Studies. I want to understand not only how to build a system, but also what value it creates for an organisation. Outside classes I'm part of the programming section of Lodz Solar Team and the AI section of the KINO student club. In November 2026 I was named an ABB scholar in the City of Łódź “Młodzi w Łodzi” Super Scholarship programme.",
       "Before that, I spent more than a year teaching programming to children and teenagers. It taught me the most important skill for working with people outside IT: explaining difficult things in plain language.",
     ],
     contact: "Let's talk",
@@ -330,19 +331,19 @@ const en: Translations = {
   },
   research: {
     badge: "Research",
-    status: "Ongoing · Master's thesis",
-    title: "How do you quickly find the <em>real cause</em> of an outage?",
+    status: "Developing it during my Master's studies",
+    title: "AI that helps <em>keep systems running.</em>",
     description:
-      "In large systems a single fault can cause symptoms in many places at once — and teams lose time fighting the wrong fire. In my Master's thesis I research how artificial intelligence can automatically point to the source of a problem, and honestly say when it is not sure of the answer.",
+      "I'm interested in where artificial intelligence meets operations. How models can catch problems earlier, point to their cause faster and take load off the people responding to incidents — and how to deploy and run AI itself as maturely as any other production service.",
     technical: "For engineers",
-    technicalText: "Root Cause Analysis in microservice systems based on telemetry — logs, metrics and traces. Evaluated on the RCAEval benchmark.",
+    technicalText: "AIOps and MLOps: telemetry analysis (logs, metrics, traces), anomaly detection, root cause analysis, and deploying and monitoring models.",
     topics: [
       "Observability",
-      "Graph neural networks (GNN)",
+      "AIOps",
+      "MLOps",
+      "Anomaly detection",
+      "Root cause analysis",
       "Large language models (LLM)",
-      "Uncertainty estimation",
-      "Model calibration",
-      "Selective prediction",
     ],
     legend: { root: "root cause", symptom: "symptom", ok: "healthy" },
     figureLabel: "Diagram: a failure in one service causes symptoms in the services that depend on it.",
@@ -415,9 +416,57 @@ const en: Translations = {
     items: {
       karate: { title: "Karate — black belt, 1st DAN", text: "About 15 years of training. Karate also became the subject of my engineering thesis." },
       sensei: { title: "Karate instructor", text: "I lead training sessions as a sensei — passing on knowledge and taking responsibility for the group." },
-      kino: { title: "Lodz Solar Team", text: "Member of a student research club that builds solar-powered vehicles." },
+      teams: { title: "Student teams", text: "Lodz Solar Team and the KINO AI section — details on a separate page." },
       events: { title: "Tech events", text: "Łódź IT Days and other academic and industry events." },
       business: { title: "Technology in business", text: "I'm interested in digital transformation and how AI changes the way organisations work." },
+    },
+  },
+  teams: {
+    index: "08",
+    badge: "Student teams",
+    title: "Teams I'm <em>part of.</em>",
+    description:
+      "Student teams are where I learn faster than in class: real projects, real deadlines and people from different disciplines.",
+    present: "present",
+    current: "Active",
+    main: "Main team",
+    focus: "What I work on",
+    stack: "Technologies",
+    items: {
+      solarTeam: {
+        role: "Member of the Programming Section",
+        kind: "Solar vehicles · Lodz University of Technology",
+        summary:
+          "A student engineering team at Lodz University of Technology that designs and builds solar-powered cars and races them internationally. In the programming section I work on the vehicle's software and the tools that support the team.",
+        highlights: [
+          "Software for the vehicle and its supporting systems",
+          "Working in an interdisciplinary team — mechanics, electronics, software",
+          "A project where reliability means something very concrete: the car has to reach the finish line",
+        ],
+      },
+      kino: {
+        role: "AI Section Member",
+        kind: "Artificial intelligence · KINO student club",
+        summary:
+          "The AI section of the KINO student organisation at Lodz University of Technology. Together we explore machine learning and generative AI through team projects — from experimenting with models to applications meant to work in practice.",
+        highlights: [
+          "Machine learning and generative AI in team projects",
+          "Combining software engineering with practical use of models",
+          "Meetups, workshops and knowledge sharing",
+        ],
+      },
+      ubicomp: {
+        role: "Research group member",
+        kind: "Real-time systems · HCI",
+        summary:
+          "A human–computer interaction research group. I worked on a system that evaluates body posture in real time and warns users when it becomes unhealthy.",
+        highlights: [
+          "Real-time body keypoint capture integrated with the OptiTrack system",
+          "Python programs for live visualisation and user feedback",
+          "An alert system for problematic posture",
+          "Working in an Agile team",
+        ],
+      },
     },
   },
   pages: {
@@ -437,10 +486,17 @@ const en: Translations = {
     },
     projects: {
       title: "Projects — Łukasz Pelikan",
-      description: "Projects I have built and my research on automatically finding the root cause of outages.",
+      description: "Projects I have built and my research on using AI to keep systems running.",
       eyebrow: "Projects",
       heading: "Things I've built — and problems I research.",
-      lead: "Microservice applications, tools and machine learning research.",
+      lead: "Microservice applications, tools and research on AI for operations.",
+    },
+    teams: {
+      title: "Student teams — Łukasz Pelikan",
+      description: "Student teams at Lodz University of Technology: Lodz Solar Team, the KINO AI section and the UbiCOMP Research Group.",
+      eyebrow: "Student teams",
+      heading: "I keep building after hours — in student teams.",
+      lead: "Software for a solar car, AI projects and research on real-time systems at Lodz University of Technology.",
     },
     education: {
       title: "Education & skills — Łukasz Pelikan",
@@ -458,7 +514,7 @@ const en: Translations = {
     },
   },
   home: {
-    logosLabel: "Companies and universities I'm connected with",
+    logosLabel: "Companies, universities and student teams I'm connected with",
     award: {
       label: "New · November 2026",
       title: "I was named an ABB scholar in the “Młodzi w Łodzi” Super Scholarship programme.",
@@ -471,8 +527,9 @@ const en: Translations = {
       items: {
         about: { title: "About", text: "Who I am, what drives me and why karate has something in common with engineering." },
         experience: { title: "Experience", text: "ING Bank Śląski, fintech, business software and teaching programming." },
-        projects: { title: "Projects", text: "Microservices, cloud and research on finding the root cause of outages." },
+        projects: { title: "Projects", text: "Microservices, cloud and research on AI for keeping systems running." },
         education: { title: "Education", text: "Lodz University of Technology, Erasmus in Helsinki, the ABB scholarship and certificates." },
+        teams: { title: "Student teams", text: "Lodz Solar Team, the KINO AI section and the UbiCOMP Research Group." },
       },
     },
     contact: {

@@ -15,7 +15,7 @@ export type Language = "pl" | "en";
 export const localePath = (lang: Language, hash = "") => `${lang === "en" ? "/en/" : "/"}${hash}`;
 
 /** Pages of the site. Both languages share the structure; only the slugs differ. */
-export const PAGES = ["home", "about", "experience", "projects", "education", "contact"] as const;
+export const PAGES = ["home", "about", "experience", "projects", "education", "teams", "contact"] as const;
 export type PageKey = (typeof PAGES)[number];
 
 const SLUGS: Record<PageKey, Record<Language, string>> = {
@@ -24,6 +24,7 @@ const SLUGS: Record<PageKey, Record<Language, string>> = {
   experience: { pl: "doswiadczenie", en: "experience" },
   projects: { pl: "projekty", en: "projects" },
   education: { pl: "edukacja", en: "education" },
+  teams: { pl: "kola-naukowe", en: "student-teams" },
   contact: { pl: "kontakt", en: "contact" },
 };
 

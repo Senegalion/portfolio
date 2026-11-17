@@ -13,6 +13,7 @@ const pl = {
     projects: "Projekty",
     skills: "Umiejętności",
     education: "Edukacja",
+    teams: "Koła naukowe",
     contact: "Kontakt",
     contactButton: "Napisz do mnie",
     mobileContact: "Napisz do mnie",
@@ -46,30 +47,30 @@ const pl = {
       "automatyzacji CI/CD",
       "chmurze Microsoft Azure",
       "Kubernetesie i Dockerze",
-      "AI i ML",
+      "AI, ML i MLOps",
     ],
   },
   intro: {
     index: "01",
     badge: "Czym się zajmuję",
     title: "Łączę trzy rzeczy, które zwykle robią <em>trzy różne osoby.</em>",
-    lead: "Piszę oprogramowanie, dbam o to, żeby działało w chmurze, i wykorzystuję dane, żeby szybciej wykrywać problemy. Dzięki temu rozumiem cały proces — od pomysłu do działającego produktu.",
+    lead: "Programowanie, utrzymanie systemów na produkcji i sztuczna inteligencja. Samo napisanie kodu to dziś dopiero początek — dużą część potrafi zrobić AI. Sztuką jest to, co dzieje się potem: system ma działać stabilnie i bezpiecznie, spełniać standardy, być stale poprawiany, a awarie mają być szybko opanowane.",
     techLabel: "Technicznie",
     items: [
       {
         title: "Buduję oprogramowanie",
-        text: "Projektuję i tworzę systemy, które realizują logikę biznesową: obsługę klientów, płatności, zamówienia i integracje z partnerami.",
-        tech: "Java, Spring Boot, bazy danych SQL, API",
+        text: "Projektuję i tworzę aplikacje oraz usługi backendowe — przetestowane, czytelne i gotowe na dalszy rozwój.",
+        tech: "Java, Spring Boot, Python, bazy danych, API",
       },
       {
-        title: "Dbam, żeby działało",
-        text: "Automatyzuję wydawanie nowych wersji, żeby zmiany trafiały do użytkowników szybciej i bez ryzyka. Pilnuję stabilności systemów w chmurze.",
-        tech: "CI/CD, Docker, Kubernetes, Microsoft Azure",
+        title: "Utrzymuję je na produkcji",
+        text: "Automatyzuję budowanie i wdrażanie, pilnuję bezpieczeństwa i zgodności ze standardami, reaguję na awarie i ciągle ulepszam to, co już działa.",
+        tech: "CI/CD, Docker, Kubernetes, Azure, monitoring",
       },
       {
-        title: "Wykorzystuję dane i AI",
-        text: "Uczę modele rozpoznawać problemy w systemach, zanim staną się poważne. To także temat mojej pracy magisterskiej.",
-        tech: "Python, uczenie maszynowe, analiza logów",
+        title: "Łączę to z AI",
+        text: "Wykorzystuję uczenie maszynowe i modele językowe w praktyce — i dbam o to, żeby rozwiązania AI też działały niezawodnie na produkcji.",
+        tech: "Python, uczenie maszynowe, LLM, MLOps",
       },
     ],
   },
@@ -80,7 +81,7 @@ const pl = {
     paragraphs: [
       "Nazywam się Łukasz Pelikan. Jestem absolwentem informatyki na Politechnice Łódzkiej, a dziś pracuję w ING Bank Śląski — w środowisku, w którym niezawodność i bezpieczeństwo są ważniejsze niż efektowne prezentacje.",
       "Najbardziej lubię momenty, w których technologia rozwiązuje konkretny problem: system przestaje się zawieszać, wdrożenie trwa minuty zamiast godzin, a zespół szybciej znajduje przyczynę awarii.",
-      "Równolegle studiuję dwa kierunki magisterskie: informatykę (inżynieria oprogramowania i uczenie maszynowe) oraz Master of Business Studies. Chcę rozumieć nie tylko jak zbudować system, ale też jaką wartość tworzy dla organizacji. W listopadzie 2026 zostałem stypendystą ABB w programie Super Stypendium „Młodzi w Łodzi”.",
+      "Równolegle studiuję dwa kierunki magisterskie: informatykę (inżynieria oprogramowania i uczenie maszynowe) oraz Master of Business Studies. Chcę rozumieć nie tylko jak zbudować system, ale też jaką wartość tworzy dla organizacji. Poza zajęciami działam w sekcji programistycznej Lodz Solar Team i w sekcji AI koła KINO. W listopadzie 2026 zostałem stypendystą ABB w programie Super Stypendium „Młodzi w Łodzi”.",
       "Wcześniej przez ponad rok uczyłem programowania dzieci i młodzież. Nauczyło mnie to najważniejszej umiejętności w pracy z ludźmi spoza IT: tłumaczenia trudnych rzeczy prostym językiem.",
     ],
     contact: "Porozmawiajmy",
@@ -328,19 +329,19 @@ const pl = {
   },
   research: {
     badge: "Badania",
-    status: "W toku · praca magisterska",
-    title: "Jak szybko znaleźć <em>prawdziwą przyczynę</em> awarii?",
+    status: "Rozwijam na studiach magisterskich",
+    title: "AI, które pomaga <em>utrzymać systemy</em> w ruchu.",
     description:
-      "W dużych systemach jedna usterka potrafi wywołać objawy w wielu miejscach naraz — i zespół traci czas, gasząc niewłaściwy pożar. W pracy magisterskiej badam, jak sztuczna inteligencja może automatycznie wskazać źródło problemu i uczciwie powiedzieć, kiedy nie jest pewna odpowiedzi.",
+      "Interesuje mnie styk sztucznej inteligencji i utrzymania systemów. Jak modele mogą wcześniej wychwytywać problemy, szybciej wskazywać ich przyczynę i odciążać zespoły reagujące na awarie — i jak samo AI wdrażać i utrzymywać tak dojrzale jak każdą inną usługę produkcyjną.",
     technical: "Dla technicznych",
-    technicalText: "Root Cause Analysis w systemach mikroserwisowych na podstawie telemetrii — logów, metryk i śladów. Ewaluacja na benchmarku RCAEval.",
+    technicalText: "AIOps i MLOps: analiza telemetrii (logi, metryki, ślady), wykrywanie anomalii, analiza przyczyn awarii oraz wdrażanie i monitorowanie modeli.",
     topics: [
       "Obserwowalność",
-      "Grafowe sieci neuronowe (GNN)",
+      "AIOps",
+      "MLOps",
+      "Wykrywanie anomalii",
+      "Analiza przyczyn awarii",
       "Duże modele językowe (LLM)",
-      "Szacowanie niepewności",
-      "Kalibracja modeli",
-      "Selective prediction",
     ],
     legend: { root: "źródło problemu", symptom: "objaw", ok: "działa poprawnie" },
     figureLabel: "Schemat: awaria w jednej usłudze wywołuje objawy w usługach, które od niej zależą.",
@@ -413,9 +414,57 @@ const pl = {
     items: {
       karate: { title: "Karate — czarny pas, 1 DAN", text: "Około 15 lat treningów. Karate stało się też tematem mojej pracy inżynierskiej." },
       sensei: { title: "Instruktor karate", text: "Prowadzę treningi jako sensei — przekazuję wiedzę i odpowiadam za grupę." },
-      kino: { title: "Lodz Solar Team", text: "Członek studenckiego koła naukowego budującego pojazdy solarne." },
+      teams: { title: "Koła naukowe", text: "Lodz Solar Team i Sekcja AI koła KINO — szczegóły na osobnej stronie." },
       events: { title: "Wydarzenia technologiczne", text: "Łódzkie Dni Informatyki oraz inne wydarzenia akademickie i branżowe." },
       business: { title: "Technologia w biznesie", text: "Interesuje mnie transformacja cyfrowa i wpływ AI na sposób pracy w organizacjach." },
+    },
+  },
+  teams: {
+    index: "08",
+    badge: "Koła naukowe",
+    title: "Zespoły, w których <em>działam.</em>",
+    description:
+      "Koła naukowe to miejsce, w którym uczę się szybciej niż na zajęciach: prawdziwe projekty, prawdziwe terminy i ludzie z różnych specjalności.",
+    present: "obecnie",
+    current: "Aktywnie",
+    main: "Główne koło",
+    focus: "Czym się zajmuję",
+    stack: "Technologie",
+    items: {
+      solarTeam: {
+        role: "Członek sekcji programistycznej",
+        kind: "Pojazdy solarne · Politechnika Łódzka",
+        summary:
+          "Studencki zespół inżynierski Politechniki Łódzkiej, który projektuje i buduje samochody zasilane energią słoneczną i startuje nimi w międzynarodowych wyścigach. W sekcji programistycznej pracuję nad oprogramowaniem pojazdu i narzędziami wspierającymi zespół.",
+        highlights: [
+          "Oprogramowanie dla pojazdu i systemów towarzyszących",
+          "Praca w interdyscyplinarnym zespole — mechanika, elektronika, programowanie",
+          "Projekt, w którym niezawodność ma bardzo konkretne znaczenie: pojazd musi dojechać do mety",
+        ],
+      },
+      kino: {
+        role: "Członek Sekcji AI",
+        kind: "Sztuczna inteligencja · Koło Informatycznego Niepokoju",
+        summary:
+          "Sekcja AI koła KINO na Politechnice Łódzkiej. Wspólnie zgłębiamy uczenie maszynowe i generatywne AI przez projekty zespołowe — od eksperymentów z modelami po aplikacje, które mają działać w praktyce.",
+        highlights: [
+          "Uczenie maszynowe i generatywne AI w projektach zespołowych",
+          "Łączenie inżynierii oprogramowania z praktycznym wykorzystaniem modeli",
+          "Spotkania, warsztaty i wymiana wiedzy",
+        ],
+      },
+      ubicomp: {
+        role: "Członek grupy badawczej",
+        kind: "Systemy czasu rzeczywistego · HCI",
+        summary:
+          "Grupa badawcza zajmująca się interakcją człowieka z komputerem. Pracowałem nad systemem, który w czasie rzeczywistym ocenia postawę ciała i ostrzega użytkownika, gdy ta staje się niezdrowa.",
+        highlights: [
+          "Śledzenie punktów ciała w czasie rzeczywistym zintegrowane z systemem OptiTrack",
+          "Programy w Pythonie do wizualizacji na żywo i informacji zwrotnej dla użytkownika",
+          "System alertów o nieprawidłowej postawie",
+          "Praca w zespole w metodyce Agile",
+        ],
+      },
     },
   },
   pages: {
@@ -435,10 +484,17 @@ const pl = {
     },
     projects: {
       title: "Projekty — Łukasz Pelikan",
-      description: "Projekty, które zbudowałem, oraz badania nad automatycznym wykrywaniem przyczyn awarii.",
+      description: "Projekty, które zbudowałem, oraz badania nad wykorzystaniem AI w utrzymaniu systemów.",
       eyebrow: "Projekty",
       heading: "Rzeczy, które zbudowałem — i problemy, które badam.",
-      lead: "Aplikacje mikroserwisowe, narzędzia i praca badawcza z uczenia maszynowego.",
+      lead: "Aplikacje mikroserwisowe, narzędzia i badania nad AI w utrzymaniu systemów.",
+    },
+    teams: {
+      title: "Koła naukowe — Łukasz Pelikan",
+      description: "Koła naukowe na Politechnice Łódzkiej: Lodz Solar Team, Sekcja AI koła KINO i UbiCOMP Research Group.",
+      eyebrow: "Koła naukowe",
+      heading: "Po godzinach też buduję — w zespołach studenckich.",
+      lead: "Oprogramowanie dla pojazdu solarnego, projekty AI i badania nad systemami czasu rzeczywistego na Politechnice Łódzkiej.",
     },
     education: {
       title: "Edukacja i umiejętności — Łukasz Pelikan",
@@ -456,7 +512,7 @@ const pl = {
     },
   },
   home: {
-    logosLabel: "Firmy i uczelnie, z którymi jestem związany",
+    logosLabel: "Firmy, uczelnie i koła naukowe, z którymi jestem związany",
     award: {
       label: "Nowość · listopad 2026",
       title: "Zostałem stypendystą ABB w programie Super Stypendium „Młodzi w Łodzi”.",
@@ -469,8 +525,9 @@ const pl = {
       items: {
         about: { title: "O mnie", text: "Kim jestem, co mnie napędza i dlaczego karate ma coś wspólnego z inżynierią." },
         experience: { title: "Doświadczenie", text: "ING Bank Śląski, fintech, systemy dla firm i nauczanie programowania." },
-        projects: { title: "Projekty", text: "Mikroserwisy, chmura i badania nad wykrywaniem przyczyn awarii." },
+        projects: { title: "Projekty", text: "Mikroserwisy, chmura i badania nad AI w utrzymaniu systemów." },
         education: { title: "Edukacja", text: "Politechnika Łódzka, Erasmus w Helsinkach, stypendium ABB i certyfikaty." },
+        teams: { title: "Koła naukowe", text: "Lodz Solar Team, Sekcja AI koła KINO i UbiCOMP Research Group." },
       },
     },
     contact: {

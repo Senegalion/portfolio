@@ -19,6 +19,7 @@ import {
   SunMoon,
   Sparkles,
   User,
+  Users,
   Wrench,
 } from "lucide-astro";
 import { SITE, pagePath } from "../../data/site";
@@ -56,6 +57,7 @@ const groups: { title: string; items: Item[] }[] = [
       { label: t.research.badge, icon: Microscope, href: pagePath("projects", lang, "#research"), keywords: "rca research ml badania" },
       { label: t.navigation.education, icon: GraduationCap, href: pagePath("education", lang), keywords: "studies certificates az-900 abb stypendium" },
       { label: t.navigation.skills, icon: Wrench, href: pagePath("education", lang, "#skills"), keywords: "stack tech java devops" },
+      { label: t.navigation.teams, icon: Users, href: pagePath("teams", lang), keywords: "kola naukowe student teams solar kino ai ubicomp" },
       { label: t.activities.badge, icon: Medal, href: pagePath("about", lang, "#activities"), keywords: "karate hobby" },
       { label: t.navigation.contact, icon: Mail, href: pagePath("contact", lang), keywords: "contact email kontakt" },
     ],

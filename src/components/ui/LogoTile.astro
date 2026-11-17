@@ -9,13 +9,22 @@ interface Props {
 }
 
 const { org, class: className, link = false } = Astro.props;
-const { name, logo, url } = ORGS[org];
+const { name, url, ...rest } = ORGS[org];
+const logo = "logo" in rest ? rest.logo : undefined;
+const mark = "mark" in rest ? rest.mark : undefined;
+const dark = "dark" in rest && rest.dark;
 const Tag = link ? "a" : "span";
 ---
 
 <Tag
-  class:list={["logo-tile", link && "transition hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/10", className]}
+  class:list={["logo-tile", dark && "logo-tile--dark", link && "transition hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/10", className]}
   {...link ? { href: url, target: "_blank", rel: "noreferrer", title: name } : {}}
 >
-  <img src={logo} alt={name} loading="lazy" decoding="async" />
+  {
+    logo ? (
+      <img src={logo} alt={name} loading="lazy" decoding="async" />
+    ) : (
+      <span class="logo-wordmark" role="img" aria-label={name}>{mark ?? name}</span>
+    )
+  }
 </Tag>

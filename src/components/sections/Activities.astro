@@ -5,7 +5,7 @@ import { getTranslations, langFrom } from "../../i18n";
 const t = getTranslations(langFrom(Astro.currentLocale));
 const a = t.activities;
 
-const items = [a.items.sensei, a.items.kino, a.items.events, a.items.business];
+const items = [a.items.sensei, a.items.teams, a.items.events, a.items.business];
 ---
 
 <Section id="activities" index={a.index} label={a.badge} title={a.title} description={a.description}>
