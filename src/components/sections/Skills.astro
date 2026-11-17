@@ -2,6 +2,8 @@
 import Section from "../ui/Section.astro";
 import { SKILL_CATEGORIES, label } from "../../data/skills";
 import { logoFor } from "../../data/tech";
+import { ArrowRight } from "lucide-astro";
+import { pagePath } from "../../data/site";
 import { getTranslations, langFrom } from "../../i18n";
 
 const lang = langFrom(Astro.currentLocale);
@@ -75,6 +77,11 @@ const s = t.skills;
       ))
     }
   </ul>
+
+  <a href={pagePath("education", lang, "#certificates")} class="link mt-10 inline-flex items-center gap-2 font-medium text-fg" data-reveal>
+    {s.certsLink}
+    <ArrowRight size={16} aria-hidden="true" />
+  </a>
 </Section>
 
 <script>

@@ -7,28 +7,12 @@ import { getTranslations, langFrom } from "../../i18n";
 const t = getTranslations(langFrom(Astro.currentLocale));
 const ed = t.education;
 
-type Status = keyof typeof ed.statuses;
-
 const studies = [
   { ...ed.items.msc, school: ed.university, org: "tul" as OrgKey, done: false },
   { ...ed.items.mbs, school: ed.university, org: "tul" as OrgKey, done: false },
   { ...ed.items.beng, school: ed.university, org: "tul" as OrgKey, done: true },
   { ...ed.items.erasmus, org: "metropolia" as OrgKey, done: true },
 ];
-
-const certs: { key: keyof typeof ed.certs; status: Status }[] = [
-  { key: "az900", status: "passed" },
-  { key: "elementsOfAi", status: "enrolled" },
-  { key: "az204", status: "preparing" },
-  { key: "oracle", status: "planned" },
-];
-
-const statusTone: Record<Status, string> = {
-  passed: "border-ok/50 text-ok",
-  enrolled: "border-line-strong text-fg",
-  preparing: "border-line-strong text-muted",
-  planned: "border-line text-subtle",
-};
 ---
 
 <Section id="education" index={ed.index} label={ed.badge} title={ed.title} description={ed.description}>
@@ -65,26 +49,4 @@ const statusTone: Record<Status, string> = {
     }
   </ol>
 
-  <h3 class="mt-16 text-sm font-semibold text-fg" data-reveal>{ed.certsTitle}</h3>
-  <ul class="mt-4 border-b border-line">
-    {
-      certs.map(({ key, status }) => {
-        const cert = ed.certs[key];
-        return (
-          <li class="flex flex-col gap-2 border-t border-line py-5 sm:flex-row sm:items-center sm:justify-between sm:gap-6" data-reveal>
-            <div class="min-w-0">
-              <p class="text-lg font-medium text-fg">{cert.name}</p>
-              <p class="mt-0.5 text-sm text-subtle">
-                {cert.issuer}
-                {cert.date && ` · ${cert.date}`}
-              </p>
-            </div>
-            <span class:list={["w-fit shrink-0 rounded-md border px-2.5 py-1 text-xs font-semibold", statusTone[status]]}>
-              {ed.statuses[status]}
-            </span>
-          </li>
-        );
-      })
-    }
-  </ul>
 </Section>

@@ -14,10 +14,14 @@ const lang = langFrom(Astro.currentLocale);
 const t = getTranslations(lang);
 const e = t.home.explore;
 
-const cards: { page: Exclude<PageKey, "home" | "contact">; image: ImageMetadata; focus: string }[] = [
+// The skills card has no photo: it shows a wall of the tools instead.
+const toolWall = ["java", "spring", "docker", "kubernetes", "azure", "python", "apachekafka", "postgresql", "git", "argocd", "grafana", "react"];
+
+const cards: { page: Exclude<PageKey, "home" | "contact">; image?: ImageMetadata; focus?: string }[] = [
   { page: "about", image: profile, focus: "50% 25%" },
   { page: "experience", image: experience, focus: "50% 50%" },
   { page: "projects", image: projects, focus: "50% 50%" },
+  { page: "skills" },
   { page: "education", image: education, focus: "50% 60%" },
   { page: "teams", image: teams, focus: "50% 40%" },
 ];
@@ -32,7 +36,7 @@ const cards: { page: Exclude<PageKey, "home" | "contact">; image: ImageMetadata;
       </div>
     </div>
 
-    <ul class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+    <ul class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
       {
         cards.map(({ page, image, focus }, index) => {
           const item = e.items[page];
@@ -40,16 +44,26 @@ const cards: { page: Exclude<PageKey, "home" | "contact">; image: ImageMetadata;
             <li data-reveal style={`--reveal-delay:${index * 80}ms`}>
               <a
                 href={pagePath(page, lang)}
-                class="force-dark group relative isolate flex aspect-[4/5] flex-col justify-end overflow-hidden rounded-xl bg-bg p-6 shadow-lg shadow-black/10"
+                class="force-dark group relative isolate flex aspect-[4/5] flex-col lg:aspect-[5/4] justify-end overflow-hidden rounded-xl bg-bg p-6 shadow-lg shadow-black/10"
               >
-                <Image
-                  src={image}
-                  alt=""
-                  widths={[400, 640, 800]}
-                  sizes="(min-width: 1280px) 16rem, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                  class="absolute inset-0 -z-20 size-full object-cover transition duration-700 ease-out group-hover:scale-105"
-                  style={`object-position:${focus}`}
-                />
+                {image ? (
+                  <Image
+                    src={image}
+                    alt=""
+                    widths={[400, 640, 800]}
+                    sizes="(min-width: 1024px) 26rem, (min-width: 640px) 50vw, 100vw"
+                    class="absolute inset-0 -z-20 size-full object-cover transition duration-700 ease-out group-hover:scale-105"
+                    style={`object-position:${focus}`}
+                  />
+                ) : (
+                  <span class="tool-wall absolute inset-0 -z-20 grid grid-cols-4 content-start gap-3 p-6 transition duration-700 ease-out group-hover:scale-105" aria-hidden="true">
+                    {toolWall.map((name) => (
+                      <span class="grid aspect-square place-items-center rounded-xl bg-white/90">
+                        <img src={`/tech/${name}.svg`} alt="" loading="lazy" decoding="async" class="size-1/2 object-contain" />
+                      </span>
+                    ))}
+                  </span>
+                )}
                 <span class="card-shade absolute inset-0 -z-10" aria-hidden="true" />
                 <span class="font-mono text-xs text-muted">0{index + 1}</span>
                 <span class="mt-2 flex items-center justify-between gap-3">
@@ -70,6 +84,10 @@ const cards: { page: Exclude<PageKey, "home" | "contact">; image: ImageMetadata;
 </section>
 
 <style>
+  .tool-wall {
+    background: radial-gradient(80% 60% at 70% 10%, rgb(43 106 224 / 0.45), transparent 70%), linear-gradient(160deg, #0e1622, #0b0f15);
+  }
+
   .card-shade {
     background: linear-gradient(to top, rgb(8 11 16 / 0.92) 0%, rgb(8 11 16 / 0.55) 45%, rgb(8 11 16 / 0.1) 100%);
   }

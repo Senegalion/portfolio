@@ -1,6 +1,7 @@
 ---
 import {
   ArrowUp,
+  Award,
   BellRing,
   BookOpen,
   BriefcaseBusiness,
@@ -56,7 +57,8 @@ const groups: { title: string; items: Item[] }[] = [
       { label: t.navigation.projects, icon: FolderGit2, href: pagePath("projects", lang), keywords: "projects github projekty" },
       { label: t.research.badge, icon: Microscope, href: pagePath("projects", lang, "#research"), keywords: "rca research ml badania" },
       { label: t.navigation.education, icon: GraduationCap, href: pagePath("education", lang), keywords: "studies certificates az-900 abb stypendium" },
-      { label: t.navigation.skills, icon: Wrench, href: pagePath("education", lang, "#skills"), keywords: "stack tech java devops" },
+      { label: t.certificates.badge, icon: Award, href: pagePath("education", lang, "#certificates"), keywords: "certificates certyfikaty azure az-900 cs50 harvard kursy courses" },
+      { label: t.navigation.skills, icon: Wrench, href: pagePath("skills", lang), keywords: "stack tech java devops" },
       { label: t.navigation.teams, icon: Users, href: pagePath("teams", lang), keywords: "kola naukowe student teams solar kino ai ubicomp" },
       { label: t.activities.badge, icon: Medal, href: pagePath("about", lang, "#activities"), keywords: "karate hobby" },
       { label: t.navigation.contact, icon: Mail, href: pagePath("contact", lang), keywords: "contact email kontakt" },

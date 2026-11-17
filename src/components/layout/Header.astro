@@ -15,6 +15,7 @@ const navigation: { page: PageKey; label: string }[] = [
   { page: "about", label: t.navigation.about },
   { page: "experience", label: t.navigation.experience },
   { page: "projects", label: t.navigation.projects },
+  { page: "skills", label: t.navigation.skills },
   { page: "education", label: t.navigation.education },
   { page: "teams", label: t.navigation.teams },
 ];
@@ -35,7 +36,7 @@ const languages = [
       <span class="text-[1.05rem] font-semibold tracking-tight">Łukasz Pelikan</span>
     </a>
 
-    <nav class="hidden items-center gap-7 lg:flex" aria-label={t.navigation.mainNavigation}>
+    <nav class="hidden items-center gap-6 xl:flex" aria-label={t.navigation.mainNavigation}>
       {
         navigation.map(({ page: target, label }) => (
           <a
@@ -96,7 +97,7 @@ const languages = [
       <button
         id="mobile-menu-button"
         type="button"
-        class="icon-btn lg:hidden"
+        class="icon-btn xl:hidden"
         aria-controls="mobile-menu"
         aria-expanded="false"
         aria-label={t.navigation.openMenu}
@@ -118,7 +119,7 @@ const languages = [
 
   <div
     id="mobile-menu"
-    class="hidden h-[calc(100dvh-4.5rem)] overflow-y-auto border-t border-line bg-bg lg:hidden"
+    class="hidden h-[calc(100dvh-4.5rem)] overflow-y-auto border-t border-line bg-bg xl:hidden"
   >
     <nav class="container-page flex flex-col py-6" aria-label={t.navigation.mobileNavigation}>
       {
