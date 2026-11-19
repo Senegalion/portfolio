@@ -204,7 +204,7 @@ const pl = {
     badge: "Projekty",
     title: "Rzeczy, które <em>zbudowałem.</em>",
     description:
-      "Wybrane projekty — od pracy inżynierskiej, przez narzędzia z elementami sztucznej inteligencji, po gry online. Każdy z publicznym kodem źródłowym.",
+      "Wybrane projekty — od pracy inżynierskiej, przez narzędzia z elementami sztucznej inteligencji, po gry online. Większość z publicznym kodem źródłowym.",
     viewRepositories: "Wszystkie projekty na GitHubie",
     viewRepository: "Kod źródłowy",
     frontendRepository: "Kod interfejsu",
@@ -242,6 +242,21 @@ const pl = {
           "Jenkins CI/CD z automatycznymi testami i wdrożeniami",
         ],
         flow: [["React"], ["API Gateway", "Eureka", "Config Server"], ["Users", "Trainings", "Payments", "Notifications"], ["Kafka", "PostgreSQL"]],
+      },
+      whisper: {
+        kind: "AI · Rozpoznawanie mowy · Koło KINO",
+        summary:
+          "Zespołowy projekt Sekcji AI koła KINO na Politechnice Łódzkiej: budujemy obszerny dataset nagrań z obrad instytucji publicznych, takich jak sejmiki wojewódzkie, z transkrypcją wygenerowaną modelem Whisper i zsynchronizowaną z dźwiękiem. Jestem jednym z PM-ów projektu i wspieram zespół od strony inżynierii oprogramowania, backendu oraz DevOps/MLOps.",
+        note: "Projekt w toku. Technologie poniżej to planowany stos, a nie lista ukończonych wdrożeń.",
+        highlights: [
+          "Pozyskiwanie nagrań audio i wideo oraz istniejących transkrypcji z publicznych źródeł",
+          "Przetwarzanie nagrań i transkrypcja modelem rozpoznawania mowy (Whisper)",
+          "Synchronizacja ścieżki dźwiękowej z tekstem i kontrola jakości dopasowania",
+          "Uporządkowany dataset przygotowany do dalszego trenowania modeli AI",
+          "Wyzwania: ograniczenia sprzętowe, specjalistyczne słownictwo i nazwy własne, różne formaty i duża skala danych",
+          "Mój zakres (planowany): środowiska i konteneryzacja w Dockerze, CI/CD, architektura, integracja backendu z usługami ML, pipeline'y audio i infrastruktura MLOps",
+        ],
+        flow: [["Nagrania publiczne"], ["Przetwarzanie audio"], ["Whisper"], ["Synchronizacja"], ["Dataset"]],
       },
       cityFailurePredictor: {
         kind: "Inteligentne miasto",
@@ -462,7 +477,7 @@ const pl = {
         ],
       },
       kino: {
-        role: "Członek Sekcji AI",
+        role: "Członek Sekcji AI · PM projektu WHISPER",
         kind: "Sztuczna inteligencja · Koło Informatycznego Niepokoju",
         summary:
           "Sekcja AI koła KINO na Politechnice Łódzkiej. Wspólnie zgłębiamy uczenie maszynowe i generatywne AI przez projekty zespołowe — od eksperymentów z modelami po aplikacje, które mają działać w praktyce.",
@@ -470,6 +485,7 @@ const pl = {
           "Uczenie maszynowe i generatywne AI w projektach zespołowych",
           "Łączenie inżynierii oprogramowania z praktycznym wykorzystaniem modeli",
           "Spotkania, warsztaty i wymiana wiedzy",
+          "Jeden z PM-ów projektu WHISPER: dataset nagrań z obrad instytucji publicznych z transkrypcją modelem Whisper",
         ],
       },
       ubicomp: {
